@@ -2,18 +2,24 @@
 
 This project is base on [Bottender](https://github.com/Yoctol/bottender).
 
-## Main packages
+# Platform
+
+- [ ] LINE
+- [ ] Messager
+- [ ] Telegram
+
+# Main packages
 
 - bottender
 - Mongo
 - mongoose
 - [twitch API](https://d-fischer.github.io/twitch/docs/basic-usage/getting-started.html)
 
-## Create `.env`
+# Create `.env`
 
 Replace `.env.sample` name to `.env` and add relate information in here.
 
-## Test
+# Try this project
 
 - `tsc -w` to Compile
 - `yarn install` or `npm install`
