@@ -1,14 +1,8 @@
-import { userCreate } from './controller/user';
-import { UserModel } from './model/user';
 import TwitchClient from 'twitch';
-import mongoose from 'mongoose';
-mongoose.connect(process.env.MONGO_URL, {
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-  useCreateIndex: true,
-});
-mongoose.Promise = global.Promise;
-const db = mongoose.connection;
+import { Stream } from 'stream';
+import { router, text } from 'bottender/router';
+import userBinding from './controller/users/binding';
+
 async function getFollow(userName: string) {
   const twitchClient = await TwitchClient.withCredentials(
     process.env.TWITCH_CLIENT_ID,
@@ -30,16 +24,10 @@ async function getFollow(userName: string) {
   return (await twitchClient.kraken.streams.getStreams(channel)) || [];
 }
 
-export default async function App(context: any) {
-  await getFollow('louis70109');
-  // const userObj = {
-  //   name: 'nijia222',
-  //   displayName: 'nijia122222',
-  //   twitchId: 'a12342222',
-  //   lineId: 'z1234222',
-  // };
-  // await userCreate(userObj);
-  // const a = await UserModel.findOne({ name: 'nijia' });
-  db.close();
-  await context.sendText('Welcome to Bottender');
+export default async function App(context: any): Promise<void> {
+  // await getFollow('louis70109');
+  return router([
+    text(/^綁定(?<name>[\s\S]+)/, userBinding),
+    // text('*', debug),
+  ]);
 }
