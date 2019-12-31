@@ -6,7 +6,7 @@ const User = new Schema({
   displayName: { type: String, index: true },
   twitchId: { type: String, unique: true },
   createAt: { type: Date, default: Date.now },
-  lineId: { type: String },
+  userId: { type: String },
 });
 const UserModel = mongoose.model('user', User);
 

@@ -6,5 +6,6 @@ mongoose.connect(process.env.MONGO_URL, {
   useCreateIndex: true,
 });
 mongoose.Promise = global.Promise;
+
 // const db = mongoose.connection;
 export default App;
