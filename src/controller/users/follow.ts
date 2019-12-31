@@ -34,5 +34,6 @@ export default async function userFollow(context: any): Promise<void> {
     `;
   });
   console.log(output);
+  await context.sendText(output);
   // 看平台去發送 streams
 }
