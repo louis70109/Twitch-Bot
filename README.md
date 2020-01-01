@@ -24,3 +24,16 @@ Replace `.env.sample` name to `.env` and add relate information in here.
 - `tsc -w` to Compile
 - `yarn install` or `npm install`
 - `npx bottender dev` to test platform bot, or add `--console` to test bot in CLI.
+
+# Try it
+
+## Messenger
+
+- a fans page.
+- add `https://twitch.tv` in `white list`.
+
+![](https://i.imgur.com/dtj3zKO.png)
+![](https://i.imgur.com/TzlwiP5.png)
+
+- `npx bottender dev`: run project.
+- `npx bottender messenger webhook set`: set messenger webhook.
