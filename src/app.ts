@@ -1,11 +1,33 @@
-import { router, text } from 'bottender/router';
+import { platform, router, text } from 'bottender/router';
 import userBinding from './controller/users/binding';
 import userFollow from './controller/users/follow';
+import mongoose from 'mongoose';
 
-export default async function App(context: any): Promise<void> {
-  return router([
-    text(/^綁定(?<name>[\s\S]+)/, userBinding),
+async function LineAction(context): Promise<void> {
+  return await router([
+    text(/^綁定\s*(?<name>[\s\S]+)/, userBinding),
     text('follow', userFollow),
-    // text('*', debug),
+  ]);
+}
+
+async function MessengerAction(context): Promise<void> {
+  return await router([
+    text(/^綁定\s*(?<name>[\s\S]+)/, userBinding),
+    text('follow', userFollow),
+  ]);
+}
+
+export default async function App(context): Promise<void> {
+  mongoose.connect(process.env.MONGO_URL, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useCreateIndex: true,
+  });
+  mongoose.Promise = global.Promise;
+  return await router([
+    platform('line', LineAction),
+    platform('messenger', MessengerAction),
+    text(/^綁定\s*(?<name>[\s\S]+)/, userBinding),
+    text('follow', userFollow),
   ]);
 }

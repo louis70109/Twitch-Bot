@@ -1,6 +1,9 @@
 import { UserModel } from '../../model/user';
 import TwitchClient from 'twitch';
+import mongoose from 'mongoose';
+import FollowFlex from '../../template/line/users/follow';
 export default async function userFollow(context: any): Promise<void> {
+  const platform = context._session?.platform;
   const userId = context._session?.user?.id;
 
   const twitchClient = await TwitchClient.withCredentials(
@@ -19,21 +22,33 @@ export default async function userFollow(context: any): Promise<void> {
     channel.push(element.channel.id);
   }
   const streams = await twitchClient.kraken.streams.getStreams(channel);
+  if (streams.length === 0)
+    await context.sendText('🚀現在追隨的實況主都沒開哦！');
+  else {
+    switch (platform) {
+      case 'line':
+        FollowFlex(context, streams);
+        break;
+      default:
+        let output = '';
+        streams.forEach(stream => {
+          const ch = stream.channel;
 
-  let output: string = '';
-  streams.forEach(stream => {
-    const ch = stream.channel;
-    output += `
-    直播主:${ch.displayName}
-    狀態:${ch.status}
-    遊戲:${ch.game}
-    網址:${ch.url}
-    何時開台:${stream.startDate}
-    人數:${stream.viewers}
-    ---------------
-    `;
-  });
-  console.log(output);
-  await context.sendText(output);
-  // 看平台去發送 streams
+          output += `
+            直播主:${ch.displayName}
+            狀態:${ch.status}
+            遊戲:${ch.game}
+            網址:${ch.url}
+            何時開台:${stream.startDate}
+            人數:${stream.viewers}
+            圖片:${streams[0].getPreviewUrl('large')}
+            ---------------
+          `;
+        });
+        await context.sendText(output);
+        break;
+    }
+
+    await mongoose.connection.close();
+  }
 }

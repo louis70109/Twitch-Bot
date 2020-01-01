@@ -1,5 +1,6 @@
 import { UserModel } from '../../model/user';
 import TwitchClient from 'twitch';
+import mongoose from 'mongoose';
 
 export default async function userBinding(
   context: any,
@@ -15,23 +16,41 @@ export default async function userBinding(
 
   const twitchUser = await twitchClient.helix.users.getUserByName(userName);
 
-  if (!twitchUser) throw Error('User not found');
-  const userObj = {
-    name: twitchUser.name,
-    displayName: twitchUser.displayName,
-    twitchId: twitchUser.id,
-    userId: userId,
-  };
-  const user = new UserModel(userObj);
+  if (!twitchUser) {
+    context.sendText('👾 綁定帳號失敗，請檢查 Twitch 是否有效');
+    return;
+  }
+
+  const user = new UserModel();
+  user.name = twitchUser.name;
+  user.displayName = twitchUser.displayName;
+  user.twitchId = twitchUser.id;
+  user.userId = userId;
   const isAlive = await UserModel.findOne({ userId: userId });
   if (!isAlive) {
     console.log('this record not found');
     await user.save(err => {
-      if (err) context.sendText('綁定失敗');
+      if (err) {
+        context.sendText('❌ 綁定失敗');
+        return;
+      }
     });
   } else {
     console.log('Find record, update...');
-    await UserModel.updateOne({ userId: userId }, userObj);
+    const userObj = {
+      name: twitchUser.name,
+      displayName: twitchUser.displayName,
+      twitchId: twitchUser.id,
+      userId: userId,
+    };
+    await UserModel.findOneAndUpdate(
+      { userId: userId },
+      userObj,
+      (err, res) => {
+        if (!err) console.log('帳戶更新成功', res);
+        mongoose.connection.close();
+      }
+    );
   }
-  await context.sendText('綁定完成');
+  await context.sendText(`✅ 綁定 ${twitchUser.name} 成功！`);
 }
