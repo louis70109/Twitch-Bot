@@ -1,6 +1,6 @@
 # Twitch Bot
 
-This project is cross Messenger and LINE bot.
+This project is cross `Messenger` and `LINE message API`.
 
 It can find your following Stream channels and show top Games.
 
