@@ -1,4 +1,7 @@
-export default async function FollowFlex(context: any, streams): Promise<void> {
+export default async function showChannelsFlex(
+  context: any,
+  streams
+): Promise<void> {
   let channelBubble: any[] = [];
 
   streams.forEach(stream => {

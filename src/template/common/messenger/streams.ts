@@ -1,4 +1,4 @@
-export default async function FollowGeneric(
+export default async function showStreamGeneric(
   context: any,
   streams
 ): Promise<void> {
