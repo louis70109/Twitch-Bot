@@ -16,7 +16,7 @@
     "isolatedModules": true,
     "rootDir": "./src",
     "outDir": "./dist",
-    "types": [],
+    "types": ["node"],
     "strict": false
   }
 }
