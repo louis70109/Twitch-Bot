@@ -62,4 +62,4 @@ typings/
 # dotenv environment variables file
 .env
 
-dist/
+# dist/

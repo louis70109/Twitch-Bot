@@ -18,22 +18,22 @@ export default async function showGames(
         showStreamGeneric(context, games);
         break;
       default:
-        let output = '';
-        const streamLength = games.length ? games.length < 12 : 12;
-        for (let index = 0; index < streamLength; index++) {
-          const ch = games[index].channel;
-          output += `
-          直播主:${ch.displayName}
-          狀態:${ch.status}
-          遊戲:${ch.game}
-          網址:${ch.url}
-          何時開台:${games[index].startDate}
-          人數:${games[index].viewers}
-          圖片:${games[0].getPreviewUrl('large')}
-          ---------------
-        `;
-        }
-        await context.sendText(output);
+        // let output = '';
+        // const streamLength = games.length ? games.length < 12 : 12;
+        // for (let index = 0; index < streamLength; index++) {
+        //   const ch = games[index].channel;
+        //   output += `
+        //   直播主:${ch.displayName}
+        //   狀態:${ch.status}
+        //   遊戲:${ch.game}
+        //   網址:${ch.url}
+        //   何時開台:${games[index].startDate}
+        //   人數:${games[index].viewers}
+        //   圖片:${games[0].getPreviewUrl('large')}
+        //   ---------------
+        // `;
+        // }
+        // await context.sendText(output);
         break;
     }
 
