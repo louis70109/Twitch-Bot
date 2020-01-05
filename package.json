@@ -6,8 +6,7 @@
     "dev": "bottender dev",
     "lint": "eslint .",
     "start": "bottender start",
-    "test": "jest",
-    "build": "tsc"
+    "test": "jest"
   },
   "dependencies": {
     "@types/node": "^12.12.24",
