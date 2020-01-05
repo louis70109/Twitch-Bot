@@ -1,7 +1,7 @@
 import { Stream } from 'twitch';
 import mongoose from 'mongoose';
-import showChannelsFlex from '../../template/common/line/streams';
-import showStreamGeneric from '../../template/common/messenger/streams';
+import showChannelsFlex from '../../common/line/streams';
+import showStreamGeneric from '../../common/messenger/streams';
 export default async function showChannels(
   context,
   platform: string,
@@ -19,19 +19,21 @@ export default async function showChannels(
         break;
       default:
         let output = '';
-        for (let index = 0; index < 5; index++) {
-          const ch = streams[index].channel;
-          output += `
-          直播主:${ch.displayName}
-          狀態:${ch.status}
-          遊戲:${ch.game}
-          網址:${ch.url}
-          何時開台:${streams[index].startDate}
-          人數:${streams[index].viewers}
-          圖片:${streams[0].getPreviewUrl('large')}
-          ---------------
-        `;
-        }
+        streams.forEach((element, index) => {
+          if (index < 12) {
+            const ch = element.channel;
+            output += `
+              直播主:${ch.displayName}
+              狀態:${ch.status}
+              遊戲:${ch.game}
+              網址:${ch.url}
+              何時開台:${element.startDate}
+              人數:${element.viewers}
+              圖片:${element.getPreviewUrl('large')}
+              ---------------
+            `;
+          }
+        });
         await context.sendText(output);
         break;
     }
