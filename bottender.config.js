@@ -15,7 +15,7 @@ module.exports = {
         db: 0,
       },
       mongo: {
-        url: process.env.MONGO_URL || 'mongodb://localhost:27017/twitch-bot',
+        url: process.env.MONGODB_URI || 'mongodb://localhost:27017/twitch-bot',
         collectionName: 'sessions',
       },
     },

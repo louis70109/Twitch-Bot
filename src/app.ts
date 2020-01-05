@@ -24,7 +24,7 @@ async function MessengerAction(): Promise<void> {
 }
 
 export default async function App(): Promise<void> {
-  mongoose.connect(process.env.MONGO_URL, {
+  mongoose.connect(process.env.MONGODB_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,
