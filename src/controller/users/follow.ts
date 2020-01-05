@@ -11,7 +11,10 @@ export default async function userFollow(context: any): Promise<void> {
   );
 
   const currentUser = await UserModel.findOne({ userId: userId });
-
+  if (!currentUser) {
+    context.sendText('👾 請先綁定帳號哦！\n ex: 綁定 godjj');
+    return;
+  }
   const follow = await twitchClient.kraken.users.getFollowedChannels(
     currentUser.twitchId
   );
