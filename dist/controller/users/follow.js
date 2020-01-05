@@ -57,6 +57,10 @@ function userFollow(context) {
                     return [4 /*yield*/, user_1.UserModel.findOne({ userId: userId })];
                 case 2:
                     currentUser = _d.sent();
+                    if (!currentUser) {
+                        context.sendText('👾 請先綁定帳號哦！\n ex: 綁定 godjj');
+                        return [2 /*return*/];
+                    }
                     return [4 /*yield*/, twitchClient.kraken.users.getFollowedChannels(currentUser.twitchId)];
                 case 3:
                     follow = _d.sent();
