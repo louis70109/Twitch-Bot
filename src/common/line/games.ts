@@ -14,12 +14,14 @@ export default async function showGamesFlex(
           type: 'image',
           url: element.boxArtUrl,
           size: 'full',
-          aspectRatio: '20:13',
           aspectMode: 'cover',
+          aspectRatio: '150:196',
+          gravity: 'center',
+          flex: 1,
         },
         body: {
           type: 'box',
-          layout: 'vertical',
+          layout: 'baseline',
           contents: [
             {
               type: 'text',
@@ -28,19 +30,25 @@ export default async function showGamesFlex(
               size: 'xl',
               wrap: true,
             },
-
+          ],
+          spacing: 'xl',
+          margin: 'lg',
+        },
+        footer: {
+          type: 'box',
+          layout: 'vertical',
+          spacing: 'sm',
+          contents: [
             {
               type: 'button',
               style: 'primary',
               action: {
                 type: 'message',
-                label: element.name,
+                label: '看這個',
                 text: `我要看 ${element.name}`,
               },
             },
           ],
-          spacing: 'sm',
-          paddingAll: '8px',
         },
       };
 

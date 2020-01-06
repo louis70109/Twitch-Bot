@@ -53,31 +53,106 @@ function showChannelsFlex(context, streams) {
                                     type: 'image',
                                     url: element.getPreviewUrl('large'),
                                     size: 'full',
-                                    aspectRatio: '20:13',
                                     aspectMode: 'cover',
+                                    aspectRatio: '150:196',
+                                    gravity: 'center',
+                                    flex: 1,
                                 },
                                 body: {
                                     type: 'box',
                                     layout: 'vertical',
+                                    spacing: 'sm',
+                                    paddingAll: '0px',
                                     contents: [
                                         {
-                                            type: 'text',
-                                            text: ch.displayName,
-                                            weight: 'bold',
-                                            size: 'xl',
-                                            wrap: true,
+                                            type: 'box',
+                                            layout: 'horizontal',
+                                            contents: [
+                                                {
+                                                    type: 'box',
+                                                    layout: 'vertical',
+                                                    contents: [
+                                                        {
+                                                            type: 'image',
+                                                            url: ch.logo,
+                                                            aspectMode: 'cover',
+                                                            size: 'full',
+                                                        },
+                                                    ],
+                                                    cornerRadius: '100px',
+                                                    width: '72px',
+                                                    height: '72px',
+                                                },
+                                                {
+                                                    type: 'box',
+                                                    layout: 'vertical',
+                                                    contents: [
+                                                        {
+                                                            type: 'box',
+                                                            layout: 'baseline',
+                                                            spacing: 'sm',
+                                                            margin: 'md',
+                                                            contents: [
+                                                                {
+                                                                    type: 'text',
+                                                                    text: "" + ch.displayName,
+                                                                    weight: 'bold',
+                                                                    color: '#000000',
+                                                                    size: 'sm',
+                                                                },
+                                                            ],
+                                                        },
+                                                        {
+                                                            type: 'box',
+                                                            layout: 'baseline',
+                                                            spacing: 'sm',
+                                                            margin: 'md',
+                                                            contents: [
+                                                                {
+                                                                    type: 'text',
+                                                                    text: "\u8FFD\u96A8\u4EBA\u6578: " + ch.followers,
+                                                                    size: 'sm',
+                                                                    color: '#000000',
+                                                                },
+                                                            ],
+                                                        },
+                                                        {
+                                                            type: 'box',
+                                                            layout: 'baseline',
+                                                            spacing: 'sm',
+                                                            margin: 'md',
+                                                            contents: [
+                                                                {
+                                                                    type: 'text',
+                                                                    text: "\u89C0\u770B\u4EBA\u6578: " + element.viewers + " \uD83D\uDC40",
+                                                                    size: 'sm',
+                                                                    color: '#000000',
+                                                                },
+                                                            ],
+                                                        },
+                                                    ],
+                                                },
+                                            ],
+                                            spacing: 'xl',
+                                            paddingAll: '20px',
                                         },
                                         {
                                             type: 'text',
-                                            text: "\uD83C\uDFAE" + ch.game,
+                                            text: "\u2618\uFE0F " + ch.status,
                                             size: 'sm',
                                         },
                                         {
                                             type: 'text',
-                                            text: "\uD83D\uDCAC" + element.viewers,
+                                            text: "\uD83C\uDFAE " + ch.game,
                                             size: 'sm',
-                                            wrap: true,
                                         },
+                                    ],
+                                },
+                                footer: {
+                                    type: 'box',
+                                    layout: 'vertical',
+                                    spacing: 'sm',
+                                    contents: [
                                         {
                                             type: 'button',
                                             style: 'primary',
@@ -88,8 +163,6 @@ function showChannelsFlex(context, streams) {
                                             },
                                         },
                                     ],
-                                    spacing: 'sm',
-                                    paddingAll: '8px',
                                 },
                             };
                             channelBubble.push(content);
