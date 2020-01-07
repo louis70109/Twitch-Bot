@@ -35,48 +35,43 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var mongoose_1 = __importDefault(require("mongoose"));
-var games_1 = __importDefault(require("../../common/line/games"));
-var Games_1 = __importDefault(require("../../common/messenger/Games"));
-function showGames(context, platform, games) {
+function showGamesGeneric(context, games) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var channelBubble;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
-                    if (!(games.length === 0)) return [3 /*break*/, 2];
-                    return [4 /*yield*/, context.sendText('🚀現在追隨的實況主都沒開哦！')];
+                    channelBubble = [];
+                    games.forEach(function (element, index) {
+                        if (index < 12) {
+                            var content = {
+                                title: element.name,
+                                imageUrl: element.boxArtUrl,
+                                defaultAction: {
+                                    type: 'web_url',
+                                    url: element.boxArtUrl,
+                                    messengerExtensions: true,
+                                    webviewHeightRatio: 'tall',
+                                    fallbackUrl: element.boxArtUrl,
+                                },
+                                buttons: [
+                                    {
+                                        type: 'web_url',
+                                        title: '找直播',
+                                        payload: "\u6211\u8981\u770B " + element.name,
+                                    },
+                                ],
+                            };
+                            channelBubble.push(content);
+                        }
+                    });
+                    return [4 /*yield*/, context.sendGenericTemplate(channelBubble)];
                 case 1:
-                    _b.sent();
-                    return [3 /*break*/, 9];
-                case 2:
-                    _a = platform;
-                    switch (_a) {
-                        case 'line': return [3 /*break*/, 3];
-                        case 'messenger': return [3 /*break*/, 4];
-                    }
-                    return [3 /*break*/, 5];
-                case 3:
-                    games_1.default(context, games);
-                    return [3 /*break*/, 7];
-                case 4:
-                    Games_1.default(context, games);
-                    return [3 /*break*/, 7];
-                case 5: return [4 /*yield*/, context.sendText(games)];
-                case 6:
-                    _b.sent();
-                    return [3 /*break*/, 7];
-                case 7: return [4 /*yield*/, mongoose_1.default.connection.close()];
-                case 8:
-                    _b.sent();
-                    _b.label = 9;
-                case 9: return [2 /*return*/];
+                    _a.sent();
+                    return [2 /*return*/];
             }
         });
     });
 }
-exports.default = showGames;
+exports.default = showGamesGeneric;

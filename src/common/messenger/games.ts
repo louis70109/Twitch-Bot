@@ -1,27 +1,27 @@
-export default async function showStreamGeneric(
+import { Game } from '../../model/game';
+
+export default async function showGamesGeneric(
   context: any,
-  streams
+  games: Game[]
 ): Promise<void> {
   const channelBubble: any[] = [];
-  streams.forEach((element, index) => {
+  games.forEach((element, index) => {
     if (index < 12) {
-      const ch = element.channel;
       const content = {
-        title: ch.displayName,
-        imageUrl: element.getPreviewUrl('large'),
-        subtitle: `${ch.displayName}\n☘️${ch.status}\n🎮${ch.game}\n🦈${element.viewers}`,
+        title: element.name,
+        imageUrl: element.boxArtUrl,
         defaultAction: {
           type: 'web_url',
-          url: ch.url,
+          url: element.boxArtUrl,
           messengerExtensions: true,
           webviewHeightRatio: 'tall',
-          fallbackUrl: element.getPreviewUrl('large'),
+          fallbackUrl: element.boxArtUrl,
         },
         buttons: [
           {
             type: 'web_url',
-            url: ch.url,
-            title: '看直播',
+            title: '找直播',
+            payload: `我要看 ${element.name}`,
           },
         ],
       };
