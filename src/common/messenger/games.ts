@@ -10,6 +10,7 @@ export default async function showGamesGeneric(
       const content = {
         title: element.name,
         imageUrl: element.boxArtUrl,
+        subtitle: '',
         defaultAction: {
           type: 'web_url',
           url: element.boxArtUrl,
