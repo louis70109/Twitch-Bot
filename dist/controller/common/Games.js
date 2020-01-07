@@ -41,7 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var mongoose_1 = __importDefault(require("mongoose"));
 var games_1 = __importDefault(require("../../common/line/games"));
-var Games_1 = __importDefault(require("../../common/messenger/Games"));
+var games_2 = __importDefault(require("../../common/messenger/games"));
 function showGames(context, platform, games) {
     return __awaiter(this, void 0, void 0, function () {
         var _a;
@@ -64,7 +64,7 @@ function showGames(context, platform, games) {
                     games_1.default(context, games);
                     return [3 /*break*/, 7];
                 case 4:
-                    Games_1.default(context, games);
+                    games_2.default(context, games);
                     return [3 /*break*/, 7];
                 case 5: return [4 /*yield*/, context.sendText(games)];
                 case 6:
