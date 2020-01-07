@@ -10,48 +10,97 @@ export default async function showGamesFlex(
     if (index < LINE_FLEX_LIMIT) {
       const content = {
         type: 'bubble',
-        hero: {
-          type: 'image',
-          url: element.boxArtUrl,
-          size: 'full',
-          aspectMode: 'cover',
-          aspectRatio: '150:196',
-          gravity: 'center',
-          flex: 1,
-        },
         body: {
           type: 'box',
-          layout: 'baseline',
-          contents: [
-            {
-              type: 'text',
-              text: element.name,
-              weight: 'bold',
-              size: 'xl',
-              wrap: true,
-            },
-          ],
-          spacing: 'xl',
-          margin: 'lg',
-        },
-        footer: {
-          type: 'box',
           layout: 'vertical',
-          spacing: 'sm',
           contents: [
             {
-              type: 'button',
-              style: 'primary',
-              action: {
-                type: 'message',
-                label: '看這個',
-                text: `我要看 ${element.name}`,
-              },
+              type: 'image',
+              url: element.boxArtUrl,
+              size: 'full',
+              aspectMode: 'cover',
+              aspectRatio: '2:3',
+              gravity: 'center',
+            },
+            {
+              type: 'box',
+              layout: 'vertical',
+              contents: [
+                {
+                  type: 'box',
+                  layout: 'vertical',
+                  contents: [
+                    {
+                      type: 'text',
+                      text: element.name,
+                      size: 'xl',
+                      color: '#ffffff',
+                      weight: 'bold',
+                    },
+                  ],
+                },
+                {
+                  type: 'box',
+                  layout: 'vertical',
+                  contents: [
+                    {
+                      type: 'box',
+                      layout: 'vertical',
+                      contents: [
+                        {
+                          type: 'button',
+                          style: 'link',
+                          color: '#ffffff',
+                          action: {
+                            type: 'message',
+                            label: '我要找...',
+                            text: `我要看 ${element.name}`,
+                          },
+                        },
+                      ],
+                    },
+                  ],
+                  borderWidth: '1px',
+                  cornerRadius: '4px',
+                  spacing: 'sm',
+                  borderColor: '#ffffff',
+                  margin: 'xxl',
+                  height: '40px',
+                },
+              ],
+              position: 'absolute',
+              offsetBottom: '0px',
+              offsetStart: '0px',
+              offsetEnd: '0px',
+              backgroundColor: '#03303Acc',
+              paddingAll: '20px',
+              paddingTop: '18px',
+            },
+            {
+              type: 'box',
+              layout: 'vertical',
+              contents: [
+                {
+                  type: 'text',
+                  text: 'GAME',
+                  color: '#ffffff',
+                  align: 'center',
+                  size: 'xs',
+                  offsetTop: '3px',
+                },
+              ],
+              position: 'absolute',
+              cornerRadius: '20px',
+              offsetTop: '18px',
+              backgroundColor: '#6441a5',
+              offsetStart: '18px',
+              height: '25px',
+              width: '53px',
             },
           ],
+          paddingAll: '0px',
         },
       };
-
       channelBubble.push(content);
     }
   });

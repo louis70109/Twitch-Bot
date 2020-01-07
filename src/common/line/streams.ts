@@ -22,8 +22,8 @@ export default async function showChannelsFlex(
         body: {
           type: 'box',
           layout: 'vertical',
-          spacing: 'sm',
-          paddingAll: '0px',
+          spacing: 'xl',
+          margin: 'lg',
           contents: [
             {
               type: 'box',

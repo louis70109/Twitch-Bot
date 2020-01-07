@@ -36,37 +36,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-function showGamesGeneric(context, games) {
+function helpMe(context) {
     return __awaiter(this, void 0, void 0, function () {
-        var channelBubble;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    channelBubble = [];
-                    games.forEach(function (element, index) {
-                        if (index < 12) {
-                            console.log(element);
-                            var content = {
-                                title: element.name,
-                                imageUrl: element.boxArtUrl,
-                                subtitle: '',
-                                defaultAction: {
-                                    type: 'web_url',
-                                    messengerExtensions: true,
-                                    webviewHeightRatio: 'tall',
-                                },
-                                buttons: [
-                                    {
-                                        type: 'postback',
-                                        title: '找直播',
-                                        payload: "\u6211\u8981\u770B " + element.name,
-                                    },
-                                ],
-                            };
-                            channelBubble.push(content);
-                        }
-                    });
-                    return [4 /*yield*/, context.sendGenericTemplate(channelBubble)];
+                case 0: return [4 /*yield*/, context.sendText('🎮 輸入範例\n綁帳號: 綁定 sam1268\n查詢追隨: follow\n找遊戲: top')];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];
@@ -74,4 +48,4 @@ function showGamesGeneric(context, games) {
         });
     });
 }
-exports.default = showGamesGeneric;
+exports.default = helpMe;

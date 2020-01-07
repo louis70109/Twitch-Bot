@@ -44,6 +44,7 @@ var binding_1 = __importDefault(require("./controller/users/binding"));
 var follow_1 = __importDefault(require("./controller/users/follow"));
 var top_1 = __importDefault(require("./controller/twitches/top"));
 var searchGame_1 = __importDefault(require("./controller/twitches/searchGame"));
+var Help_1 = __importDefault(require("./controller/common/Help"));
 var mongoose_1 = __importDefault(require("mongoose"));
 function LineAction() {
     return __awaiter(this, void 0, void 0, function () {
@@ -54,6 +55,7 @@ function LineAction() {
                         router_1.text(/^([f|F]ollow)|追隨/, follow_1.default),
                         router_1.text(/([t|T]op)|遊戲/, top_1.default),
                         router_1.text(/^我[要|想]看\s*(?<topic>.+)$/, searchGame_1.default),
+                        router_1.text(/([h|H]elp)|(\/h)|(說明)/, Help_1.default),
                     ])];
                 case 1: return [2 /*return*/, _a.sent()];
             }
@@ -93,6 +95,7 @@ function App() {
                             router_1.text(/^([f|F]ollow)|追隨/, follow_1.default),
                             router_1.text(/([t|T]op)|遊戲/, top_1.default),
                             router_1.text(/^我[要|想]看\s*(?<topic>.+)$/, searchGame_1.default),
+                            router_1.text(/([h|H]elp)|(\/h)|(說明)/, Help_1.default),
                         ])];
                 case 1: return [2 /*return*/, _a.sent()];
             }

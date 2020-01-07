@@ -49,7 +49,7 @@ function showStreamGeneric(context, streams) {
                             var content = {
                                 title: ch.displayName,
                                 imageUrl: element.getPreviewUrl('large'),
-                                subtitle: ch.displayName + "\n\u2618\uFE0F" + ch.status + "\n\uD83C\uDFAE" + ch.game + "\n\uD83E\uDD88" + element.viewers,
+                                subtitle: "\u2618\uFE0F" + ch.status + "\n\uD83C\uDFAE" + ch.game + "\n\uD83E\uDD88" + element.viewers,
                                 defaultAction: {
                                     type: 'web_url',
                                     url: ch.url,

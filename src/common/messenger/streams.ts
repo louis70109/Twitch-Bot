@@ -9,7 +9,7 @@ export default async function showStreamGeneric(
       const content = {
         title: ch.displayName,
         imageUrl: element.getPreviewUrl('large'),
-        subtitle: `${ch.displayName}\n☘️${ch.status}\n🎮${ch.game}\n🦈${element.viewers}`,
+        subtitle: `☘️${ch.status}\n🎮${ch.game}\n🦈${element.viewers}`,
         defaultAction: {
           type: 'web_url',
           url: ch.url,
