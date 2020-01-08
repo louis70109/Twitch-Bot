@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var MESSENGER_LIMIT = 9;
 function showStreamGeneric(context, streams) {
     return __awaiter(this, void 0, void 0, function () {
         var channelBubble;
@@ -44,7 +45,7 @@ function showStreamGeneric(context, streams) {
                 case 0:
                     channelBubble = [];
                     streams.forEach(function (element, index) {
-                        if (index < 12) {
+                        if (index < MESSENGER_LIMIT) {
                             var ch = element.channel;
                             var content = {
                                 title: ch.displayName,

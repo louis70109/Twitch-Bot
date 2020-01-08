@@ -1,26 +1,27 @@
 import { Game } from '../../model/game';
-
+const MESSENGER_LIMIT = 10;
 export default async function showGamesGeneric(
   context: any,
   games: Game[]
 ): Promise<void> {
   const channelBubble: any[] = [];
   games.forEach((element, index) => {
-    if (index < 12) {
-      console.log(element);
+    if (index < MESSENGER_LIMIT) {
       const content = {
-        title: element.name,
+        title: `🦈 ${element.name}`,
         imageUrl: element.boxArtUrl,
-        subtitle: '',
+        subtitle: '🎮🎮🎮🎮🎮',
         defaultAction: {
           type: 'web_url',
+          url: element.boxArtUrl,
           messengerExtensions: true,
           webviewHeightRatio: 'tall',
+          fallbackUrl: element.boxArtUrl,
         },
         buttons: [
           {
             type: 'postback',
-            title: '找直播',
+            title: `我要看 ${element.name}`,
             payload: `我要看 ${element.name}`,
           },
         ],

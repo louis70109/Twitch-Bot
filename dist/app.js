@@ -71,6 +71,7 @@ function MessengerAction() {
                         router_1.text(/^([f|F]ollow)|追隨/, follow_1.default),
                         router_1.text(/([t|T]op)|遊戲/, top_1.default),
                         router_1.text(/^我[要|想]看\s*(?<topic>.+)$/, searchGame_1.default),
+                        router_1.text(/([h|H]elp)|(\/h)|(說明)/, Help_1.default),
                     ])];
                 case 1: return [2 /*return*/, _a.sent()];
             }

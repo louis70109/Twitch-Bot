@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var MESSENGER_LIMIT = 10;
 function showGamesGeneric(context, games) {
     return __awaiter(this, void 0, void 0, function () {
         var channelBubble;
@@ -44,21 +45,22 @@ function showGamesGeneric(context, games) {
                 case 0:
                     channelBubble = [];
                     games.forEach(function (element, index) {
-                        if (index < 12) {
-                            console.log(element);
+                        if (index < MESSENGER_LIMIT) {
                             var content = {
-                                title: element.name,
+                                title: "\uD83E\uDD88 " + element.name,
                                 imageUrl: element.boxArtUrl,
-                                subtitle: '',
+                                subtitle: '🎮🎮🎮🎮🎮',
                                 defaultAction: {
                                     type: 'web_url',
+                                    url: element.boxArtUrl,
                                     messengerExtensions: true,
                                     webviewHeightRatio: 'tall',
+                                    fallbackUrl: element.boxArtUrl,
                                 },
                                 buttons: [
                                     {
                                         type: 'postback',
-                                        title: '找直播',
+                                        title: "\u6211\u8981\u770B " + element.name,
                                         payload: "\u6211\u8981\u770B " + element.name,
                                     },
                                 ],

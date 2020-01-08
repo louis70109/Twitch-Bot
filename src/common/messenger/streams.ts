@@ -1,10 +1,11 @@
+const MESSENGER_LIMIT = 9;
 export default async function showStreamGeneric(
   context: any,
   streams
 ): Promise<void> {
   const channelBubble: any[] = [];
   streams.forEach((element, index) => {
-    if (index < 12) {
+    if (index < MESSENGER_LIMIT) {
       const ch = element.channel;
       const content = {
         title: ch.displayName,

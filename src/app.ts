@@ -22,6 +22,7 @@ async function MessengerAction(): Promise<void> {
     text(/^([f|F]ollow)|追隨/, userFollow),
     text(/([t|T]op)|遊戲/, topGames),
     text(/^我[要|想]看\s*(?<topic>.+)$/, searchGame),
+    text(/([h|H]elp)|(\/h)|(說明)/, helpMe),
   ]);
 }
 
