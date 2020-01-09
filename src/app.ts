@@ -1,4 +1,5 @@
 import { platform, router, text } from 'bottender/router';
+import { withProps } from 'bottender';
 import userBinding from './controller/users/binding';
 import userFollow from './controller/users/follow';
 import topGames from './controller/twitches/top';
@@ -11,17 +12,17 @@ async function LineAction(): Promise<void> {
     text(/^綁定\s*(?<name>[\s\S]+)/, userBinding),
     text(/^([f|F]ollow)|追隨/, userFollow),
     text(/([t|T]op)|遊戲/, topGames),
-    text(/^我[要|想]看\s*(?<topic>.+)$/, searchGame),
+    text(/^[f|F]ind\s*(?<topic>.*)$/, searchGame),
     text(/([h|H]elp)|(\/h)|(說明)/, helpMe),
   ]);
 }
 
-async function MessengerAction(): Promise<void> {
+async function MessengerAction(context): Promise<void> {
   return await router([
     text(/^綁定\s*(?<name>[\s\S]+)/, userBinding),
     text(/^([f|F]ollow)|追隨/, userFollow),
     text(/([t|T]op)|遊戲/, topGames),
-    text(/^我[要|想]看\s*(?<topic>.+)$/, searchGame),
+    text(/^[f|F]ind\s*(?<topic>.*)$/, searchGame),
     text(/([h|H]elp)|(\/h)|(說明)/, helpMe),
   ]);
 }
@@ -39,7 +40,7 @@ export default async function App(): Promise<void> {
     text(/^綁定\s*(?<name>[\s\S]+)/, userBinding),
     text(/^([f|F]ollow)|追隨/, userFollow),
     text(/([t|T]op)|遊戲/, topGames),
-    text(/^我[要|想]看\s*(?<topic>.+)$/, searchGame),
+    text(/^[f|F]ind\s*(?<topic>.+)$/, searchGame),
     text(/([h|H]elp)|(\/h)|(說明)/, helpMe),
   ]);
 }
