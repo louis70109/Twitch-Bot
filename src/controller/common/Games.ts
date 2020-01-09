@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import showGamesFlex from '../../common/line/games';
-import showGamesGeneric from '../../common/messenger/games';
+import showGamesFlex from '../../view/line/games';
+import showGamesGeneric from '../../view/messenger/games';
 import { Game } from '../../model/game';
 export default async function showGames(
   context,

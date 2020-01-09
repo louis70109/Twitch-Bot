@@ -59,7 +59,7 @@ function searchGame(context, _a) {
                     gamesInfo = _d.sent();
                     streams = [];
                     gamesInfo.forEach(function (element, index) {
-                        if (index < 12) {
+                        if (index < 10) {
                             streams.push(element);
                         }
                     });

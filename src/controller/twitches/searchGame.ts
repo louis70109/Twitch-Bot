@@ -17,7 +17,7 @@ export default async function searchGame(
 
   const streams: Stream[] = [];
   gamesInfo.forEach((element, index) => {
-    if (index < 12) {
+    if (index < 10) {
       streams.push(element);
     }
   });

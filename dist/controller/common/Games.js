@@ -40,8 +40,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var mongoose_1 = __importDefault(require("mongoose"));
-var games_1 = __importDefault(require("../../common/line/games"));
-var games_2 = __importDefault(require("../../common/messenger/games"));
+var games_1 = __importDefault(require("../../view/line/games"));
+var games_2 = __importDefault(require("../../view/messenger/games"));
 function showGames(context, platform, games) {
     return __awaiter(this, void 0, void 0, function () {
         var _a;

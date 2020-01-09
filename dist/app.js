@@ -54,7 +54,7 @@ function LineAction() {
                         router_1.text(/^綁定\s*(?<name>[\s\S]+)/, binding_1.default),
                         router_1.text(/^([f|F]ollow)|追隨/, follow_1.default),
                         router_1.text(/([t|T]op)|遊戲/, top_1.default),
-                        router_1.text(/^我[要|想]看\s*(?<topic>.+)$/, searchGame_1.default),
+                        router_1.text(/^[f|F]ind\s*(?<topic>.*)$/, searchGame_1.default),
                         router_1.text(/([h|H]elp)|(\/h)|(說明)/, Help_1.default),
                     ])];
                 case 1: return [2 /*return*/, _a.sent()];
@@ -62,7 +62,7 @@ function LineAction() {
         });
     });
 }
-function MessengerAction() {
+function MessengerAction(context) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -70,7 +70,7 @@ function MessengerAction() {
                         router_1.text(/^綁定\s*(?<name>[\s\S]+)/, binding_1.default),
                         router_1.text(/^([f|F]ollow)|追隨/, follow_1.default),
                         router_1.text(/([t|T]op)|遊戲/, top_1.default),
-                        router_1.text(/^我[要|想]看\s*(?<topic>.+)$/, searchGame_1.default),
+                        router_1.text(/^[f|F]ind\s*(?<topic>.*)$/, searchGame_1.default),
                         router_1.text(/([h|H]elp)|(\/h)|(說明)/, Help_1.default),
                     ])];
                 case 1: return [2 /*return*/, _a.sent()];
@@ -95,7 +95,7 @@ function App() {
                             router_1.text(/^綁定\s*(?<name>[\s\S]+)/, binding_1.default),
                             router_1.text(/^([f|F]ollow)|追隨/, follow_1.default),
                             router_1.text(/([t|T]op)|遊戲/, top_1.default),
-                            router_1.text(/^我[要|想]看\s*(?<topic>.+)$/, searchGame_1.default),
+                            router_1.text(/^[f|F]ind\s*(?<topic>.+)$/, searchGame_1.default),
                             router_1.text(/([h|H]elp)|(\/h)|(說明)/, Help_1.default),
                         ])];
                 case 1: return [2 /*return*/, _a.sent()];

@@ -35,56 +35,45 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var mongoose_1 = __importDefault(require("mongoose"));
-var streams_1 = __importDefault(require("../../view/line/streams"));
-var streams_2 = __importDefault(require("../../view/messenger/streams"));
-function showChannels(context, platform, streams) {
+var MESSENGER_LIMIT = 10;
+function showGamesGeneric(context, games) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, output_1;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var channelBubble;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
-                    if (!(streams.length === 0)) return [3 /*break*/, 2];
-                    return [4 /*yield*/, context.sendText('🚀現在追隨的實況主都沒開哦！')];
-                case 1:
-                    _b.sent();
-                    return [3 /*break*/, 9];
-                case 2:
-                    _a = platform;
-                    switch (_a) {
-                        case 'line': return [3 /*break*/, 3];
-                        case 'messenger': return [3 /*break*/, 4];
-                    }
-                    return [3 /*break*/, 5];
-                case 3:
-                    streams_1.default(context, streams);
-                    return [3 /*break*/, 7];
-                case 4:
-                    streams_2.default(context, streams);
-                    return [3 /*break*/, 7];
-                case 5:
-                    output_1 = '';
-                    streams.forEach(function (element, index) {
-                        if (index < 12) {
-                            var ch = element.channel;
-                            output_1 += "\n              \u76F4\u64AD\u4E3B:" + ch.displayName + "\n              \u72C0\u614B:" + ch.status + "\n              \u904A\u6232:" + ch.game + "\n              \u7DB2\u5740:" + ch.url + "\n              \u4F55\u6642\u958B\u53F0:" + element.startDate + "\n              \u4EBA\u6578:" + element.viewers + "\n              \u5716\u7247:" + element.getPreviewUrl('large') + "\n              ---------------\n            ";
+                    channelBubble = [];
+                    games.forEach(function (element, index) {
+                        if (index < MESSENGER_LIMIT) {
+                            var content = {
+                                title: "\uD83E\uDD88 " + element.name,
+                                imageUrl: element.boxArtUrl,
+                                subtitle: '🎮🎮🎮🎮🎮🎮',
+                                defaultAction: {
+                                    type: 'web_url',
+                                    url: element.boxArtUrl,
+                                    messengerExtensions: true,
+                                    webviewHeightRatio: 'tall',
+                                    fallbackUrl: element.boxArtUrl,
+                                },
+                                buttons: [
+                                    {
+                                        type: 'postback',
+                                        title: "\u770B\u9019\u500B",
+                                        payload: "find " + element.name,
+                                    },
+                                ],
+                            };
+                            channelBubble.push(content);
                         }
                     });
-                    return [4 /*yield*/, context.sendText(output_1)];
-                case 6:
-                    _b.sent();
-                    return [3 /*break*/, 7];
-                case 7: return [4 /*yield*/, mongoose_1.default.connection.close()];
-                case 8:
-                    _b.sent();
-                    _b.label = 9;
-                case 9: return [2 /*return*/];
+                    return [4 /*yield*/, context.sendGenericTemplate(channelBubble)];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/];
             }
         });
     });
 }
-exports.default = showChannels;
+exports.default = showGamesGeneric;

@@ -4,7 +4,7 @@ This project is cross `Messenger` and `LINE message API`.
 
 It can find your following Stream channels and show top Games.
 
-# Add me
+# 加入好友
 
 <img height="200" border="0" alt="QRcode" src="https://i.imgur.com/u4Tvugn.png">
 

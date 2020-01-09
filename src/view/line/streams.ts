@@ -1,7 +1,9 @@
+import { Stream } from 'twitch';
+
 const LINE_FLEX_LIMIT = 10;
 export default async function showChannelsFlex(
   context: any,
-  streams
+  streams: Stream[]
 ): Promise<void> {
   const channelBubble: any[] = [];
 

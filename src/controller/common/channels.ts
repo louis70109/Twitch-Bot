@@ -1,7 +1,7 @@
 import { Stream } from 'twitch';
 import mongoose from 'mongoose';
-import showChannelsFlex from '../../common/line/streams';
-import showStreamGeneric from '../../common/messenger/streams';
+import showChannelsFlex from '../../view/line/streams';
+import showStreamGeneric from '../../view/messenger/streams';
 export default async function showChannels(
   context,
   platform: string,

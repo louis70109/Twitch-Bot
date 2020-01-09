@@ -10,7 +10,7 @@ export default async function showGamesGeneric(
       const content = {
         title: `🦈 ${element.name}`,
         imageUrl: element.boxArtUrl,
-        subtitle: '🎮🎮🎮🎮🎮',
+        subtitle: '🎮🎮🎮🎮🎮🎮',
         defaultAction: {
           type: 'web_url',
           url: element.boxArtUrl,
@@ -21,8 +21,8 @@ export default async function showGamesGeneric(
         buttons: [
           {
             type: 'postback',
-            title: `我要看 ${element.name}`,
-            payload: `我要看 ${element.name}`,
+            title: `看這個`,
+            payload: `find ${element.name}`,
           },
         ],
       };

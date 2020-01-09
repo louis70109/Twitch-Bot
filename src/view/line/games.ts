@@ -54,7 +54,7 @@ export default async function showGamesFlex(
                           action: {
                             type: 'message',
                             label: '我要找...',
-                            text: `我要看 ${element.name}`,
+                            text: `find ${element.name}`,
                           },
                         },
                       ],
