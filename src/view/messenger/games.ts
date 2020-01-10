@@ -22,7 +22,7 @@ export default async function showGamesGeneric(
           {
             type: 'postback',
             title: `看這個`,
-            payload: `find ${element.name}`,
+            payload: `${element.name}`,
           },
         ],
       };

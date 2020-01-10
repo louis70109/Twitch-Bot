@@ -61,7 +61,7 @@ function showGamesGeneric(context, games) {
                                     {
                                         type: 'postback',
                                         title: "\u770B\u9019\u500B",
-                                        payload: "find " + element.name,
+                                        payload: "" + element.name,
                                     },
                                 ],
                             };

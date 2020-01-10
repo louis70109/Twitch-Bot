@@ -40,6 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var router_1 = require("bottender/router");
+var bottender_1 = require("bottender");
 var binding_1 = __importDefault(require("./controller/users/binding"));
 var follow_1 = __importDefault(require("./controller/users/follow"));
 var top_1 = __importDefault(require("./controller/twitches/top"));
@@ -63,17 +64,21 @@ function LineAction() {
     });
 }
 function MessengerAction(context) {
+    var _a, _b;
     return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, router_1.router([
-                        router_1.text(/^綁定\s*(?<name>[\s\S]+)/, binding_1.default),
-                        router_1.text(/^([f|F]ollow)|追隨/, follow_1.default),
-                        router_1.text(/([t|T]op)|遊戲/, top_1.default),
-                        router_1.text(/^[f|F]ind\s*(?<topic>.*)$/, searchGame_1.default),
-                        router_1.text(/([h|H]elp)|(\/h)|(說明)/, Help_1.default),
-                    ])];
-                case 1: return [2 /*return*/, _a.sent()];
+        var payload;
+        return __generator(this, function (_c) {
+            switch (_c.label) {
+                case 0:
+                    payload = (_b = (_a = context.event) === null || _a === void 0 ? void 0 : _a.postback) === null || _b === void 0 ? void 0 : _b.payload;
+                    return [4 /*yield*/, router_1.router([
+                            router_1.text(/^綁定\s*(?<name>[\s\S]+)/, binding_1.default),
+                            router_1.text(/^([f|F]ollow)|追隨/, follow_1.default),
+                            router_1.text(/([t|T]op)|遊戲/, top_1.default),
+                            router_1.messenger.postback(bottender_1.withProps(searchGame_1.default, { match: { groups: { topic: payload } } })),
+                            router_1.text(/([h|H]elp)|(\/h)|(說明)/, Help_1.default),
+                        ])];
+                case 1: return [2 /*return*/, _c.sent()];
             }
         });
     });
