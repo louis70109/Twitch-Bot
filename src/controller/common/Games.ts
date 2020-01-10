@@ -3,7 +3,7 @@ import showGamesFlex from '../../view/line/games';
 import showGamesGeneric from '../../view/messenger/games';
 import { Game } from '../../model/game';
 export default async function showGames(
-  context,
+  context: any,
   platform: string,
   games: Game[]
 ): Promise<void> {

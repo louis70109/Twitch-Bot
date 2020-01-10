@@ -26,6 +26,7 @@ async function MessengerAction(context): Promise<void> {
     messenger.postback(
       withProps(searchGame, { match: { groups: { topic: payload } } })
     ),
+    text(/^[f|F]ind\s*(?<topic>.*)$/, searchGame),
     text(/([h|H]elp)|(\/h)|(說明)/, helpMe),
   ]);
 }

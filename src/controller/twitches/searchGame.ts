@@ -6,10 +6,6 @@ export default async function searchGame(
   context: any,
   { match }
 ): Promise<void> {
-  console.log('==============');
-  console.log(context);
-  console.log('----------');
-  console.log(match);
   const platform = context._session?.platform;
   const topic = match.groups?.topic;
   const twitchClient = await TwitchClient.withCredentials(

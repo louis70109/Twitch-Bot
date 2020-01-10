@@ -76,6 +76,7 @@ function MessengerAction(context) {
                             router_1.text(/^([f|F]ollow)|追隨/, follow_1.default),
                             router_1.text(/([t|T]op)|遊戲/, top_1.default),
                             router_1.messenger.postback(bottender_1.withProps(searchGame_1.default, { match: { groups: { topic: payload } } })),
+                            router_1.text(/^[f|F]ind\s*(?<topic>.*)$/, searchGame_1.default),
                             router_1.text(/([h|H]elp)|(\/h)|(說明)/, Help_1.default),
                         ])];
                 case 1: return [2 /*return*/, _c.sent()];

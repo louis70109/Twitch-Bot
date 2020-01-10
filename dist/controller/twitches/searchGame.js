@@ -49,10 +49,6 @@ function searchGame(context, _a) {
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
-                    console.log('==============');
-                    console.log(context);
-                    console.log('----------');
-                    console.log(match);
                     platform = (_b = context._session) === null || _b === void 0 ? void 0 : _b.platform;
                     topic = (_c = match.groups) === null || _c === void 0 ? void 0 : _c.topic;
                     return [4 /*yield*/, twitch_1.default.withCredentials(process.env.TWITCH_CLIENT_ID, process.env.TWITCH_ACCESS_TOKEN)];
