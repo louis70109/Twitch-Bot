@@ -32,7 +32,7 @@
   - [mongoose](https://mongoosejs.com/)
 - [twitch API](https://d-fischer.github.io/twitch/docs/basic-usage/getting-started.html)
 
-# 未來展望
+# 支援平台
 
 - [x] LINE
 - [x] Messenger
