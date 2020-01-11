@@ -1,4 +1,5 @@
 import { Game } from '../../model/game';
+import quickReplies from './quickReplies';
 const MESSENGER_LIMIT = 10;
 export default async function showGamesGeneric(
   context: any,
@@ -29,5 +30,8 @@ export default async function showGamesGeneric(
       channelBubble.push(content);
     }
   });
-  await context.sendGenericTemplate(channelBubble);
+  await context.sendGenericTemplate(
+    channelBubble,
+    quickReplies(['follow', 'top', 'help', 'author'])
+  );
 }

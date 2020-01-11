@@ -1,7 +1,9 @@
+import quickReplies from './quickReplies';
+import { Stream } from 'twitch';
 const MESSENGER_LIMIT = 9;
 export default async function showStreamGeneric(
   context: any,
-  streams
+  streams: Stream[]
 ): Promise<void> {
   const channelBubble: any[] = [];
   streams.forEach((element, index) => {
@@ -29,5 +31,8 @@ export default async function showStreamGeneric(
       channelBubble.push(content);
     }
   });
-  await context.sendGenericTemplate(channelBubble);
+  await context.sendGenericTemplate(
+    channelBubble,
+    quickReplies(['follow', 'top', 'help', 'author'])
+  );
 }
