@@ -49,6 +49,6 @@ export default async function App(): Promise<void> {
     text(/([t|T]op)|遊戲/, topGames),
     text(/^[f|F]ind\s*(?<topic>.+)$/, searchGame),
     text(/([h|H]elp)|(\/h)|(說明)/, helpMe),
-    text(/([a|A]uhor)|(作者)/, author),
+    text(/([a|A]uthor)|(作者)/, author),
   ]);
 }

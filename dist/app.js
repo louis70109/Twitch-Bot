@@ -106,7 +106,7 @@ function App() {
                             router_1.text(/([t|T]op)|遊戲/, top_1.default),
                             router_1.text(/^[f|F]ind\s*(?<topic>.+)$/, searchGame_1.default),
                             router_1.text(/([h|H]elp)|(\/h)|(說明)/, help_1.default),
-                            router_1.text(/([a|A]uhor)|(作者)/, author_1.default),
+                            router_1.text(/([a|A]uthor)|(作者)/, author_1.default),
                         ])];
                 case 1: return [2 /*return*/, _a.sent()];
             }
