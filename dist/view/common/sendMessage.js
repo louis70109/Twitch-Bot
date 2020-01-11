@@ -39,45 +39,40 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var quickReplies_1 = __importDefault(require("./quickReplies"));
-var MESSENGER_LIMIT = 10;
-function showGamesGeneric(context, games) {
+var quickReply_1 = __importDefault(require("../line/quickReply"));
+var quickReplies_1 = __importDefault(require("../messenger/quickReplies"));
+function sendMessage(context, message) {
+    var _a;
     return __awaiter(this, void 0, void 0, function () {
-        var channelBubble;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var platform, _b;
+        return __generator(this, function (_c) {
+            switch (_c.label) {
                 case 0:
-                    channelBubble = [];
-                    games.forEach(function (element, index) {
-                        if (index < MESSENGER_LIMIT) {
-                            var content = {
-                                title: "\uD83E\uDD88 " + element.name,
-                                imageUrl: element.boxArtUrl,
-                                subtitle: '🎮🎮🎮🎮🎮🎮',
-                                defaultAction: {
-                                    type: 'web_url',
-                                    url: element.boxArtUrl,
-                                    messengerExtensions: true,
-                                    webviewHeightRatio: 'tall',
-                                    fallbackUrl: element.boxArtUrl,
-                                },
-                                buttons: [
-                                    {
-                                        type: 'postback',
-                                        title: "\u770B\u9019\u500B",
-                                        payload: "" + element.name,
-                                    },
-                                ],
-                            };
-                            channelBubble.push(content);
-                        }
-                    });
-                    return [4 /*yield*/, context.sendGenericTemplate(channelBubble, quickReplies_1.default(['follow', 'top', 'help', 'author']))];
-                case 1:
-                    _a.sent();
-                    return [2 /*return*/];
+                    platform = (_a = context._session) === null || _a === void 0 ? void 0 : _a.platform;
+                    _b = platform;
+                    switch (_b) {
+                        case 'line': return [3 /*break*/, 1];
+                        case 'messenger': return [3 /*break*/, 3];
+                    }
+                    return [3 /*break*/, 5];
+                case 1: return [4 /*yield*/, context.sendText(message, quickReply_1.default(['follow', 'top', 'help', 'author']))];
+                case 2:
+                    _c.sent();
+                    return [3 /*break*/, 7];
+                case 3: 
+                // showStreamGeneric(context, streams);
+                return [4 /*yield*/, context.sendText(message, quickReplies_1.default(['follow', 'top', 'help', 'author']))];
+                case 4:
+                    // showStreamGeneric(context, streams);
+                    _c.sent();
+                    return [3 /*break*/, 7];
+                case 5: return [4 /*yield*/, context.sendText(message)];
+                case 6:
+                    _c.sent();
+                    return [3 /*break*/, 7];
+                case 7: return [2 /*return*/];
             }
         });
     });
 }
-exports.default = showGamesGeneric;
+exports.default = sendMessage;

@@ -45,7 +45,8 @@ var binding_1 = __importDefault(require("./controller/users/binding"));
 var follow_1 = __importDefault(require("./controller/users/follow"));
 var top_1 = __importDefault(require("./controller/twitches/top"));
 var searchGame_1 = __importDefault(require("./controller/twitches/searchGame"));
-var Help_1 = __importDefault(require("./controller/common/Help"));
+var help_1 = __importDefault(require("./view/common/help"));
+var author_1 = __importDefault(require("./view/common/author"));
 var mongoose_1 = __importDefault(require("mongoose"));
 function LineAction() {
     return __awaiter(this, void 0, void 0, function () {
@@ -56,7 +57,8 @@ function LineAction() {
                         router_1.text(/^([f|F]ollow)|追隨/, follow_1.default),
                         router_1.text(/([t|T]op)|遊戲/, top_1.default),
                         router_1.text(/^[f|F]ind\s*(?<topic>.*)$/, searchGame_1.default),
-                        router_1.text(/([h|H]elp)|(\/h)|(說明)/, Help_1.default),
+                        router_1.text(/([h|H]elp)|(\/h)|(說明)/, help_1.default),
+                        router_1.text(/([a|A]uthor)|(作者)/, author_1.default),
                     ])];
                 case 1: return [2 /*return*/, _a.sent()];
             }
@@ -77,7 +79,8 @@ function MessengerAction(context) {
                             router_1.text(/([t|T]op)|遊戲/, top_1.default),
                             router_1.messenger.postback(bottender_1.withProps(searchGame_1.default, { match: { groups: { topic: payload } } })),
                             router_1.text(/^[f|F]ind\s*(?<topic>.*)$/, searchGame_1.default),
-                            router_1.text(/([h|H]elp)|(\/h)|(說明)/, Help_1.default),
+                            router_1.text(/([h|H]elp)|(\/h)|(說明)/, help_1.default),
+                            router_1.text(/([a|A]uthor)|(作者)/, author_1.default),
                         ])];
                 case 1: return [2 /*return*/, _c.sent()];
             }
@@ -102,7 +105,8 @@ function App() {
                             router_1.text(/^([f|F]ollow)|追隨/, follow_1.default),
                             router_1.text(/([t|T]op)|遊戲/, top_1.default),
                             router_1.text(/^[f|F]ind\s*(?<topic>.+)$/, searchGame_1.default),
-                            router_1.text(/([h|H]elp)|(\/h)|(說明)/, Help_1.default),
+                            router_1.text(/([h|H]elp)|(\/h)|(說明)/, help_1.default),
+                            router_1.text(/([a|A]uhor)|(作者)/, author_1.default),
                         ])];
                 case 1: return [2 /*return*/, _a.sent()];
             }
