@@ -57,8 +57,8 @@ function LineAction() {
                         router_1.text(/^([f|F]ollow)|追隨/, follow_1.default),
                         router_1.text(/([t|T]op)|遊戲/, top_1.default),
                         router_1.text(/^[f|F]ind\s*(?<topic>.*)$/, searchGame_1.default),
-                        router_1.text(/([h|H]elp)|(\/h)|(說明)/, help_1.default),
                         router_1.text(/([a|A]uthor)|(作者)/, author_1.default),
+                        router_1.text('*', help_1.default),
                     ])];
                 case 1: return [2 /*return*/, _a.sent()];
             }
@@ -79,8 +79,8 @@ function MessengerAction(context) {
                             router_1.text(/([t|T]op)|遊戲/, top_1.default),
                             router_1.messenger.postback(bottender_1.withProps(searchGame_1.default, { match: { groups: { topic: payload } } })),
                             router_1.text(/^[f|F]ind\s*(?<topic>.*)$/, searchGame_1.default),
-                            router_1.text(/([h|H]elp)|(\/h)|(說明)/, help_1.default),
                             router_1.text(/([a|A]uthor)|(作者)/, author_1.default),
+                            router_1.text('*', help_1.default),
                         ])];
                 case 1: return [2 /*return*/, _c.sent()];
             }
@@ -105,8 +105,8 @@ function App() {
                             router_1.text(/^([f|F]ollow)|追隨/, follow_1.default),
                             router_1.text(/([t|T]op)|遊戲/, top_1.default),
                             router_1.text(/^[f|F]ind\s*(?<topic>.+)$/, searchGame_1.default),
-                            router_1.text(/([h|H]elp)|(\/h)|(說明)/, help_1.default),
                             router_1.text(/([a|A]uthor)|(作者)/, author_1.default),
+                            router_1.text('*', help_1.default),
                         ])];
                 case 1: return [2 /*return*/, _a.sent()];
             }

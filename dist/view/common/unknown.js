@@ -39,50 +39,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var mongoose_1 = __importDefault(require("mongoose"));
-var streams_1 = __importDefault(require("../../view/line/streams"));
-var streams_2 = __importDefault(require("../../view/messenger/streams"));
-var sendMessage_1 = __importDefault(require("../../view/common/sendMessage"));
-function showChannels(context, platform, streams) {
+var sendMessage_1 = __importDefault(require("./sendMessage"));
+function unKnown(context, message) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, output_1;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    _a = platform;
-                    switch (_a) {
-                        case 'line': return [3 /*break*/, 1];
-                        case 'messenger': return [3 /*break*/, 2];
-                    }
-                    return [3 /*break*/, 3];
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, sendMessage_1.default(context, message)];
                 case 1:
-                    streams.length !== 0
-                        ? streams_1.default(context, streams)
-                        : sendMessage_1.default(context, '🚀現在追隨的實況主都沒開哦！');
-                    return [3 /*break*/, 5];
-                case 2:
-                    streams.length !== 0
-                        ? streams_2.default(context, streams)
-                        : sendMessage_1.default(context, '🚀現在追隨的實況主都沒開哦！');
-                    return [3 /*break*/, 5];
-                case 3:
-                    output_1 = '';
-                    streams.forEach(function (element, index) {
-                        if (index < 10) {
-                            var ch = element.channel;
-                            output_1 += "\n              \u76F4\u64AD\u4E3B:" + ch.displayName + "\n              \u72C0\u614B:" + ch.status + "\n              \u904A\u6232:" + ch.game + "\n              \u7DB2\u5740:" + ch.url + "\n              \u4F55\u6642\u958B\u53F0:" + element.startDate + "\n              \u4EBA\u6578:" + element.viewers + "\n              \u5716\u7247:" + element.getPreviewUrl('large') + "\n              ---------------\n            ";
-                        }
-                    });
-                    return [4 /*yield*/, context.sendText(output_1)];
-                case 4:
-                    _b.sent();
-                    return [3 /*break*/, 5];
-                case 5: return [4 /*yield*/, mongoose_1.default.connection.close()];
-                case 6:
-                    _b.sent();
+                    _a.sent();
                     return [2 /*return*/];
             }
         });
     });
 }
-exports.default = showChannels;
+exports.default = unKnown;

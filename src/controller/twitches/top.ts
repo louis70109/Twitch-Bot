@@ -16,7 +16,7 @@ export default async function topGames(context: any): Promise<void> {
   const games = await twitchClient.helix.games.getTopGames();
   const gamesInfo: Game[] = [];
   games.data.forEach((element, index) => {
-    if (index < 12) {
+    if (index < 10) {
       const _tmpGame: Game = {
         id: element.id,
         name: element.name,

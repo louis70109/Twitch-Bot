@@ -1,6 +1,8 @@
-import { UserModel } from '../../model/user';
 import TwitchClient from 'twitch';
+import { UserModel } from '../../model/user';
 import showChannels from '../common/Channels';
+import sendMessage from '../../view/common/sendMessage';
+
 export default async function userFollow(context: any): Promise<void> {
   const platform = context._session?.platform;
   const userId = context._session?.user?.id;
@@ -12,7 +14,7 @@ export default async function userFollow(context: any): Promise<void> {
 
   const currentUser = await UserModel.findOne({ userId: userId });
   if (!currentUser) {
-    context.sendText('👾 請先綁定帳號哦！\n ex: 綁定 godjj');
+    sendMessage(context, '👾 請先綁定帳號哦！\n ex: 綁定 godjj');
     return;
   }
   const follow = await twitchClient.kraken.users.getFollowedChannels(

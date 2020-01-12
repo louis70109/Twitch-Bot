@@ -1,6 +1,7 @@
 import { UserModel } from '../../model/user';
 import TwitchClient from 'twitch';
 import mongoose from 'mongoose';
+import sendMessage from '../../view/common/sendMessage';
 
 export default async function userBinding(
   context: any,
@@ -15,9 +16,8 @@ export default async function userBinding(
   );
 
   const twitchUser = await twitchClient.helix.users.getUserByName(userName);
-
   if (!twitchUser) {
-    context.sendText('👾 綁定帳號失敗，請檢查 Twitch 是否有效');
+    sendMessage(context, '👾 綁定帳號失敗，請檢查 Twitch 是否有效');
     return;
   }
 
@@ -31,7 +31,7 @@ export default async function userBinding(
     console.log('this record not found');
     await user.save(err => {
       if (err) {
-        context.sendText('❌ 綁定失敗');
+        sendMessage(context, '❌ 綁定失敗');
         return;
       }
     });
@@ -52,5 +52,5 @@ export default async function userBinding(
       }
     );
   }
-  await context.sendText(`✅ 綁定 ${twitchUser.name} 成功！`);
+  await sendMessage(context, `✅ 綁定 ${twitchUser.name} 成功！`);
 }

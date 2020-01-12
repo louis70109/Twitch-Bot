@@ -39,9 +39,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var user_1 = require("../../model/user");
 var twitch_1 = __importDefault(require("twitch"));
+var user_1 = require("../../model/user");
 var Channels_1 = __importDefault(require("../common/Channels"));
+var sendMessage_1 = __importDefault(require("../../view/common/sendMessage"));
 function userFollow(context) {
     var _a, _b, _c;
     return __awaiter(this, void 0, void 0, function () {
@@ -58,7 +59,7 @@ function userFollow(context) {
                 case 2:
                     currentUser = _d.sent();
                     if (!currentUser) {
-                        context.sendText('👾 請先綁定帳號哦！\n ex: 綁定 godjj');
+                        sendMessage_1.default(context, '👾 請先綁定帳號哦！\n ex: 綁定 godjj');
                         return [2 /*return*/];
                     }
                     return [4 /*yield*/, twitchClient.kraken.users.getFollowedChannels(currentUser.twitchId)];

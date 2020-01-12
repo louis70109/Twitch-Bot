@@ -42,39 +42,37 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var mongoose_1 = __importDefault(require("mongoose"));
 var games_1 = __importDefault(require("../../view/line/games"));
 var games_2 = __importDefault(require("../../view/messenger/games"));
+var sendMessage_1 = __importDefault(require("../../view/common/sendMessage"));
 function showGames(context, platform, games) {
     return __awaiter(this, void 0, void 0, function () {
         var _a;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
-                    if (!(games.length === 0)) return [3 /*break*/, 2];
-                    return [4 /*yield*/, context.sendText('🚀現在追隨的實況主都沒開哦！')];
-                case 1:
-                    _b.sent();
-                    return [3 /*break*/, 9];
-                case 2:
                     _a = platform;
                     switch (_a) {
-                        case 'line': return [3 /*break*/, 3];
-                        case 'messenger': return [3 /*break*/, 4];
+                        case 'line': return [3 /*break*/, 1];
+                        case 'messenger': return [3 /*break*/, 2];
                     }
+                    return [3 /*break*/, 3];
+                case 1:
+                    games.length !== 0
+                        ? games_1.default(context, games)
+                        : sendMessage_1.default(context, '🚀現在想看的遊戲都沒開哦！');
                     return [3 /*break*/, 5];
-                case 3:
-                    games_1.default(context, games);
-                    return [3 /*break*/, 7];
+                case 2:
+                    games.length !== 0
+                        ? games_2.default(context, games)
+                        : sendMessage_1.default(context, '🚀現在想看的遊戲都沒開哦！');
+                    return [3 /*break*/, 5];
+                case 3: return [4 /*yield*/, context.sendText(games)];
                 case 4:
-                    games_2.default(context, games);
-                    return [3 /*break*/, 7];
-                case 5: return [4 /*yield*/, context.sendText(games)];
+                    _b.sent();
+                    return [3 /*break*/, 5];
+                case 5: return [4 /*yield*/, mongoose_1.default.connection.close()];
                 case 6:
                     _b.sent();
-                    return [3 /*break*/, 7];
-                case 7: return [4 /*yield*/, mongoose_1.default.connection.close()];
-                case 8:
-                    _b.sent();
-                    _b.label = 9;
-                case 9: return [2 /*return*/];
+                    return [2 /*return*/];
             }
         });
     });

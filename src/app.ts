@@ -14,8 +14,8 @@ async function LineAction(): Promise<void> {
     text(/^([f|F]ollow)|追隨/, userFollow),
     text(/([t|T]op)|遊戲/, topGames),
     text(/^[f|F]ind\s*(?<topic>.*)$/, searchGame),
-    text(/([h|H]elp)|(\/h)|(說明)/, helpMe),
     text(/([a|A]uthor)|(作者)/, author),
+    text('*', helpMe),
   ]);
 }
 
@@ -29,8 +29,8 @@ async function MessengerAction(context): Promise<void> {
       withProps(searchGame, { match: { groups: { topic: payload } } })
     ),
     text(/^[f|F]ind\s*(?<topic>.*)$/, searchGame),
-    text(/([h|H]elp)|(\/h)|(說明)/, helpMe),
     text(/([a|A]uthor)|(作者)/, author),
+    text('*', helpMe),
   ]);
 }
 
@@ -48,7 +48,7 @@ export default async function App(): Promise<void> {
     text(/^([f|F]ollow)|追隨/, userFollow),
     text(/([t|T]op)|遊戲/, topGames),
     text(/^[f|F]ind\s*(?<topic>.+)$/, searchGame),
-    text(/([h|H]elp)|(\/h)|(說明)/, helpMe),
     text(/([a|A]uthor)|(作者)/, author),
+    text('*', helpMe),
   ]);
 }

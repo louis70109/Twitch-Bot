@@ -42,6 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var user_1 = require("../../model/user");
 var twitch_1 = __importDefault(require("twitch"));
 var mongoose_1 = __importDefault(require("mongoose"));
+var sendMessage_1 = __importDefault(require("../../view/common/sendMessage"));
 function userBinding(context, _a) {
     var match = _a.match;
     var _b, _c, _d;
@@ -59,7 +60,7 @@ function userBinding(context, _a) {
                 case 2:
                     twitchUser = _e.sent();
                     if (!twitchUser) {
-                        context.sendText('👾 綁定帳號失敗，請檢查 Twitch 是否有效');
+                        sendMessage_1.default(context, '👾 綁定帳號失敗，請檢查 Twitch 是否有效');
                         return [2 /*return*/];
                     }
                     user = new user_1.UserModel();
@@ -74,7 +75,7 @@ function userBinding(context, _a) {
                     console.log('this record not found');
                     return [4 /*yield*/, user.save(function (err) {
                             if (err) {
-                                context.sendText('❌ 綁定失敗');
+                                sendMessage_1.default(context, '❌ 綁定失敗');
                                 return;
                             }
                         })];
@@ -97,7 +98,7 @@ function userBinding(context, _a) {
                 case 6:
                     _e.sent();
                     _e.label = 7;
-                case 7: return [4 /*yield*/, context.sendText("\u2705 \u7D81\u5B9A " + twitchUser.name + " \u6210\u529F\uFF01")];
+                case 7: return [4 /*yield*/, sendMessage_1.default(context, "\u2705 \u7D81\u5B9A " + twitchUser.name + " \u6210\u529F\uFF01")];
                 case 8:
                     _e.sent();
                     return [2 /*return*/];

@@ -60,7 +60,7 @@ function topGames(context) {
                     games = _b.sent();
                     gamesInfo = [];
                     games.data.forEach(function (element, index) {
-                        if (index < 12) {
+                        if (index < 10) {
                             var _tmpGame = {
                                 id: element.id,
                                 name: element.name,

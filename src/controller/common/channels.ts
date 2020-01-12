@@ -2,27 +2,29 @@ import { Stream } from 'twitch';
 import mongoose from 'mongoose';
 import showChannelsFlex from '../../view/line/streams';
 import showStreamGeneric from '../../view/messenger/streams';
+import sendMessage from '../../view/common/sendMessage';
 export default async function showChannels(
   context,
   platform: string,
   streams: Stream[]
 ): Promise<void> {
-  if (streams.length === 0)
-    await context.sendText('🚀現在追隨的實況主都沒開哦！');
-  else {
-    switch (platform) {
-      case 'line':
-        showChannelsFlex(context, streams);
-        break;
-      case 'messenger':
-        showStreamGeneric(context, streams);
-        break;
-      default:
-        let output = '';
-        streams.forEach((element, index) => {
-          if (index < 12) {
-            const ch = element.channel;
-            output += `
+  switch (platform) {
+    case 'line':
+      streams.length !== 0
+        ? showChannelsFlex(context, streams)
+        : sendMessage(context, '🚀現在追隨的實況主都沒開哦！');
+      break;
+    case 'messenger':
+      streams.length !== 0
+        ? showStreamGeneric(context, streams)
+        : sendMessage(context, '🚀現在追隨的實況主都沒開哦！');
+      break;
+    default:
+      let output = '';
+      streams.forEach((element, index) => {
+        if (index < 10) {
+          const ch = element.channel;
+          output += `
               直播主:${ch.displayName}
               狀態:${ch.status}
               遊戲:${ch.game}
@@ -32,12 +34,11 @@ export default async function showChannels(
               圖片:${element.getPreviewUrl('large')}
               ---------------
             `;
-          }
-        });
-        await context.sendText(output);
-        break;
-    }
-
-    await mongoose.connection.close();
+        }
+      });
+      await context.sendText(output);
+      break;
   }
+
+  await mongoose.connection.close();
 }
