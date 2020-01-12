@@ -27,7 +27,7 @@
 
 ### [截圖](https://github.com/louis70109/Twitch-Bot/tree/master/public)
 
-# Main packages
+# 主力套件
 
 - [Bottender](https://github.com/Yoctol/bottender)
 - [Mongo](https://www.mongodb.com/)
