@@ -25,6 +25,8 @@
 - 最多人看的遊戲: `top` / `遊戲`
 - 查詢特定遊戲: `find League of Legends`
 
+### [截圖](https://github.com/louis70109/Twitch-Bot/tree/master/public)
+
 # Main packages
 
 - [Bottender](https://github.com/Yoctol/bottender)
