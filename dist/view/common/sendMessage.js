@@ -39,7 +39,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var quickReply_1 = __importDefault(require("../line/quickReply"));
 var quickReplies_1 = __importDefault(require("../messenger/quickReplies"));
 function sendMessage(context, message) {
     var _a;
@@ -55,7 +54,7 @@ function sendMessage(context, message) {
                         case 'messenger': return [3 /*break*/, 3];
                     }
                     return [3 /*break*/, 5];
-                case 1: return [4 /*yield*/, context.sendText(message, quickReply_1.default(['follow', 'top', 'help', 'author']))];
+                case 1: return [4 /*yield*/, context.sendText(message)];
                 case 2:
                     _c.sent();
                     return [3 /*break*/, 7];

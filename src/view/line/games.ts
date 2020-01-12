@@ -1,5 +1,4 @@
 import { Game } from '../../model/game';
-import quickReply from './quickReply';
 
 const LINE_FLEX_LIMIT = 10;
 export default async function showGamesFlex(
@@ -107,12 +106,8 @@ export default async function showGamesFlex(
     }
   });
 
-  await context.sendFlex(
-    '來看直播囉！',
-    {
-      type: 'carousel',
-      contents: channelBubble,
-    },
-    quickReply(['follow', 'top', 'help', 'author'])
-  );
+  await context.sendFlex('來看直播囉！', {
+    type: 'carousel',
+    contents: channelBubble,
+  });
 }

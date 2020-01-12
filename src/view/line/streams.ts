@@ -1,5 +1,4 @@
 import { Stream } from 'twitch';
-import quickReply from './quickReply';
 
 const LINE_FLEX_LIMIT = 10;
 export default async function showChannelsFlex(
@@ -132,12 +131,8 @@ export default async function showChannelsFlex(
       channelBubble.push(content);
     }
   });
-  await context.sendFlex(
-    '來看直播囉！',
-    {
-      type: 'carousel',
-      contents: channelBubble,
-    },
-    quickReply(['follow', 'top', 'help', 'author'])
-  );
+  await context.sendFlex('來看直播囉！', {
+    type: 'carousel',
+    contents: channelBubble,
+  });
 }
