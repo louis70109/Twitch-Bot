@@ -38,7 +38,6 @@
 
 - [x] LINE
 - [x] Messenger
-- [ ] Telegram
 - [ ] Slack
 
 # 試玩
