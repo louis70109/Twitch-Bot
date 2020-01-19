@@ -1,8 +1,8 @@
 # Twitch Bot
 
-此專案支援 `Messenger` 以及 `LINE message API`.
+此專案目前支援 `Messenger` 以及 `LINE message API`.
 
-目前能透過指令`綁定帳號`、`查詢追隨`、`最多人看的遊戲` 以及`查詢特定遊戲` 之直播。
+目前能透過指令`綁定帳號`、`查詢追隨`、`最多人看的遊戲`以及`查詢特定遊戲`之直播。
 
 # 加入好友
 
@@ -19,9 +19,9 @@
 # 指令
 
 - 綁定帳號: `綁定 TWITCH_ACCOUNT`
-  - > ex: 綁定 relaxing234
+  - ex: 綁定 relaxing234
 - 查詢追隨: `follow` / `追隨`
-  - > 須先綁定帳號才可查詢
+  - 須先綁定帳號才可查詢
 - 最多人看的遊戲: `top` / `遊戲`
 - 查詢特定遊戲: `find League of Legends`
 
