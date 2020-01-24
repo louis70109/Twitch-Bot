@@ -73,6 +73,12 @@
 
 ## 啟動
 
+```sh
+git clone https://github.com/louis70109/Twitch-Bot.git
+```
+
+### Normal
+
 - 先用 `yarn install` 或 `npm install` 來安裝相依套件
 - 開啟另一個視窗執行 `tsc -w`，它會幫忙編譯並且即時監聽。
 - `npx bottender dev`: 執行程式，或是加上 `--console` 讓你可以在`終端機`上直接測試行為。
@@ -82,6 +88,27 @@
 
 然後將 `LINE` webhook url 複製到你的機器人開發者頁面中。
 ![](https://i.imgur.com/KEpPgxK.png)
+
+### Docker
+
+若要試玩 Docker 的話可以使用以下指令
+
+```sh
+docker-compose up -d # 啟動服務於背景
+docker ps            # 查看服務狀態
+```
+
+開啟另一個視窗執行`ngrok`將 port 導出去
+
+```sh
+npx ngrok http 5000
+```
+
+再將網址複製到對應的平台設定上即可！
+
+> 在 container 裡也是讀取`.env`，要記得設定檔案。
+
+---
 
 👾👾👾 現在你可以好好的去試玩 Twitch Bot 了 🎉🎉🎉
 
