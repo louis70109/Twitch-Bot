@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  twitch-bot:
+    image: twitch-bot
+    restart: always
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 5000:5000
+    depends_on:
+      - mongo
+    networks:
+      - chatbot-network
+  mongo:
+    image: mongo
+    restart: always
+    volumes:
+      - ./data/db:/data/db
+    networks:
+      - chatbot-network
+
+networks:
+  chatbot-network:
+    driver: bridge
