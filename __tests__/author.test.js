@@ -84,7 +84,7 @@ it('should reply Author context', async () => {
     .post('/webhooks/line')
     .set('X-Line-Signature', signature)
     .send(body);
-  mongoose.connection.close();
+
   expect(res.status).toEqual(200);
   expect(replyBody).toEqual({
     replyToken: 'nHuyWiB7yP5Zw52FIkcQobQuGDXCTA',
@@ -96,4 +96,10 @@ it('should reply Author context', async () => {
       },
     ],
   });
+});
+
+afterAll(async done => {
+  // Closing the DB connection allows Jest to exit successfully.
+  mongoose.connection.close();
+  done();
 });
