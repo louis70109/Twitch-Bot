@@ -110,7 +110,7 @@ function showChannelsFlex(context, streams) {
                                                             contents: [
                                                                 {
                                                                     type: 'text',
-                                                                    text: "\u8FFD\u96A8\u4EBA\u6578: " + ch.followers,
+                                                                    text: "\u8FFD\u96A8: " + ch.followers,
                                                                     size: 'sm',
                                                                     color: '#000000',
                                                                 },
@@ -124,7 +124,7 @@ function showChannelsFlex(context, streams) {
                                                             contents: [
                                                                 {
                                                                     type: 'text',
-                                                                    text: "\u89C0\u770B\u4EBA\u6578: " + element.viewers + " \uD83D\uDC40",
+                                                                    text: "\u89C0\u770B: " + element.viewers,
                                                                     size: 'sm',
                                                                     color: '#000000',
                                                                 },

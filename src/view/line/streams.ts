@@ -73,7 +73,7 @@ export default async function showChannelsFlex(
                       contents: [
                         {
                           type: 'text',
-                          text: `追隨人數: ${ch.followers}`,
+                          text: `追隨: ${ch.followers}`,
                           size: 'sm',
                           color: '#000000',
                         },
@@ -87,7 +87,7 @@ export default async function showChannelsFlex(
                       contents: [
                         {
                           type: 'text',
-                          text: `觀看人數: ${element.viewers} 👀`,
+                          text: `觀看: ${element.viewers}`,
                           size: 'sm',
                           color: '#000000',
                         },
