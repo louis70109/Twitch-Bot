@@ -2,7 +2,7 @@ version: '3'
 
 services:
   twitch-bot:
-    image: twitch-bot
+    image: louis70109/twitch-bot:0.1
     restart: always
     build: .
     environment:
