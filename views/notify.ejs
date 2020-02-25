@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BOTTENDER LINE LIFF V2 DEMO</title>
+  </head>
+
+  <body>
+    <button onclick="Auth();">點選這裡連結到LineNotify</button>
+    <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+  </body>
+
+  <script>
+    function Auth() {
+      liff
+        .init({
+          liffId: '1622939248-9kdYpJPM',
+        })
+        .then(() => {
+          liff
+            .getProfile()
+            .then(profile => {
+              const userId = profile.userId;
+              var URL = 'https://notify-bot.line.me/oauth/authorize?';
+              URL += 'response_type=code';
+              URL += '&client_id=<%= client_id %>';
+              URL += '&redirect_uri=<%= redirect_uri %>';
+              URL += '&scope=notify';
+              URL += `&state=${userId}`;
+              window.location.href = URL;
+            })
+            .catch(err => {
+              console.log('error', err);
+            });
+        })
+        .catch(err => {
+          // Error happens during initialization
+          console.log(err.code, err.message);
+        });
+    }
+  </script>
+</html>
