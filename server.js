@@ -1,7 +1,8 @@
 const path = require('path');
-
 const bodyParser = require('body-parser');
 const express = require('express');
+const ejs = require('ejs');
+
 const { bottender } = require('bottender');
 const mongoose = require('mongoose');
 
@@ -15,6 +16,7 @@ const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   const server = express();
+  server.set('view engine', 'ejs');
 
   server.use(
     bodyParser.json({
@@ -24,13 +26,17 @@ app.prepare().then(() => {
     })
   );
 
-  server.get('/send-id', (req, res) => {
-    res.json({ id: process.env.LINE_LIFF_ID });
+  server.get('/notify/confirm', (req, res) => {
+    code = req.query.code;
+    userId = req.query.state;
+    res.render('notify_confirm');
   });
 
-  server.get('/liff', (req, res) => {
-    const filename = path.join(`${__dirname}/liff.html`);
-    res.sendFile(filename);
+  server.get('/notify', (req, res) => {
+    res.render('notify', {
+      client_id: process.env.CLIENT_ID,
+      redirect_uri: process.env.REDIRECT_URI,
+    });
   });
 
   // delegate other requests to bottender
@@ -45,7 +51,10 @@ app.prepare().then(() => {
       useCreateIndex: true,
     });
     mongoose.Promise = global.Promise;
-    if (err) throw err;
+    if (err) {
+      mongoose.connection.close();
+      throw err;
+    }
     console.log(`> Ready on http://localhost:${port}`);
   });
 });
