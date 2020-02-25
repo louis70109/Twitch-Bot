@@ -6,7 +6,6 @@ import topGames from './controller/twitches/top';
 import searchGame from './controller/twitches/searchGame';
 import helpMe from './view/common/help';
 import author from './view/common/author';
-import mongoose from 'mongoose';
 
 async function LineAction(): Promise<void> {
   return await router([
@@ -35,12 +34,6 @@ async function MessengerAction(context): Promise<void> {
 }
 
 export default async function App(): Promise<void> {
-  mongoose.connect(process.env.MONGODB_URI, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useCreateIndex: true,
-  });
-  mongoose.Promise = global.Promise;
   return await router([
     platform('line', LineAction),
     platform('messenger', MessengerAction),
