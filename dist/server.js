@@ -24,8 +24,9 @@ app.prepare().then(function () {
     server.get('/notify/confirm', notifiesController_1.NotifyController.confirmNotify);
     server.get('/notify', function (req, res) {
         res.render('notify', {
-            client_id: process.env.CLIENT_ID,
-            redirect_uri: process.env.REDIRECT_URI,
+            clientId: process.env.CLIENT_ID,
+            redirectUri: process.env.REDIRECT_URI,
+            liffId: process.env.LIFF_ID,
         });
     });
     // delegate other requests to bottender

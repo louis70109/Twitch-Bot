@@ -48,10 +48,16 @@ class NotifyController {
           }
         });
 
-        res.render('notify_confirm', { message: response.data });
+        res.render('notify_confirm', {
+          message: response.data,
+          liffId: process.env.LIFF_ID,
+        });
       })
       .catch(err => {
-        res.render('notify_confirm', { message: err });
+        res.render('notify_confirm', {
+          message: err,
+          liffId: process.env.LIFF_ID,
+        });
       });
   }
 }

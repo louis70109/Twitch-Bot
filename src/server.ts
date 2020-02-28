@@ -28,8 +28,9 @@ app.prepare().then(() => {
 
   server.get('/notify', (req, res) => {
     res.render('notify', {
-      client_id: process.env.CLIENT_ID,
-      redirect_uri: process.env.REDIRECT_URI,
+      clientId: process.env.CLIENT_ID,
+      redirectUri: process.env.REDIRECT_URI,
+      liffId: process.env.LIFF_ID,
     });
   });
 

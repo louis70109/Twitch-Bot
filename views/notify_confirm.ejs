@@ -1,12 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>message check</title>
+    <title>推播綁定完成</title>
   </head>
   <body>
-    <span>綁定成功！</span>
+    <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
   </body>
+
+  <script>
+    liff
+      .init({
+        liffId: '<%= liffId %>',
+      })
+      .then(() => {
+        const textBody =
+          '【綁定 LINE 推播功能🎉】\n接著請再輸入 follow 後按下【訂閱】的按鈕🔔';
+
+        liff
+          .sendMessages([
+            {
+              type: 'text',
+              text: textBody,
+            },
+          ])
+          .then(() => {
+            liff.closeWindow();
+          })
+          .catch(err => {
+            console.log('error', err);
+          });
+      })
+      .catch(err => {
+        console.log(err.code, err.message);
+        alert('綁定異常，請聯絡作者');
+      });
+  </script>
 </html>

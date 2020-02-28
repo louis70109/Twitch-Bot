@@ -95,10 +95,16 @@ var NotifyController = /** @class */ (function () {
                                         });
                                     }
                                 });
-                                res.render('notify_confirm', { message: response.data });
+                                res.render('notify_confirm', {
+                                    message: response.data,
+                                    liffId: process.env.LIFF_ID,
+                                });
                             })
                                 .catch(function (err) {
-                                res.render('notify_confirm', { message: err });
+                                res.render('notify_confirm', {
+                                    message: err,
+                                    liffId: process.env.LIFF_ID,
+                                });
                             })];
                     case 1:
                         _a.sent();
