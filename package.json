@@ -3,8 +3,8 @@
   "version": "1.4.2",
   "private": true,
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "cross-env NODE_ENV=production node server.js",
+    "dev": "nodemon dist/server.js",
+    "start": "cross-env NODE_ENV=production node dist/server.js",
     "lint": "eslint .",
     "test": "jest",
     "build": "tsc"
