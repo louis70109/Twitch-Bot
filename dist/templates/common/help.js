@@ -39,38 +39,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var games_1 = __importDefault(require("../../templates/line/games"));
-var games_2 = __importDefault(require("../../templates/messenger/games"));
-var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"));
-function showGames(context, platform, games) {
+var sendMessage_1 = __importDefault(require("./sendMessage"));
+function helpMe(context) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var message;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
-                    _a = platform;
-                    switch (_a) {
-                        case 'line': return [3 /*break*/, 1];
-                        case 'messenger': return [3 /*break*/, 2];
-                    }
-                    return [3 /*break*/, 3];
+                    message = '🎮 輸入範例\n綁帳號: 綁定 sam1268\n查詢追隨: follow\n找遊戲: top';
+                    return [4 /*yield*/, sendMessage_1.default(context, message)];
                 case 1:
-                    games.length !== 0
-                        ? games_1.default(context, games)
-                        : sendMessage_1.default(context, '🚀現在想看的遊戲都沒開哦！');
-                    return [3 /*break*/, 5];
-                case 2:
-                    games.length !== 0
-                        ? games_2.default(context, games)
-                        : sendMessage_1.default(context, '🚀現在想看的遊戲都沒開哦！');
-                    return [3 /*break*/, 5];
-                case 3: return [4 /*yield*/, context.sendText(games)];
-                case 4:
-                    _b.sent();
-                    return [3 /*break*/, 5];
-                case 5: return [2 /*return*/];
+                    _a.sent();
+                    return [2 /*return*/];
             }
         });
     });
 }
-exports.default = showGames;
+exports.default = helpMe;

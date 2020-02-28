@@ -1,7 +1,7 @@
 import TwitchClient from 'twitch';
 import { UserModel } from '../../model/user';
 import showChannels from '../common/Channels';
-import sendMessage from '../../view/common/sendMessage';
+import sendMessage from '../../templates/common/sendMessage';
 
 export default async function userFollow(context: any): Promise<void> {
   const platform = context._session?.platform;

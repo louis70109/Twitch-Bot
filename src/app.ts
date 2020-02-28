@@ -4,8 +4,8 @@ import userBinding from './controller/users/binding';
 import userFollow from './controller/users/follow';
 import topGames from './controller/twitches/top';
 import searchGame from './controller/twitches/searchGame';
-import helpMe from './view/common/help';
-import author from './view/common/author';
+import helpMe from './templates/common/help';
+import author from './templates/common/author';
 
 async function LineAction(): Promise<void> {
   return await router([

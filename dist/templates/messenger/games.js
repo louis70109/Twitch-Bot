@@ -39,38 +39,45 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var games_1 = __importDefault(require("../../templates/line/games"));
-var games_2 = __importDefault(require("../../templates/messenger/games"));
-var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"));
-function showGames(context, platform, games) {
+var quickReplies_1 = __importDefault(require("./quickReplies"));
+var MESSENGER_LIMIT = 10;
+function showGamesGeneric(context, games) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var channelBubble;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
-                    _a = platform;
-                    switch (_a) {
-                        case 'line': return [3 /*break*/, 1];
-                        case 'messenger': return [3 /*break*/, 2];
-                    }
-                    return [3 /*break*/, 3];
+                    channelBubble = [];
+                    games.forEach(function (element, index) {
+                        if (index < MESSENGER_LIMIT) {
+                            var content = {
+                                title: "\uD83E\uDD88 " + element.name,
+                                imageUrl: element.boxArtUrl,
+                                subtitle: '🎮🎮🎮🎮🎮🎮',
+                                defaultAction: {
+                                    type: 'web_url',
+                                    url: element.boxArtUrl,
+                                    messengerExtensions: true,
+                                    webviewHeightRatio: 'tall',
+                                    fallbackUrl: element.boxArtUrl,
+                                },
+                                buttons: [
+                                    {
+                                        type: 'postback',
+                                        title: "\u770B\u9019\u500B",
+                                        payload: "" + element.name,
+                                    },
+                                ],
+                            };
+                            channelBubble.push(content);
+                        }
+                    });
+                    return [4 /*yield*/, context.sendGenericTemplate(channelBubble, quickReplies_1.default(['follow', 'top', 'help', 'author']))];
                 case 1:
-                    games.length !== 0
-                        ? games_1.default(context, games)
-                        : sendMessage_1.default(context, '🚀現在想看的遊戲都沒開哦！');
-                    return [3 /*break*/, 5];
-                case 2:
-                    games.length !== 0
-                        ? games_2.default(context, games)
-                        : sendMessage_1.default(context, '🚀現在想看的遊戲都沒開哦！');
-                    return [3 /*break*/, 5];
-                case 3: return [4 /*yield*/, context.sendText(games)];
-                case 4:
-                    _b.sent();
-                    return [3 /*break*/, 5];
-                case 5: return [2 /*return*/];
+                    _a.sent();
+                    return [2 /*return*/];
             }
         });
     });
 }
-exports.default = showGames;
+exports.default = showGamesGeneric;

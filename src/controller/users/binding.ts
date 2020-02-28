@@ -1,7 +1,7 @@
 import { UserModel } from '../../model/user';
 import TwitchClient from 'twitch';
 import mongoose from 'mongoose';
-import sendMessage from '../../view/common/sendMessage';
+import sendMessage from '../../templates/common/sendMessage';
 
 export default async function userBinding(
   context: any,

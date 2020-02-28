@@ -1,8 +1,8 @@
 import { Stream } from 'twitch';
 import mongoose from 'mongoose';
-import showChannelsFlex from '../../view/line/streams';
-import showStreamGeneric from '../../view/messenger/streams';
-import sendMessage from '../../view/common/sendMessage';
+import showChannelsFlex from '../../templates/line/streams';
+import showStreamGeneric from '../../templates/messenger/streams';
+import sendMessage from '../../templates/common/sendMessage';
 export default async function showChannels(
   context,
   platform: string,
@@ -39,6 +39,4 @@ export default async function showChannels(
       await context.sendText(output);
       break;
   }
-
-  await mongoose.connection.close();
 }

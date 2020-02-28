@@ -45,8 +45,8 @@ var binding_1 = __importDefault(require("./controller/users/binding"));
 var follow_1 = __importDefault(require("./controller/users/follow"));
 var top_1 = __importDefault(require("./controller/twitches/top"));
 var searchGame_1 = __importDefault(require("./controller/twitches/searchGame"));
-var help_1 = __importDefault(require("./view/common/help"));
-var author_1 = __importDefault(require("./view/common/author"));
+var help_1 = __importDefault(require("./templates/common/help"));
+var author_1 = __importDefault(require("./templates/common/author"));
 function LineAction() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {

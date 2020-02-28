@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import showGamesFlex from '../../view/line/games';
-import showGamesGeneric from '../../view/messenger/games';
+import showGamesFlex from '../../templates/line/games';
+import showGamesGeneric from '../../templates/messenger/games';
 import { Game } from '../../model/game';
-import sendMessage from '../../view/common/sendMessage';
+import sendMessage from '../../templates/common/sendMessage';
 
 export default async function showGames(
   context: any,
@@ -24,6 +24,4 @@ export default async function showGames(
       await context.sendText(games);
       break;
   }
-
-  await mongoose.connection.close();
 }

@@ -42,7 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var twitch_1 = __importDefault(require("twitch"));
 var user_1 = require("../../model/user");
 var Channels_1 = __importDefault(require("../common/Channels"));
-var sendMessage_1 = __importDefault(require("../../view/common/sendMessage"));
+var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"));
 function userFollow(context) {
     var _a, _b, _c;
     return __awaiter(this, void 0, void 0, function () {

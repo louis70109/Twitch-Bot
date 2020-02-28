@@ -39,38 +39,46 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var games_1 = __importDefault(require("../../templates/line/games"));
-var games_2 = __importDefault(require("../../templates/messenger/games"));
-var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"));
-function showGames(context, platform, games) {
+var quickReplies_1 = __importDefault(require("./quickReplies"));
+var MESSENGER_LIMIT = 9;
+function showStreamGeneric(context, streams) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var channelBubble;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
-                    _a = platform;
-                    switch (_a) {
-                        case 'line': return [3 /*break*/, 1];
-                        case 'messenger': return [3 /*break*/, 2];
-                    }
-                    return [3 /*break*/, 3];
+                    channelBubble = [];
+                    streams.forEach(function (element, index) {
+                        if (index < MESSENGER_LIMIT) {
+                            var ch = element.channel;
+                            var content = {
+                                title: ch.displayName,
+                                imageUrl: element.getPreviewUrl('large'),
+                                subtitle: "\u2618\uFE0F" + ch.status + "\n\uD83C\uDFAE" + ch.game + "\n\uD83E\uDD88" + element.viewers,
+                                defaultAction: {
+                                    type: 'web_url',
+                                    url: ch.url,
+                                    messengerExtensions: true,
+                                    webviewHeightRatio: 'tall',
+                                    fallbackUrl: element.getPreviewUrl('large'),
+                                },
+                                buttons: [
+                                    {
+                                        type: 'web_url',
+                                        url: ch.url,
+                                        title: '看直播',
+                                    },
+                                ],
+                            };
+                            channelBubble.push(content);
+                        }
+                    });
+                    return [4 /*yield*/, context.sendGenericTemplate(channelBubble, quickReplies_1.default(['follow', 'top', 'help', 'author']))];
                 case 1:
-                    games.length !== 0
-                        ? games_1.default(context, games)
-                        : sendMessage_1.default(context, '🚀現在想看的遊戲都沒開哦！');
-                    return [3 /*break*/, 5];
-                case 2:
-                    games.length !== 0
-                        ? games_2.default(context, games)
-                        : sendMessage_1.default(context, '🚀現在想看的遊戲都沒開哦！');
-                    return [3 /*break*/, 5];
-                case 3: return [4 /*yield*/, context.sendText(games)];
-                case 4:
-                    _b.sent();
-                    return [3 /*break*/, 5];
-                case 5: return [2 /*return*/];
+                    _a.sent();
+                    return [2 /*return*/];
             }
         });
     });
 }
-exports.default = showGames;
+exports.default = showStreamGeneric;

@@ -42,7 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var user_1 = require("../../model/user");
 var twitch_1 = __importDefault(require("twitch"));
 var mongoose_1 = __importDefault(require("mongoose"));
-var sendMessage_1 = __importDefault(require("../../view/common/sendMessage"));
+var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"));
 function userBinding(context, _a) {
     var match = _a.match;
     var _b, _c, _d;

@@ -39,10 +39,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var mongoose_1 = __importDefault(require("mongoose"));
-var streams_1 = __importDefault(require("../../view/line/streams"));
-var streams_2 = __importDefault(require("../../view/messenger/streams"));
-var sendMessage_1 = __importDefault(require("../../view/common/sendMessage"));
+var streams_1 = __importDefault(require("../../templates/line/streams"));
+var streams_2 = __importDefault(require("../../templates/messenger/streams"));
+var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"));
 function showChannels(context, platform, streams) {
     return __awaiter(this, void 0, void 0, function () {
         var _a, output_1;
@@ -77,10 +76,7 @@ function showChannels(context, platform, streams) {
                 case 4:
                     _b.sent();
                     return [3 /*break*/, 5];
-                case 5: return [4 /*yield*/, mongoose_1.default.connection.close()];
-                case 6:
-                    _b.sent();
-                    return [2 /*return*/];
+                case 5: return [2 /*return*/];
             }
         });
     });
