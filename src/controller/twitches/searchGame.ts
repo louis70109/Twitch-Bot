@@ -20,5 +20,5 @@ export default async function searchGame(
       streams.push(element);
     }
   });
-  showChannels(context, platform, streams);
+  showChannels(context, platform, streams, []);
 }

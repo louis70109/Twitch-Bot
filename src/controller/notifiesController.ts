@@ -39,15 +39,12 @@ class NotifyController {
             NotifyModel.findOneAndUpdate(
               { userId: userId },
               userObj,
-              (err, info) => {
-                if (!err) console.log('帳戶更新成功', info);
-                else console.log(err);
-                // mongoose.connection.close();
+              (err, _) => {
+                if (err) console.log(err);
               }
             );
           }
         });
-
         res.render('notify_confirm', {
           message: response.data,
           liffId: process.env.LIFF_ID,

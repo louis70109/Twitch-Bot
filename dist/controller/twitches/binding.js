@@ -39,37 +39,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var user_1 = require("../../model/user");
-var twitch_1 = __importDefault(require("twitch"));
+var notify_1 = require("../../model/notify");
 var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"));
-function userBinding(context, _a) {
+function notifyBinding(context, _a) {
     var match = _a.match;
     var _b, _c, _d;
     return __awaiter(this, void 0, void 0, function () {
-        var userName, userId, twitchClient, twitchUser, user;
+        var name, userId, notify;
         return __generator(this, function (_e) {
             switch (_e.label) {
                 case 0:
-                    userName = (_b = match.groups) === null || _b === void 0 ? void 0 : _b.name;
+                    name = (_b = match.groups) === null || _b === void 0 ? void 0 : _b.name;
                     userId = (_d = (_c = context._session) === null || _c === void 0 ? void 0 : _c.user) === null || _d === void 0 ? void 0 : _d.id;
-                    return [4 /*yield*/, twitch_1.default.withCredentials(process.env.TWITCH_CLIENT_ID, process.env.TWITCH_ACCESS_TOKEN)];
-                case 1:
-                    twitchClient = _e.sent();
-                    return [4 /*yield*/, twitchClient.helix.users.getUserByName(userName)];
-                case 2:
-                    twitchUser = _e.sent();
-                    if (!twitchUser) {
-                        sendMessage_1.default(context, '👾 綁定帳號失敗，請檢查 Twitch 是否有效');
-                        return [2 /*return*/];
-                    }
-                    user = new user_1.UserModel();
-                    user.name = twitchUser.name;
-                    user.displayName = twitchUser.displayName;
-                    user.twitchId = twitchUser.id;
-                    user.userId = userId;
-                    return [4 /*yield*/, user_1.UserModel.findOne({ userId: userId }, function (_, isAlive) {
+                    notify = new notify_1.StreamNotifyModel();
+                    notify.name = name;
+                    notify.userId = userId;
+                    return [4 /*yield*/, notify_1.StreamNotifyModel.findOne({ userId: userId }, function (err, isAlive) {
                             if (!isAlive) {
-                                user.save(function (err) {
+                                notify.save(function (err) {
                                     if (err) {
                                         sendMessage_1.default(context, '❌ 綁定失敗');
                                         return;
@@ -77,24 +64,22 @@ function userBinding(context, _a) {
                                 });
                             }
                             else {
-                                var userObj = {
-                                    name: twitchUser.name,
-                                    displayName: twitchUser.displayName,
-                                    twitchId: twitchUser.id,
+                                var notifyObj = {
+                                    name: name,
                                     userId: userId,
                                 };
-                                user_1.UserModel.findOneAndUpdate({ userId: userId }, userObj, function (err) {
-                                    if (err)
-                                        console.log('帳戶更新失敗', err);
+                                notify_1.StreamNotifyModel.findOneAndUpdate({ userId: userId }, notifyObj, function (err, res) {
+                                    if (!err)
+                                        console.log('帳戶更新成功', res);
                                 });
                             }
-                            sendMessage_1.default(context, "\u2705 \u7D81\u5B9A " + twitchUser.name + " \u6210\u529F\uFF01");
+                            sendMessage_1.default(context, "\u2705 \u7D81\u5B9A\u7DE8\u865F: " + name + " \u6210\u529F\uFF01");
                         })];
-                case 3:
+                case 1:
                     _e.sent();
                     return [2 /*return*/];
             }
         });
     });
 }
-exports.default = userBinding;
+exports.default = notifyBinding;

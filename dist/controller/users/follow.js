@@ -41,12 +41,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var twitch_1 = __importDefault(require("twitch"));
 var user_1 = require("../../model/user");
+var notify_1 = require("../../model/notify");
 var Channels_1 = __importDefault(require("../common/Channels"));
 var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"));
 function userFollow(context) {
     var _a, _b, _c;
     return __awaiter(this, void 0, void 0, function () {
-        var platform, userId, twitchClient, currentUser, follow, channel, index, element, streams;
+        var platform, userId, twitchClient, currentUser, follow, channel, streams, notify, binding_streams, idx, n_idx;
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
@@ -66,14 +67,24 @@ function userFollow(context) {
                 case 3:
                     follow = _d.sent();
                     channel = [];
-                    for (index = 0; index < follow.length; index++) {
-                        element = follow[index];
-                        channel.push(element.channel.id);
-                    }
+                    follow.forEach(function (element) { return channel.push(element.channel.id); });
                     return [4 /*yield*/, twitchClient.kraken.streams.getStreams(channel)];
                 case 4:
                     streams = _d.sent();
-                    Channels_1.default(context, platform, streams);
+                    return [4 /*yield*/, notify_1.StreamNotifyModel.find({ userId: userId })];
+                case 5:
+                    notify = _d.sent();
+                    binding_streams = [];
+                    for (idx = 0; idx < streams.length; idx++) {
+                        for (n_idx = 0; n_idx < notify.length; n_idx++) {
+                            if (streams[idx].channel.name === notify[n_idx].name) {
+                                binding_streams.push(notify[n_idx].name);
+                                break;
+                            }
+                        }
+                    }
+                    console.log(binding_streams);
+                    Channels_1.default(context, platform, streams, binding_streams);
                     return [2 /*return*/];
             }
         });

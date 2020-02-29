@@ -86,12 +86,9 @@ var NotifyController = /** @class */ (function () {
                                             token: response.data.access_token,
                                             userId: userId,
                                         };
-                                        notify_1.NotifyModel.findOneAndUpdate({ userId: userId }, userObj, function (err, info) {
-                                            if (!err)
-                                                console.log('帳戶更新成功', info);
-                                            else
+                                        notify_1.NotifyModel.findOneAndUpdate({ userId: userId }, userObj, function (err, _) {
+                                            if (err)
                                                 console.log(err);
-                                            // mongoose.connection.close();
                                         });
                                     }
                                 });

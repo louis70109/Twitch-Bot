@@ -3,14 +3,15 @@ import { Stream } from 'twitch';
 const LINE_FLEX_LIMIT = 10;
 export default async function showChannelsFlex(
   context: any,
-  streams: Stream[]
+  streams: Stream[],
+  notification: Array<string>
 ): Promise<void> {
   const channelBubble: any[] = [];
 
   streams.forEach((element, index) => {
     if (index < LINE_FLEX_LIMIT) {
       const ch = element.channel;
-      const content = {
+      const content: any = {
         type: 'bubble',
         hero: {
           type: 'image',
@@ -128,6 +129,27 @@ export default async function showChannelsFlex(
           ],
         },
       };
+      if (notification.includes(String(ch.name))) {
+        content.footer.contents.push({
+          type: 'button',
+          style: 'secondary',
+          action: {
+            type: 'message',
+            label: '取消綁定',
+            text: `解除 ${ch.name}`,
+          },
+        });
+      } else {
+        content.footer.contents.push({
+          type: 'button',
+          style: 'primary',
+          action: {
+            type: 'message',
+            label: '綁定通知',
+            text: `推播 ${ch.name}`,
+          },
+        });
+      }
       channelBubble.push(content);
     }
   });
