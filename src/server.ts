@@ -45,8 +45,10 @@ app.prepare().then(() => {
     mongoose.set('useCreateIndex', true);
     mongoose.set('useUnifiedTopology', true);
 
-    mongoose.connect(process.env.MONGODB_URI);
-    mongoose.Promise = global.Promise;
+    mongoose
+      .connect(process.env.MONGODB_URI)
+      .then(() => (mongoose.Promise = global.Promise));
+
     if (err) {
       mongoose.connection.close();
       throw err;

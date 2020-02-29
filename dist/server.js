@@ -38,8 +38,9 @@ app.prepare().then(function () {
         mongoose_1.default.set('useFindAndModify', false);
         mongoose_1.default.set('useCreateIndex', true);
         mongoose_1.default.set('useUnifiedTopology', true);
-        mongoose_1.default.connect(process.env.MONGODB_URI);
-        mongoose_1.default.Promise = global.Promise;
+        mongoose_1.default
+            .connect(process.env.MONGODB_URI)
+            .then(function () { return (mongoose_1.default.Promise = global.Promise); });
         if (err) {
             mongoose_1.default.connection.close();
             throw err;
