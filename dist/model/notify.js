@@ -9,5 +9,11 @@ var NotifySchema = new Schema({
     token: { type: String },
     userId: { type: String, unique: true },
 });
+var StreamNotifySchema = new Schema({
+    name: { type: String },
+    userId: { type: String },
+});
 var NotifyModel = mongoose_1.default.model('notify', NotifySchema);
 exports.NotifyModel = NotifyModel;
+var StreamNotifyModel = mongoose_1.default.model('stream_notify', StreamNotifySchema);
+exports.StreamNotifyModel = StreamNotifyModel;
