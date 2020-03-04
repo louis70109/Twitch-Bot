@@ -26,12 +26,10 @@ class NotifyController {
           notify.token = response.data.access_token;
           notify.userId = userId;
           if (!isAlive) {
-            console.log('this record not found');
             notify.save(err => {
               if (err) throw err;
             });
           } else {
-            console.log('Find record, update...');
             const userObj = {
               token: response.data.access_token,
               userId: userId,

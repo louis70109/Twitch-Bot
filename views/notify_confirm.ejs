@@ -17,7 +17,6 @@
       .then(() => {
         const textBody =
           '【綁定 LINE 推播功能🎉】\n接著請再輸入 follow 後按下【訂閱】的按鈕🔔';
-
         liff
           .sendMessages([
             {
@@ -29,12 +28,13 @@
             liff.closeWindow();
           })
           .catch(err => {
+            alert(err);
             console.log('error', err);
           });
       })
       .catch(err => {
         console.log(err.code, err.message);
-        alert('綁定異常，請聯絡作者');
+        alert('confirm 綁定異常，請聯絡作者');
       });
   </script>
 </html>
