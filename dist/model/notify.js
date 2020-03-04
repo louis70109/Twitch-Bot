@@ -7,12 +7,13 @@ var mongoose_1 = __importDefault(require("mongoose"));
 var Schema = mongoose_1.default.Schema;
 var NotifySchema = new Schema({
     token: { type: String },
-    userId: { type: String, unique: true },
+    userId: { type: String, unique: true, index: true },
 });
 var StreamNotifySchema = new Schema({
-    name: { type: String },
-    userId: { type: String },
-});
+    name: { type: String, required: true },
+    userId: { type: String, index: true },
+}, { timestamps: { updatedAt: 'createdAt' } });
+StreamNotifySchema.index({ name: 1, userId: 1 }, { unique: true });
 var NotifyModel = mongoose_1.default.model('notify', NotifySchema);
 exports.NotifyModel = NotifyModel;
 var StreamNotifyModel = mongoose_1.default.model('stream_notify', StreamNotifySchema);
