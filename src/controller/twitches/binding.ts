@@ -10,27 +10,16 @@ export default async function notifyBinding(
   const notify = new StreamNotifyModel();
   notify.name = name;
   notify.userId = userId;
-  await StreamNotifyModel.findOne({ userId: userId }, (err, isAlive) => {
-    if (!isAlive) {
-      notify.save(err => {
-        if (err) {
-          sendMessage(context, '❌ 綁定失敗');
-          return;
-        }
-      });
-    } else {
-      const notifyObj = {
-        name: name,
-        userId: userId,
-      };
-      StreamNotifyModel.findOneAndUpdate(
-        { userId: userId },
-        notifyObj,
-        (err, res) => {
-          if (!err) console.log('帳戶更新成功', res);
-        }
-      );
-    }
-    sendMessage(context, `✅ 綁定編號: ${name} 成功！`);
+  let replyMessage = `✅ 綁定編號: ${name} 成功！`;
+
+  const stream = await StreamNotifyModel.findOne({
+    userId: userId,
+    name: name,
   });
+  if (!stream) {
+    notify.save(err => {
+      if (err) replyMessage = '❌ 綁定失敗';
+      sendMessage(context, replyMessage);
+    });
+  } else sendMessage(context, '🔔 已經綁定過了喔！');
 }
