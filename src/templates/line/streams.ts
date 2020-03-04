@@ -146,7 +146,7 @@ export default async function showChannelsFlex(
           action: {
             type: 'message',
             label: '綁定通知',
-            text: `推播 ${ch.name}`,
+            text: `綁定推播 ${ch.name}`,
           },
         });
       }

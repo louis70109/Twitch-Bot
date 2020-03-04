@@ -183,7 +183,7 @@ function showChannelsFlex(context, streams, notification) {
                                     action: {
                                         type: 'message',
                                         label: '綁定通知',
-                                        text: "\u63A8\u64AD " + ch.name,
+                                        text: "\u7D81\u5B9A\u63A8\u64AD " + ch.name,
                                     },
                                 });
                             }

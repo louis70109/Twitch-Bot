@@ -45,16 +45,18 @@ var binding_1 = __importDefault(require("./controller/users/binding"));
 var follow_1 = __importDefault(require("./controller/users/follow"));
 var top_1 = __importDefault(require("./controller/twitches/top"));
 var binding_2 = __importDefault(require("./controller/twitches/binding"));
+var cancelBinging_1 = __importDefault(require("./controller/twitches/cancelBinging"));
 var searchGame_1 = __importDefault(require("./controller/twitches/searchGame"));
 var help_1 = __importDefault(require("./templates/common/help"));
 var author_1 = __importDefault(require("./templates/common/author"));
-function LineAction(context) {
+function LineAction() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, router_1.router([
+                        router_1.text(/^綁定推播\s*(?<name>[\s\S]+)/, binding_2.default),
+                        router_1.text(/^解除\s*(?<name>[\s\S]+)/, cancelBinging_1.default),
                         router_1.text(/^綁定\s*(?<name>[\s\S]+)/, binding_1.default),
-                        router_1.text(/^推播\s*(?<name>[\s\S]+)/, binding_2.default),
                         router_1.text(/^([f|F]ollow)|追隨/, follow_1.default),
                         router_1.text(/([t|T]op)|遊戲/, top_1.default),
                         router_1.text(/^[f|F]ind\s*(?<topic>.*)$/, searchGame_1.default),
