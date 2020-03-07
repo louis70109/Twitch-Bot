@@ -90,6 +90,9 @@ function MessengerAction(context) {
                 case 0:
                     payload = (_b = (_a = context.event) === null || _a === void 0 ? void 0 : _a.postback) === null || _b === void 0 ? void 0 : _b.payload;
                     return [4 /*yield*/, router_1.router([
+                            router_1.text('連結 LINE Notify', connectLineNotify),
+                            router_1.text(/^綁定推播\s*(?<name>[\s\S]+)/, binding_2.default),
+                            router_1.text(/^解除\s*(?<name>[\s\S]+)/, cancelBinging_1.default),
                             router_1.text(/^綁定\s*(?<name>[\s\S]+)/, binding_1.default),
                             router_1.text(/^([f|F]ollow)|追隨/, follow_1.default),
                             router_1.text(/([t|T]op)|遊戲/, top_1.default),
@@ -110,8 +113,10 @@ function App() {
                 case 0: return [4 /*yield*/, router_1.router([
                         router_1.platform('line', LineAction),
                         router_1.platform('messenger', MessengerAction),
+                        router_1.text('連結 LINE Notify', connectLineNotify),
+                        router_1.text(/^綁定推播\s*(?<name>[\s\S]+)/, binding_2.default),
+                        router_1.text(/^解除\s*(?<name>[\s\S]+)/, cancelBinging_1.default),
                         router_1.text(/^綁定\s*(?<name>[\s\S]+)/, binding_1.default),
-                        router_1.text(/^推播\s*(?<name>[\s\S]+)/, binding_2.default),
                         router_1.text(/^([f|F]ollow)|追隨/, follow_1.default),
                         router_1.text(/([t|T]op)|遊戲/, top_1.default),
                         router_1.text(/^[f|F]ind\s*(?<topic>.+)$/, searchGame_1.default),

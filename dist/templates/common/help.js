@@ -46,7 +46,7 @@ function helpMe(context) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    message = '🎮 輸入範例\n綁帳號: 綁定 sam1268\n查詢追隨: follow\n找遊戲: top';
+                    message = '🎮 輸入範例\n1.綁帳號: 綁定 sam1268\n2.查詢追隨: follow\n3.找遊戲: top\n4.輸入: 連結 LINE Notify';
                     return [4 /*yield*/, sendMessage_1.default(context, message)];
                 case 1:
                     _a.sent();
