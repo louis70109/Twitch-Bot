@@ -49,11 +49,24 @@ var cancelBinging_1 = __importDefault(require("./controller/twitches/cancelBingi
 var searchGame_1 = __importDefault(require("./controller/twitches/searchGame"));
 var help_1 = __importDefault(require("./templates/common/help"));
 var author_1 = __importDefault(require("./templates/common/author"));
+function connectLineNotify(context) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, context.sendText("https://liff.line.me/" + process.env.LIFF_ID)];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
 function LineAction() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, router_1.router([
+                        router_1.text('連結 LINE Notify', connectLineNotify),
                         router_1.text(/^綁定推播\s*(?<name>[\s\S]+)/, binding_2.default),
                         router_1.text(/^解除\s*(?<name>[\s\S]+)/, cancelBinging_1.default),
                         router_1.text(/^綁定\s*(?<name>[\s\S]+)/, binding_1.default),

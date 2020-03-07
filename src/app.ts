@@ -9,8 +9,12 @@ import searchGame from './controller/twitches/searchGame';
 import helpMe from './templates/common/help';
 import author from './templates/common/author';
 
+async function connectLineNotify(context): Promise<void> {
+  await context.sendText(`https://liff.line.me/${process.env.LIFF_ID}`);
+}
 async function LineAction(): Promise<void> {
   return await router([
+    text('連結 LINE Notify', connectLineNotify),
     text(/^綁定推播\s*(?<name>[\s\S]+)/, notifyBinding),
     text(/^解除\s*(?<name>[\s\S]+)/, notifyCancelBinding),
     text(/^綁定\s*(?<name>[\s\S]+)/, userBinding),
