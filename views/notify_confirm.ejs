@@ -7,34 +7,16 @@
   </head>
   <body>
     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
-  </body>
 
-  <script>
-    liff
-      .init({
-        liffId: '<%= liffId %>',
-      })
-      .then(() => {
-        const textBody =
-          '【綁定 LINE 推播功能🎉】\n接著請再輸入 follow 後按下【訂閱】的按鈕🔔';
-        liff
-          .sendMessages([
-            {
-              type: 'text',
-              text: textBody,
-            },
-          ])
-          .then(() => {
-            liff.closeWindow();
-          })
-          .catch(err => {
-            alert(err);
-            console.log('error', err);
-          });
-      })
-      .catch(err => {
-        console.log(err.code, err.message);
-        alert('confirm 綁定異常，請聯絡作者');
-      });
-  </script>
+    <script>
+      liff
+        .init({ liffId: '<%= liffId %>' })
+        .then(() => {
+          liff.closeWindow();
+        })
+        .catch(err => {
+          liff.closeWindow();
+        });
+    </script>
+  </body>
 </html>
