@@ -8,10 +8,11 @@ const NotifySchema = new Schema({
 
 const StreamNotifySchema = new Schema(
   {
-    name: { type: String, required: true },
+    name: { type: String, index: true },
     userId: { type: String, index: true },
+    isPublish: { type: Boolean, default: false },
   },
-  { timestamps: { updatedAt: 'createdAt' } }
+  { timestamps: { createdAt: 'createdAt' } }
 );
 
 StreamNotifySchema.index({ name: 1, userId: 1 }, { unique: true });
