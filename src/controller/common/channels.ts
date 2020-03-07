@@ -1,5 +1,4 @@
 import { Stream } from 'twitch';
-import { StreamNotifyModel } from '../../model/notify';
 import showChannelsFlex from '../../templates/line/streams';
 import showStreamGeneric from '../../templates/messenger/streams';
 import sendMessage from '../../templates/common/sendMessage';

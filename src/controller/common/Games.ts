@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import showGamesFlex from '../../templates/line/games';
 import showGamesGeneric from '../../templates/messenger/games';
 import { Game } from '../../model/game';
