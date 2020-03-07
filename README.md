@@ -2,7 +2,7 @@
 
 此專案目前支援 `Messenger` 以及 `LINE message API`.
 
-目前能透過指令`綁定帳號`、`查詢追隨`、`最多人看的遊戲`以及`查詢特定遊戲`之直播。
+目前能透過指令`綁定帳號`、`查詢追隨`、`最多人看的遊戲`、`查詢特定遊戲`以及`綁定推播`功能。
 
 # 加入好友
 
@@ -24,6 +24,7 @@
   - 須先綁定帳號才可查詢
 - 最多人看的遊戲: `top` / `遊戲`
 - 查詢特定遊戲: `find League of Legends`
+- 連結 LINE Notify: [點選我](https://liff.line.me/1653917374-QqknRPqk)
 
 ### [截圖](https://github.com/louis70109/Twitch-Bot/tree/master/public)
 
