@@ -30,7 +30,7 @@ async function publishMessage(streams, notifyToken, userInfo) {
     if (ch.name === userInfo.name && userInfo.isPublish === false) {
       await sendNotify(
         notifyToken.token,
-        `【${ch.displayName}】已經開台囉！\n\n手機用戶: twitch://stream/${ch.name}\n\n電腦用戶: https://twitch.tv/${ch.name}`
+        `\n【${ch.displayName}】\n已經開台囉！\n\n手機用戶: twitch://stream/${ch.name}\n\n電腦用戶: https://twitch.tv/${ch.name}`
       );
       await StreamNotifyModel.updateOne(
         { _id: userInfo._id },
