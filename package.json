@@ -6,8 +6,7 @@
     "dev": "nodemon dist/server.js",
     "start": "cross-env NODE_ENV=production node dist/server.js",
     "lint": "eslint .",
-    "test": "jest",
-    "build": "tsc"
+    "test": "jest"
   },
   "dependencies": {
     "@types/node": "^12.12.24",
