@@ -10,9 +10,10 @@ var NotifySchema = new Schema({
     userId: { type: String, unique: true, index: true },
 });
 var StreamNotifySchema = new Schema({
-    name: { type: String, required: true },
+    name: { type: String, index: true },
     userId: { type: String, index: true },
-}, { timestamps: { updatedAt: 'createdAt' } });
+    isPublish: { type: Boolean, default: false },
+}, { timestamps: { createdAt: 'createdAt' } });
 StreamNotifySchema.index({ name: 1, userId: 1 }, { unique: true });
 var NotifyModel = mongoose_1.default.model('notify', NotifySchema);
 exports.NotifyModel = NotifyModel;

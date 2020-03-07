@@ -83,7 +83,6 @@ function userFollow(context) {
                             }
                         }
                     }
-                    console.log(binding_streams);
                     Channels_1.default(context, platform, streams, binding_streams);
                     return [2 /*return*/];
             }
