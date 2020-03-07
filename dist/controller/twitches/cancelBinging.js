@@ -39,17 +39,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var sendMessage_1 = __importDefault(require("./sendMessage"));
-function unKnown(context, message) {
+var notify_1 = require("../../model/notify");
+var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"));
+function notifyCancelBinding(context, _a) {
+    var match = _a.match;
+    var _b, _c, _d;
     return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, sendMessage_1.default(context, message)];
+        var name, userId, notify, stream;
+        return __generator(this, function (_e) {
+            switch (_e.label) {
+                case 0:
+                    name = (_b = match.groups) === null || _b === void 0 ? void 0 : _b.name;
+                    userId = (_d = (_c = context._session) === null || _c === void 0 ? void 0 : _c.user) === null || _d === void 0 ? void 0 : _d.id;
+                    notify = new notify_1.StreamNotifyModel();
+                    notify.name = name;
+                    notify.userId = userId;
+                    return [4 /*yield*/, notify_1.StreamNotifyModel.remove({
+                            userId: userId,
+                            name: name,
+                        })];
                 case 1:
-                    _a.sent();
+                    stream = _e.sent();
+                    if (!stream) {
+                        sendMessage_1.default(context, '❌ 您未綁定此直播喔！');
+                    }
+                    else
+                        sendMessage_1.default(context, '✅ 解除成功');
                     return [2 /*return*/];
             }
         });
     });
 }
-exports.default = unKnown;
+exports.default = notifyCancelBinding;

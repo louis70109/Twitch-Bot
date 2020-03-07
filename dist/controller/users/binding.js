@@ -41,13 +41,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var user_1 = require("../../model/user");
 var twitch_1 = __importDefault(require("twitch"));
-var mongoose_1 = __importDefault(require("mongoose"));
-var sendMessage_1 = __importDefault(require("../../view/common/sendMessage"));
+var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"));
 function userBinding(context, _a) {
     var match = _a.match;
     var _b, _c, _d;
     return __awaiter(this, void 0, void 0, function () {
-        var userName, userId, twitchClient, twitchUser, user, isAlive, userObj;
+        var userName, userId, twitchClient, twitchUser, user;
         return __generator(this, function (_e) {
             switch (_e.label) {
                 case 0:
@@ -68,38 +67,30 @@ function userBinding(context, _a) {
                     user.displayName = twitchUser.displayName;
                     user.twitchId = twitchUser.id;
                     user.userId = userId;
-                    return [4 /*yield*/, user_1.UserModel.findOne({ userId: userId })];
-                case 3:
-                    isAlive = _e.sent();
-                    if (!!isAlive) return [3 /*break*/, 5];
-                    console.log('this record not found');
-                    return [4 /*yield*/, user.save(function (err) {
-                            if (err) {
-                                sendMessage_1.default(context, '❌ 綁定失敗');
-                                return;
+                    return [4 /*yield*/, user_1.UserModel.findOne({ userId: userId }, function (_, isAlive) {
+                            if (!isAlive) {
+                                user.save(function (err) {
+                                    if (err) {
+                                        sendMessage_1.default(context, '❌ 綁定失敗');
+                                        return;
+                                    }
+                                });
                             }
+                            else {
+                                var userObj = {
+                                    name: twitchUser.name,
+                                    displayName: twitchUser.displayName,
+                                    twitchId: twitchUser.id,
+                                    userId: userId,
+                                };
+                                user_1.UserModel.findOneAndUpdate({ userId: userId }, userObj, function (err) {
+                                    if (err)
+                                        console.log('帳戶更新失敗', err);
+                                });
+                            }
+                            sendMessage_1.default(context, "\u2705 \u7D81\u5B9A " + twitchUser.name + " \u6210\u529F\uFF01");
                         })];
-                case 4:
-                    _e.sent();
-                    return [3 /*break*/, 7];
-                case 5:
-                    console.log('Find record, update...');
-                    userObj = {
-                        name: twitchUser.name,
-                        displayName: twitchUser.displayName,
-                        twitchId: twitchUser.id,
-                        userId: userId,
-                    };
-                    return [4 /*yield*/, user_1.UserModel.findOneAndUpdate({ userId: userId }, userObj, function (err, res) {
-                            if (!err)
-                                console.log('帳戶更新成功', res);
-                            mongoose_1.default.connection.close();
-                        })];
-                case 6:
-                    _e.sent();
-                    _e.label = 7;
-                case 7: return [4 /*yield*/, sendMessage_1.default(context, "\u2705 \u7D81\u5B9A " + twitchUser.name + " \u6210\u529F\uFF01")];
-                case 8:
+                case 3:
                     _e.sent();
                     return [2 /*return*/];
             }

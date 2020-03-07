@@ -39,38 +39,40 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var games_1 = __importDefault(require("../../templates/line/games"));
-var games_2 = __importDefault(require("../../templates/messenger/games"));
+var notify_1 = require("../../model/notify");
 var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"));
-function showGames(context, platform, games) {
+function notifyBinding(context, _a) {
+    var match = _a.match;
+    var _b, _c, _d;
     return __awaiter(this, void 0, void 0, function () {
-        var _a;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var name, userId, notify, replyMessage, stream;
+        return __generator(this, function (_e) {
+            switch (_e.label) {
                 case 0:
-                    _a = platform;
-                    switch (_a) {
-                        case 'line': return [3 /*break*/, 1];
-                        case 'messenger': return [3 /*break*/, 2];
-                    }
-                    return [3 /*break*/, 3];
+                    name = (_b = match.groups) === null || _b === void 0 ? void 0 : _b.name;
+                    userId = (_d = (_c = context._session) === null || _c === void 0 ? void 0 : _c.user) === null || _d === void 0 ? void 0 : _d.id;
+                    notify = new notify_1.StreamNotifyModel();
+                    notify.name = name;
+                    notify.userId = userId;
+                    replyMessage = "\u2705 \u7D81\u5B9A\u7DE8\u865F: " + name + " \u6210\u529F\uFF01";
+                    return [4 /*yield*/, notify_1.StreamNotifyModel.findOne({
+                            userId: userId,
+                            name: name,
+                        })];
                 case 1:
-                    games.length !== 0
-                        ? games_1.default(context, games)
-                        : sendMessage_1.default(context, '🚀現在想看的遊戲都沒開哦！');
-                    return [3 /*break*/, 5];
-                case 2:
-                    games.length !== 0
-                        ? games_2.default(context, games)
-                        : sendMessage_1.default(context, '🚀現在想看的遊戲都沒開哦！');
-                    return [3 /*break*/, 5];
-                case 3: return [4 /*yield*/, context.sendText(games)];
-                case 4:
-                    _b.sent();
-                    return [3 /*break*/, 5];
-                case 5: return [2 /*return*/];
+                    stream = _e.sent();
+                    if (!stream) {
+                        notify.save(function (err) {
+                            if (err)
+                                replyMessage = '❌ 綁定失敗';
+                            sendMessage_1.default(context, replyMessage);
+                        });
+                    }
+                    else
+                        sendMessage_1.default(context, '🔔 已經綁定過了喔！');
+                    return [2 /*return*/];
             }
         });
     });
 }
-exports.default = showGames;
+exports.default = notifyBinding;

@@ -1,7 +1,6 @@
 import { UserModel } from '../../model/user';
 import TwitchClient from 'twitch';
-import mongoose from 'mongoose';
-import sendMessage from '../../view/common/sendMessage';
+import sendMessage from '../../templates/common/sendMessage';
 
 export default async function userBinding(
   context: any,
@@ -26,31 +25,25 @@ export default async function userBinding(
   user.displayName = twitchUser.displayName;
   user.twitchId = twitchUser.id;
   user.userId = userId;
-  const isAlive = await UserModel.findOne({ userId: userId });
-  if (!isAlive) {
-    console.log('this record not found');
-    await user.save(err => {
-      if (err) {
-        sendMessage(context, '❌ 綁定失敗');
-        return;
-      }
-    });
-  } else {
-    console.log('Find record, update...');
-    const userObj = {
-      name: twitchUser.name,
-      displayName: twitchUser.displayName,
-      twitchId: twitchUser.id,
-      userId: userId,
-    };
-    await UserModel.findOneAndUpdate(
-      { userId: userId },
-      userObj,
-      (err, res) => {
-        if (!err) console.log('帳戶更新成功', res);
-        mongoose.connection.close();
-      }
-    );
-  }
-  await sendMessage(context, `✅ 綁定 ${twitchUser.name} 成功！`);
+  await UserModel.findOne({ userId: userId }, (_, isAlive) => {
+    if (!isAlive) {
+      user.save(err => {
+        if (err) {
+          sendMessage(context, '❌ 綁定失敗');
+          return;
+        }
+      });
+    } else {
+      const userObj = {
+        name: twitchUser.name,
+        displayName: twitchUser.displayName,
+        twitchId: twitchUser.id,
+        userId: userId,
+      };
+      UserModel.findOneAndUpdate({ userId: userId }, userObj, err => {
+        if (err) console.log('帳戶更新失敗', err);
+      });
+    }
+    sendMessage(context, `✅ 綁定 ${twitchUser.name} 成功！`);
+  });
 }

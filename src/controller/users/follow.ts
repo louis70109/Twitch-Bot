@@ -1,7 +1,8 @@
 import TwitchClient from 'twitch';
 import { UserModel } from '../../model/user';
+import { StreamNotifyModel } from '../../model/notify';
 import showChannels from '../common/Channels';
-import sendMessage from '../../view/common/sendMessage';
+import sendMessage from '../../templates/common/sendMessage';
 
 export default async function userFollow(context: any): Promise<void> {
   const platform = context._session?.platform;
@@ -21,10 +22,17 @@ export default async function userFollow(context: any): Promise<void> {
     currentUser.twitchId
   );
   const channel: string[] = [];
-  for (let index = 0; index < follow.length; index++) {
-    const element = follow[index];
-    channel.push(element.channel.id);
-  }
+  follow.forEach(element => channel.push(element.channel.id));
   const streams = await twitchClient.kraken.streams.getStreams(channel);
-  showChannels(context, platform, streams);
+  const notify = await StreamNotifyModel.find({ userId: userId });
+  const binding_streams = [];
+  for (let idx = 0; idx < streams.length; idx++) {
+    for (let n_idx = 0; n_idx < notify.length; n_idx++) {
+      if (streams[idx].channel.name === notify[n_idx].name) {
+        binding_streams.push(notify[n_idx].name);
+        break;
+      }
+    }
+  }
+  showChannels(context, platform, streams, binding_streams);
 }

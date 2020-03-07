@@ -44,15 +44,18 @@ var bottender_1 = require("bottender");
 var binding_1 = __importDefault(require("./controller/users/binding"));
 var follow_1 = __importDefault(require("./controller/users/follow"));
 var top_1 = __importDefault(require("./controller/twitches/top"));
+var binding_2 = __importDefault(require("./controller/twitches/binding"));
+var cancelBinging_1 = __importDefault(require("./controller/twitches/cancelBinging"));
 var searchGame_1 = __importDefault(require("./controller/twitches/searchGame"));
-var help_1 = __importDefault(require("./view/common/help"));
-var author_1 = __importDefault(require("./view/common/author"));
-var mongoose_1 = __importDefault(require("mongoose"));
+var help_1 = __importDefault(require("./templates/common/help"));
+var author_1 = __importDefault(require("./templates/common/author"));
 function LineAction() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, router_1.router([
+                        router_1.text(/^綁定推播\s*(?<name>[\s\S]+)/, binding_2.default),
+                        router_1.text(/^解除\s*(?<name>[\s\S]+)/, cancelBinging_1.default),
                         router_1.text(/^綁定\s*(?<name>[\s\S]+)/, binding_1.default),
                         router_1.text(/^([f|F]ollow)|追隨/, follow_1.default),
                         router_1.text(/([t|T]op)|遊戲/, top_1.default),
@@ -91,23 +94,17 @@ function App() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    mongoose_1.default.connect(process.env.MONGODB_URI, {
-                        useUnifiedTopology: true,
-                        useNewUrlParser: true,
-                        useCreateIndex: true,
-                    });
-                    mongoose_1.default.Promise = global.Promise;
-                    return [4 /*yield*/, router_1.router([
-                            router_1.platform('line', LineAction),
-                            router_1.platform('messenger', MessengerAction),
-                            router_1.text(/^綁定\s*(?<name>[\s\S]+)/, binding_1.default),
-                            router_1.text(/^([f|F]ollow)|追隨/, follow_1.default),
-                            router_1.text(/([t|T]op)|遊戲/, top_1.default),
-                            router_1.text(/^[f|F]ind\s*(?<topic>.+)$/, searchGame_1.default),
-                            router_1.text(/([a|A]uthor)|(作者)/, author_1.default),
-                            router_1.text('*', help_1.default),
-                        ])];
+                case 0: return [4 /*yield*/, router_1.router([
+                        router_1.platform('line', LineAction),
+                        router_1.platform('messenger', MessengerAction),
+                        router_1.text(/^綁定\s*(?<name>[\s\S]+)/, binding_1.default),
+                        router_1.text(/^推播\s*(?<name>[\s\S]+)/, binding_2.default),
+                        router_1.text(/^([f|F]ollow)|追隨/, follow_1.default),
+                        router_1.text(/([t|T]op)|遊戲/, top_1.default),
+                        router_1.text(/^[f|F]ind\s*(?<topic>.+)$/, searchGame_1.default),
+                        router_1.text(/([a|A]uthor)|(作者)/, author_1.default),
+                        router_1.text('*', help_1.default),
+                    ])];
                 case 1: return [2 /*return*/, _a.sent()];
             }
         });

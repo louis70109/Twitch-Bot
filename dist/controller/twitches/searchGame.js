@@ -63,7 +63,7 @@ function searchGame(context, _a) {
                             streams.push(element);
                         }
                     });
-                    Channels_1.default(context, platform, streams);
+                    Channels_1.default(context, platform, streams, []);
                     return [2 /*return*/];
             }
         });

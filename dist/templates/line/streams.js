@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var LINE_FLEX_LIMIT = 10;
-function showChannelsFlex(context, streams) {
+function showChannelsFlex(context, streams, notification) {
     return __awaiter(this, void 0, void 0, function () {
         var channelBubble;
         return __generator(this, function (_a) {
@@ -165,6 +165,28 @@ function showChannelsFlex(context, streams) {
                                     ],
                                 },
                             };
+                            if (notification.includes(String(ch.name))) {
+                                content.footer.contents.push({
+                                    type: 'button',
+                                    style: 'secondary',
+                                    action: {
+                                        type: 'message',
+                                        label: '取消綁定',
+                                        text: "\u89E3\u9664 " + ch.name,
+                                    },
+                                });
+                            }
+                            else {
+                                content.footer.contents.push({
+                                    type: 'button',
+                                    style: 'primary',
+                                    action: {
+                                        type: 'message',
+                                        label: '綁定通知',
+                                        text: "\u7D81\u5B9A\u63A8\u64AD " + ch.name,
+                                    },
+                                });
+                            }
                             channelBubble.push(content);
                         }
                     });
