@@ -34,6 +34,5 @@ export default async function userFollow(context: any): Promise<void> {
       }
     }
   }
-  console.log(binding_streams);
   showChannels(context, platform, streams, binding_streams);
 }
