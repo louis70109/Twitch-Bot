@@ -1,6 +1,6 @@
 # Twitch Bot
 
-此專案目前支援 `Messenger` 以及 `LINE message API`.
+此專案目前支援 `LINE message API`.
 
 目前能透過指令`綁定帳號`、`查詢追隨`、`最多人看的遊戲`、`查詢特定遊戲`以及`綁定推播`功能。
 
@@ -11,10 +11,6 @@
 <img height="200" border="0" alt="QRcode" src="https://i.imgur.com/kRcEhBN.png">
 
 <a href="https://line.me/R/ti/p/%40eae1476b"><img height="50" border="0" alt="加入好友" src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png"></a>
-
-## Messenger
-
-<img height="200" border="0" alt="QRcode" src="https://i.imgur.com/93yxeiy.png">
 
 # 指令
 
@@ -39,30 +35,12 @@
 
 - [x] LINE
 - [x] Messenger
-- [ ] Slack
 
 # 試玩
 
 ## 建立 `.env`
 
 把 `.env.sample` 改成 `.env` 並把對應的 key 放入。
-
-> Messenger 相關步驟可以參考 [這篇文章](https://ithelp.ithome.com.tw/articles/10218682)。
-
-## Messenger
-
-- 有個粉絲頁
-- 加入以下網址於白名單中
-  - `https://twitch.tv`
-  - `https://static-cdn.jtvnw.net/ttv-boxart`
-  - 部署機器的 url (我使用 `Heroku`)
-
-![](https://i.imgur.com/dtj3zKO.png)
-![](https://i.imgur.com/KEtSop6.png)
-
-### 測試
-
-在使用 `npx bottender dev` 後緊接著使用 `npx bottender messenger webhook set` 將 webhook 設定至 Messenger 上，這邊可能需要等個一兩分鐘讓它生效。
 
 ## LINE
 
@@ -82,9 +60,11 @@ git clone https://github.com/louis70109/Twitch-Bot.git
 
 - 先用 `yarn install` 或 `npm install` 來安裝相依套件
 - 開啟另一個視窗執行 `tsc -w`，它會幫忙編譯並且即時監聽。
-- `npx bottender dev`: 執行程式，或是加上 `--console` 讓你可以在`終端機`上直接測試行為。
+- 啟動服務方法:
+  1. `npm bottender dev`: 執行程式，或是加上 `--console` 讓你可以在`終端機`上直接測試行為。
+  2. `npm run dev`: 則是有完整的 LINE API 使用功能(`Notify`、`LIFF`)，需要前端顯示的則需要透過這個指令啟動 server。
 
-到這裡要看到 bottender 已經幫你啟動 `Messenger` 以及 `LINE` 的 webhook URL 了。
+到這裡要看到 bottender 已經幫你啟動 `LINE` 的 webhook URL 了。
 ![](https://i.imgur.com/p3z2fCp.png)
 
 然後將 `LINE` webhook url 複製到你的機器人開發者頁面中。
