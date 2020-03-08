@@ -30,7 +30,7 @@ class NotifyController {
       )
       .then(response => {
         NotifyModel.findOne({ userId: userId }, (err, isAlive) => {
-          const notify: any = NotifyModel();
+          const notify: any = new NotifyModel();
           notify.token = response.data.access_token;
           notify.userId = userId;
           if (!isAlive) {
