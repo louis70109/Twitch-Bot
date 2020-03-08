@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const moment = require('moment');
+const { StreamNotifyModel } = require('../dist/model/notify.js');
+
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
