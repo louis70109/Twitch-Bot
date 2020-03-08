@@ -33,7 +33,7 @@ var NotifyController = /** @class */ (function () {
             .post('https://notify-bot.line.me/oauth/token', querystring_1.default.encode(client), { headers: headers })
             .then(function (response) {
             notify_1.NotifyModel.findOne({ userId: userId }, function (err, isAlive) {
-                var notify = notify_1.NotifyModel();
+                var notify = new notify_1.NotifyModel();
                 notify.token = response.data.access_token;
                 notify.userId = userId;
                 if (!isAlive) {
