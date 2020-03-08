@@ -12,8 +12,8 @@ async function run() {
     hour = now.hours(),
     min = now.minutes();
 
-  if ((hour === 0 || hour === 12) && min >= 30)
-    await StreamNotifyModel.updateMany({}, { $set: { isPublish: false } });
+  // if ((hour === 0 || hour === 12 || hour === 18) && min >= 0)
+  await StreamNotifyModel.updateMany({}, { $set: { isPublish: false } });
 
   await mongoose.connection.close();
 }
