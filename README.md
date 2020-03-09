@@ -6,8 +6,6 @@
 
 # 加入好友
 
-## LINE
-
 <img height="200" border="0" alt="QRcode" src="https://i.imgur.com/kRcEhBN.png">
 
 <a href="https://line.me/R/ti/p/%40eae1476b"><img height="50" border="0" alt="加入好友" src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png"></a>
@@ -22,7 +20,7 @@
 - 查詢特定遊戲: `find League of Legends`
 - 連結 LINE Notify: [點選我](https://liff.line.me/1653917374-QqknRPqk)
 
-### [截圖](https://github.com/louis70109/Twitch-Bot/tree/master/public)
+## 更多用法可以參考[我的文章](https://nijialin.com/2020/03/09/Twitch-Bot-%E5%85%A8%E9%9D%A2%E5%8D%87%E7%B4%9A%EF%BC%81/)
 
 # 主力套件
 
@@ -31,12 +29,13 @@
   - [mongoose](https://mongoosejs.com/)
 - [twitch API](https://d-fischer.github.io/twitch/docs/basic-usage/getting-started.html)
 
-# 支援平台
-
-- [x] LINE
-- [x] Messenger
-
 # 試玩
+
+Clone 圖奇獸 下來！
+
+```sh
+git clone https://github.com/louis70109/Twitch-Bot.git
+```
 
 ## 建立 `.env`
 
@@ -51,10 +50,6 @@
   ![](https://i.imgur.com/7hVHm3c.png)
 
 ## 啟動
-
-```sh
-git clone https://github.com/louis70109/Twitch-Bot.git
-```
 
 ### Normal
 
