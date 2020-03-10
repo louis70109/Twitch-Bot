@@ -42,6 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var user_1 = require("../../model/user");
 var twitch_1 = __importDefault(require("twitch"));
 var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"));
+var _a = process.env, TWITCH_CLIENT_ID = _a.TWITCH_CLIENT_ID, TWITCH_ACCESS_TOKEN = _a.TWITCH_ACCESS_TOKEN;
 function userBinding(context, _a) {
     var match = _a.match;
     var _b, _c, _d;
@@ -52,7 +53,7 @@ function userBinding(context, _a) {
                 case 0:
                     userName = (_b = match.groups) === null || _b === void 0 ? void 0 : _b.name;
                     userId = (_d = (_c = context._session) === null || _c === void 0 ? void 0 : _c.user) === null || _d === void 0 ? void 0 : _d.id;
-                    return [4 /*yield*/, twitch_1.default.withCredentials(process.env.TWITCH_CLIENT_ID, process.env.TWITCH_ACCESS_TOKEN)];
+                    return [4 /*yield*/, twitch_1.default.withCredentials(TWITCH_CLIENT_ID, TWITCH_ACCESS_TOKEN)];
                 case 1:
                     twitchClient = _e.sent();
                     return [4 /*yield*/, twitchClient.helix.users.getUserByName(userName)];

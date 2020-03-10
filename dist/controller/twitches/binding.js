@@ -45,24 +45,24 @@ function notifyBinding(context, _a) {
     var match = _a.match;
     var _b, _c, _d;
     return __awaiter(this, void 0, void 0, function () {
-        var name, userId, notify, replyMessage, stream;
+        var name, userId, $notify, replyMessage, $stream;
         return __generator(this, function (_e) {
             switch (_e.label) {
                 case 0:
                     name = (_b = match.groups) === null || _b === void 0 ? void 0 : _b.name;
                     userId = (_d = (_c = context._session) === null || _c === void 0 ? void 0 : _c.user) === null || _d === void 0 ? void 0 : _d.id;
-                    notify = new notify_1.StreamNotifyModel();
-                    notify.name = name;
-                    notify.userId = userId;
+                    $notify = new notify_1.StreamNotifyModel();
+                    $notify.name = name;
+                    $notify.userId = userId;
                     replyMessage = "\u2705 \u7D81\u5B9A\u7DE8\u865F: " + name + " \u6210\u529F\uFF01";
                     return [4 /*yield*/, notify_1.StreamNotifyModel.findOne({
                             userId: userId,
                             name: name,
                         })];
                 case 1:
-                    stream = _e.sent();
-                    if (!stream) {
-                        notify.save(function (err) {
+                    $stream = _e.sent();
+                    if (!$stream) {
+                        $notify.save(function (err) {
                             if (err)
                                 replyMessage = '❌ 綁定失敗';
                             sendMessage_1.default(context, replyMessage);

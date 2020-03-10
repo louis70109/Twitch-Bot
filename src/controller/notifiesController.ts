@@ -30,11 +30,11 @@ class NotifyController {
       )
       .then(response => {
         NotifyModel.findOne({ userId: userId }, (err, isAlive) => {
-          const notify: any = new NotifyModel();
-          notify.token = response.data.access_token;
-          notify.userId = userId;
+          const $notify: any = new NotifyModel();
+          $notify.token = response.data.access_token;
+          $notify.userId = userId;
           if (!isAlive) {
-            notify.save(err => {
+            $notify.save(err => {
               if (err) throw err;
             });
           } else {

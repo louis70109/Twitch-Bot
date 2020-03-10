@@ -45,22 +45,22 @@ function notifyCancelBinding(context, _a) {
     var match = _a.match;
     var _b, _c, _d;
     return __awaiter(this, void 0, void 0, function () {
-        var name, userId, notify, stream;
+        var name, userId, $notify, $stream;
         return __generator(this, function (_e) {
             switch (_e.label) {
                 case 0:
                     name = (_b = match.groups) === null || _b === void 0 ? void 0 : _b.name;
                     userId = (_d = (_c = context._session) === null || _c === void 0 ? void 0 : _c.user) === null || _d === void 0 ? void 0 : _d.id;
-                    notify = new notify_1.StreamNotifyModel();
-                    notify.name = name;
-                    notify.userId = userId;
+                    $notify = new notify_1.StreamNotifyModel();
+                    $notify.name = name;
+                    $notify.userId = userId;
                     return [4 /*yield*/, notify_1.StreamNotifyModel.remove({
                             userId: userId,
                             name: name,
                         })];
                 case 1:
-                    stream = _e.sent();
-                    if (!stream) {
+                    $stream = _e.sent();
+                    if (!$stream) {
                         sendMessage_1.default(context, '❌ 您未綁定此直播喔！');
                     }
                     else

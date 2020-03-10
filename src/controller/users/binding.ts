@@ -2,16 +2,18 @@ import { UserModel } from '../../model/user';
 import TwitchClient from 'twitch';
 import sendMessage from '../../templates/common/sendMessage';
 
+const { TWITCH_CLIENT_ID, TWITCH_ACCESS_TOKEN } = process.env;
+
 export default async function userBinding(
   context: any,
   { match }
 ): Promise<void> {
-  const userName = match.groups?.name;
-  const userId = context._session?.user?.id;
+  const userName: string = match.groups?.name;
+  const userId: string = context._session?.user?.id;
 
   const twitchClient = await TwitchClient.withCredentials(
-    process.env.TWITCH_CLIENT_ID,
-    process.env.TWITCH_ACCESS_TOKEN
+    TWITCH_CLIENT_ID,
+    TWITCH_ACCESS_TOKEN
   );
 
   const twitchUser = await twitchClient.helix.users.getUserByName(userName);
@@ -20,7 +22,7 @@ export default async function userBinding(
     return;
   }
 
-  const user = new UserModel();
+  const user: any = new UserModel();
   user.name = twitchUser.name;
   user.displayName = twitchUser.displayName;
   user.twitchId = twitchUser.id;

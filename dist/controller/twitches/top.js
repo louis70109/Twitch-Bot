@@ -41,6 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var twitch_1 = __importDefault(require("twitch"));
 var Games_1 = __importDefault(require("../common/Games"));
+var _a = process.env, TWITCH_CLIENT_ID = _a.TWITCH_CLIENT_ID, TWITCH_ACCESS_TOKEN = _a.TWITCH_ACCESS_TOKEN;
 function replacePreviewUrlToLarge(url) {
     return url.replace(/\{width\}x\{height\}/, '480x360');
 }
@@ -52,7 +53,7 @@ function topGames(context) {
             switch (_b.label) {
                 case 0:
                     platform = (_a = context._session) === null || _a === void 0 ? void 0 : _a.platform;
-                    return [4 /*yield*/, twitch_1.default.withCredentials(process.env.TWITCH_CLIENT_ID, process.env.TWITCH_ACCESS_TOKEN)];
+                    return [4 /*yield*/, twitch_1.default.withCredentials(TWITCH_CLIENT_ID, TWITCH_ACCESS_TOKEN)];
                 case 1:
                     twitchClient = _b.sent();
                     return [4 /*yield*/, twitchClient.helix.games.getTopGames()];

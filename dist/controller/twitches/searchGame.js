@@ -41,6 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var twitch_1 = __importDefault(require("twitch"));
 var Channels_1 = __importDefault(require("../common/Channels"));
+var _a = process.env, TWITCH_CLIENT_ID = _a.TWITCH_CLIENT_ID, TWITCH_ACCESS_TOKEN = _a.TWITCH_ACCESS_TOKEN;
 function searchGame(context, _a) {
     var match = _a.match;
     var _b, _c;
@@ -51,7 +52,7 @@ function searchGame(context, _a) {
                 case 0:
                     platform = (_b = context._session) === null || _b === void 0 ? void 0 : _b.platform;
                     topic = (_c = match.groups) === null || _c === void 0 ? void 0 : _c.topic;
-                    return [4 /*yield*/, twitch_1.default.withCredentials(process.env.TWITCH_CLIENT_ID, process.env.TWITCH_ACCESS_TOKEN)];
+                    return [4 /*yield*/, twitch_1.default.withCredentials(TWITCH_CLIENT_ID, TWITCH_ACCESS_TOKEN)];
                 case 1:
                     twitchClient = _d.sent();
                     return [4 /*yield*/, twitchClient.kraken.streams.getStreams('', topic)];
