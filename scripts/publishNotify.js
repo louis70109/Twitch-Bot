@@ -40,26 +40,26 @@ async function publishMessage(streams, notifyToken, userInfo) {
   }
 }
 async function run() {
-  const notify = await NotifyModel.find();
-  const stream = await StreamNotifyModel.find();
+  const $notify = await NotifyModel.find();
+  const $stream = await StreamNotifyModel.find();
 
   const client = await TwitchClient.withCredentials(
     process.env.TWITCH_CLIENT_ID,
     process.env.TWITCH_ACCESS_TOKEN
   );
-  for (let i = 0; i < notify.length; i++) {
-    for (let j = 0; j < stream.length; j++) {
-      const userId = stream[j].userId;
-      if (notify[i].userId === userId) {
-        const currentUser = await UserModel.findOne({ userId: userId });
+  for (let i = 0; i < $notify.length; i++) {
+    for (let j = 0; j < $stream.length; j++) {
+      const userId = $stream[j].userId;
+      if ($notify[i].userId === userId) {
+        const $currentUser = await UserModel.findOne({ userId: userId });
 
         const follow = await client.kraken.users.getFollowedChannels(
-          currentUser.twitchId
+          $currentUser.twitchId
         );
         const channel = [];
         follow.forEach(element => channel.push(element.channel.id));
         const twitches = await client.kraken.streams.getStreams(channel);
-        await publishMessage(twitches, notify[i], stream[j]);
+        await publishMessage(twitches, $notify[i], $stream[j]);
       }
     }
   }
