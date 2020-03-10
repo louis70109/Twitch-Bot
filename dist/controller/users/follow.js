@@ -47,7 +47,7 @@ var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"
 function userFollow(context) {
     var _a, _b, _c;
     return __awaiter(this, void 0, void 0, function () {
-        var platform, userId, twitchClient, currentUser, follow, channel, streams, notify, binding_streams, idx, n_idx;
+        var platform, userId, twitchClient, $currentUser, follow, channel, streams, $notify, binding_streams, idx, n_idx;
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
@@ -58,12 +58,12 @@ function userFollow(context) {
                     twitchClient = _d.sent();
                     return [4 /*yield*/, user_1.UserModel.findOne({ userId: userId })];
                 case 2:
-                    currentUser = _d.sent();
-                    if (!currentUser) {
+                    $currentUser = _d.sent();
+                    if (!$currentUser) {
                         sendMessage_1.default(context, '👾 請先綁定帳號哦！\n ex: 綁定 godjj');
                         return [2 /*return*/];
                     }
-                    return [4 /*yield*/, twitchClient.kraken.users.getFollowedChannels(currentUser.twitchId)];
+                    return [4 /*yield*/, twitchClient.kraken.users.getFollowedChannels($currentUser.twitchId)];
                 case 3:
                     follow = _d.sent();
                     channel = [];
@@ -73,12 +73,12 @@ function userFollow(context) {
                     streams = _d.sent();
                     return [4 /*yield*/, notify_1.StreamNotifyModel.find({ userId: userId })];
                 case 5:
-                    notify = _d.sent();
+                    $notify = _d.sent();
                     binding_streams = [];
                     for (idx = 0; idx < streams.length; idx++) {
-                        for (n_idx = 0; n_idx < notify.length; n_idx++) {
-                            if (streams[idx].channel.name === notify[n_idx].name) {
-                                binding_streams.push(notify[n_idx].name);
+                        for (n_idx = 0; n_idx < $notify.length; n_idx++) {
+                            if (streams[idx].channel.name === $notify[n_idx].name) {
+                                binding_streams.push($notify[n_idx].name);
                                 break;
                             }
                         }

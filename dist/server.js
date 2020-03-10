@@ -8,10 +8,10 @@ var express_1 = __importDefault(require("express"));
 var notifiesController_1 = require("./controller/notifiesController");
 var bottender_1 = require("bottender");
 var mongoose_1 = __importDefault(require("mongoose"));
+var _a = process.env, CLIENT_ID = _a.CLIENT_ID, REDIRECT_URI = _a.REDIRECT_URI, LIFF_ID = _a.LIFF_ID, MONGODB_URI = _a.MONGODB_URI, NODE_ENV = _a.NODE_ENV, PORT = _a.PORT;
 var app = bottender_1.bottender({
-    dev: process.env.NODE_ENV !== 'production',
+    dev: NODE_ENV !== 'production',
 });
-var port = Number(process.env.PORT) || 5000;
 var handle = app.getRequestHandler();
 app.prepare().then(function () {
     var server = express_1.default();
@@ -24,22 +24,23 @@ app.prepare().then(function () {
     server.get('/notify/confirm', notifiesController_1.NotifyController.confirmNotify);
     server.get('/notify', function (req, res) {
         res.render('notify', {
-            clientId: process.env.CLIENT_ID,
-            redirectUri: process.env.REDIRECT_URI,
-            liffId: process.env.LIFF_ID,
+            clientId: CLIENT_ID,
+            redirectUri: REDIRECT_URI,
+            liffId: LIFF_ID,
         });
     });
-    // delegate other requests to bottender
     server.all('*', function (req, res) {
         return handle(req, res);
     });
+    var port = Number(PORT) || 5000;
     server.listen(port, function (err) {
-        mongoose_1.default.set('useNewUrlParser', true);
-        mongoose_1.default.set('useFindAndModify', false);
-        mongoose_1.default.set('useCreateIndex', true);
-        mongoose_1.default.set('useUnifiedTopology', true);
         mongoose_1.default
-            .connect(process.env.MONGODB_URI)
+            .connect(MONGODB_URI, {
+            useUnifiedTopology: true,
+            useNewUrlParser: true,
+            reconnectTries: Number.MAX_VALUE,
+            reconnectInterval: 10000,
+        })
             .then(function () { return (mongoose_1.default.Promise = global.Promise); });
         if (err) {
             mongoose_1.default.connection.close();
