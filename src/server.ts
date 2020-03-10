@@ -4,12 +4,18 @@ import { NotifyController } from './controller/notifiesController';
 import { bottender } from 'bottender';
 import mongoose from 'mongoose';
 
+const {
+  CLIENT_ID,
+  REDIRECT_URI,
+  LIFF_ID,
+  MONGODB_URI,
+  NODE_ENV,
+  PORT,
+} = process.env;
+
 const app = bottender({
-  dev: process.env.NODE_ENV !== 'production',
+  dev: NODE_ENV !== 'production',
 });
-
-const port = Number(process.env.PORT) || 5000;
-
 const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
@@ -28,25 +34,25 @@ app.prepare().then(() => {
 
   server.get('/notify', (req, res) => {
     res.render('notify', {
-      clientId: process.env.CLIENT_ID,
-      redirectUri: process.env.REDIRECT_URI,
-      liffId: process.env.LIFF_ID,
+      clientId: CLIENT_ID,
+      redirectUri: REDIRECT_URI,
+      liffId: LIFF_ID,
     });
   });
 
-  // delegate other requests to bottender
   server.all('*', (req, res) => {
     return handle(req, res);
   });
 
+  const port = Number(PORT) || 5000;
   server.listen(port, err => {
-    mongoose.set('useNewUrlParser', true);
-    mongoose.set('useFindAndModify', false);
-    mongoose.set('useCreateIndex', true);
-    mongoose.set('useUnifiedTopology', true);
-
     mongoose
-      .connect(process.env.MONGODB_URI)
+      .connect(MONGODB_URI, {
+        useUnifiedTopology: true,
+        useNewUrlParser: true,
+        reconnectTries: Number.MAX_VALUE, // retry forever
+        reconnectInterval: 10000, // wait for 10 seconds before retry
+      })
       .then(() => (mongoose.Promise = global.Promise));
 
     if (err) {
