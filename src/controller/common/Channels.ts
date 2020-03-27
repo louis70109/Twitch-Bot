@@ -1,6 +1,5 @@
 import { Stream } from 'twitch';
 import showChannelsFlex from '../../templates/line/streams';
-import showStreamGeneric from '../../templates/messenger/streams';
 import sendMessage from '../../templates/common/sendMessage';
 export default async function showChannels(
   context,
@@ -12,11 +11,6 @@ export default async function showChannels(
     case 'line':
       streams.length !== 0
         ? showChannelsFlex(context, streams, notification)
-        : sendMessage(context, '🚀現在追隨的實況主都沒開哦！');
-      break;
-    case 'messenger':
-      streams.length !== 0
-        ? showStreamGeneric(context, streams)
         : sendMessage(context, '🚀現在追隨的實況主都沒開哦！');
       break;
     default:

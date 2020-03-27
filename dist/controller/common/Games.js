@@ -40,7 +40,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var games_1 = __importDefault(require("../../templates/line/games"));
-var games_2 = __importDefault(require("../../templates/messenger/games"));
 var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"));
 function showGames(context, platform, games) {
     return __awaiter(this, void 0, void 0, function () {
@@ -51,24 +50,18 @@ function showGames(context, platform, games) {
                     _a = platform;
                     switch (_a) {
                         case 'line': return [3 /*break*/, 1];
-                        case 'messenger': return [3 /*break*/, 2];
                     }
-                    return [3 /*break*/, 3];
+                    return [3 /*break*/, 2];
                 case 1:
                     games.length !== 0
                         ? games_1.default(context, games)
                         : sendMessage_1.default(context, '🚀現在想看的遊戲都沒開哦！');
-                    return [3 /*break*/, 5];
-                case 2:
-                    games.length !== 0
-                        ? games_2.default(context, games)
-                        : sendMessage_1.default(context, '🚀現在想看的遊戲都沒開哦！');
-                    return [3 /*break*/, 5];
-                case 3: return [4 /*yield*/, context.sendText(games)];
-                case 4:
+                    return [3 /*break*/, 4];
+                case 2: return [4 /*yield*/, context.sendText(games)];
+                case 3:
                     _b.sent();
-                    return [3 /*break*/, 5];
-                case 5: return [2 /*return*/];
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
             }
         });
     });

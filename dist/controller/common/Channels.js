@@ -40,7 +40,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var streams_1 = __importDefault(require("../../templates/line/streams"));
-var streams_2 = __importDefault(require("../../templates/messenger/streams"));
 var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"));
 function showChannels(context, platform, streams, notification) {
     return __awaiter(this, void 0, void 0, function () {
@@ -51,20 +50,14 @@ function showChannels(context, platform, streams, notification) {
                     _a = platform;
                     switch (_a) {
                         case 'line': return [3 /*break*/, 1];
-                        case 'messenger': return [3 /*break*/, 2];
                     }
-                    return [3 /*break*/, 3];
+                    return [3 /*break*/, 2];
                 case 1:
                     streams.length !== 0
                         ? streams_1.default(context, streams, notification)
                         : sendMessage_1.default(context, '🚀現在追隨的實況主都沒開哦！');
-                    return [3 /*break*/, 5];
+                    return [3 /*break*/, 4];
                 case 2:
-                    streams.length !== 0
-                        ? streams_2.default(context, streams)
-                        : sendMessage_1.default(context, '🚀現在追隨的實況主都沒開哦！');
-                    return [3 /*break*/, 5];
-                case 3:
                     output_1 = '';
                     streams.forEach(function (element, index) {
                         if (index < 10) {
@@ -73,10 +66,10 @@ function showChannels(context, platform, streams, notification) {
                         }
                     });
                     return [4 /*yield*/, context.sendText(output_1)];
-                case 4:
+                case 3:
                     _b.sent();
-                    return [3 /*break*/, 5];
-                case 5: return [2 /*return*/];
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
             }
         });
     });
