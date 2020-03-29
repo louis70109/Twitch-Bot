@@ -153,6 +153,7 @@ export default async function showChannelsFlex(
       channelBubble.push(content);
     }
   });
+
   await context.sendFlex('來看直播囉！', {
     type: 'carousel',
     contents: channelBubble,

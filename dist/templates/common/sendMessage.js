@@ -35,11 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var quickReplies_1 = __importDefault(require("../messenger/quickReplies"));
 function sendMessage(context, message) {
     var _a;
     return __awaiter(this, void 0, void 0, function () {
@@ -51,25 +47,17 @@ function sendMessage(context, message) {
                     _b = platform;
                     switch (_b) {
                         case 'line': return [3 /*break*/, 1];
-                        case 'messenger': return [3 /*break*/, 3];
                     }
-                    return [3 /*break*/, 5];
+                    return [3 /*break*/, 3];
                 case 1: return [4 /*yield*/, context.sendText(message)];
                 case 2:
                     _c.sent();
-                    return [3 /*break*/, 7];
-                case 3: 
-                // showStreamGeneric(context, streams);
-                return [4 /*yield*/, context.sendText(message, quickReplies_1.default(['follow', 'top', 'help', 'author']))];
+                    return [3 /*break*/, 5];
+                case 3: return [4 /*yield*/, context.sendText(message)];
                 case 4:
-                    // showStreamGeneric(context, streams);
                     _c.sent();
-                    return [3 /*break*/, 7];
-                case 5: return [4 /*yield*/, context.sendText(message)];
-                case 6:
-                    _c.sent();
-                    return [3 /*break*/, 7];
-                case 7: return [2 /*return*/];
+                    return [3 /*break*/, 5];
+                case 5: return [2 /*return*/];
             }
         });
     });
