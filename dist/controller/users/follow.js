@@ -47,7 +47,7 @@ var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"
 function userFollow(context) {
     var _a, _b, _c;
     return __awaiter(this, void 0, void 0, function () {
-        var platform, userId, twitchClient, $currentUser, follow, channel, streams, $notify, binding_streams, idx, n_idx;
+        var platform, userId, twitchClient, $currentUser, follows, channel, i, follow, streams, $notify, userBindingStreams, idx, n_idx;
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
@@ -65,25 +65,28 @@ function userFollow(context) {
                     }
                     return [4 /*yield*/, twitchClient.kraken.users.getFollowedChannels($currentUser.twitchId)];
                 case 3:
-                    follow = _d.sent();
+                    follows = _d.sent();
                     channel = [];
-                    follow.forEach(function (element) { return channel.push(element.channel.id); });
+                    for (i = 0; i < follows.length; i++) {
+                        follow = follows[i];
+                        channel.push(follow.channel.id);
+                    }
                     return [4 /*yield*/, twitchClient.kraken.streams.getStreams(channel)];
                 case 4:
                     streams = _d.sent();
                     return [4 /*yield*/, notify_1.StreamNotifyModel.find({ userId: userId })];
                 case 5:
                     $notify = _d.sent();
-                    binding_streams = [];
+                    userBindingStreams = [];
                     for (idx = 0; idx < streams.length; idx++) {
                         for (n_idx = 0; n_idx < $notify.length; n_idx++) {
                             if (streams[idx].channel.name === $notify[n_idx].name) {
-                                binding_streams.push($notify[n_idx].name);
+                                userBindingStreams.push($notify[n_idx].name);
                                 break;
                             }
                         }
                     }
-                    Channels_1.default(context, platform, streams, binding_streams);
+                    Channels_1.default(context, platform, streams, userBindingStreams);
                     return [2 /*return*/];
             }
         });

@@ -11,7 +11,7 @@
   "dependencies": {
     "@types/node": "^12.12.24",
     "body-parser": "^1.19.0",
-    "bottender": "^1.1.3",
+    "bottender": "latest",
     "cross-env": "^6.0.3",
     "crypto": "^1.0.1",
     "ejs": "^3.0.1",

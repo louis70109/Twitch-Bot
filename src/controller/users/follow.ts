@@ -18,21 +18,27 @@ export default async function userFollow(context: any): Promise<void> {
     sendMessage(context, '👾 請先綁定帳號哦！\n ex: 綁定 godjj');
     return;
   }
-  const follow = await twitchClient.kraken.users.getFollowedChannels(
+  const follows = await twitchClient.kraken.users.getFollowedChannels(
     $currentUser.twitchId
   );
-  const channel: string[] = [];
-  follow.forEach(element => channel.push(element.channel.id));
+  const channel: Array<string> = [];
+
+  for (let i = 0; i < follows.length; i++) {
+    const follow = follows[i]
+    channel.push(follow.channel.id)
+  }
   const streams: any = await twitchClient.kraken.streams.getStreams(channel);
+
   const $notify: any = await StreamNotifyModel.find({ userId: userId });
-  const binding_streams: Array<string> = [];
+
+  const userBindingStreams: Array<string> = [];
   for (let idx = 0; idx < streams.length; idx++) {
     for (let n_idx = 0; n_idx < $notify.length; n_idx++) {
       if (streams[idx].channel.name === $notify[n_idx].name) {
-        binding_streams.push($notify[n_idx].name);
+        userBindingStreams.push($notify[n_idx].name);
         break;
       }
     }
   }
-  showChannels(context, platform, streams, binding_streams);
+  showChannels(context, platform, streams, userBindingStreams);
 }
