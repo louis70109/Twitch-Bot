@@ -3,6 +3,7 @@ import express from 'express';
 import { NotifyController } from './controller/notifiesController';
 import { bottender } from 'bottender';
 import mongoose from 'mongoose';
+import * as Sentry from "@sentry/node";
 
 const {
   CLIENT_ID,
@@ -11,7 +12,10 @@ const {
   MONGODB_URI,
   NODE_ENV,
   PORT,
+  SENTRY_DSN
 } = process.env;
+
+Sentry.init({ dsn: SENTRY_DSN })
 
 const app = bottender({
   dev: NODE_ENV !== 'production',
@@ -29,6 +33,17 @@ app.prepare().then(() => {
       },
     })
   );
+  if (NODE_ENV === 'production') {
+    server.use(Sentry.Handlers.requestHandler());
+    server.use(Sentry.Handlers.errorHandler());
+    // Optional fallthrough error handler
+    server.use(function onError(err, req, res, next) {
+      // The error id is attached to `res.sentry` to be returned
+      // and optionally displayed to the user for support.
+      res.statusCode = 500;
+      res.end(res.sentry + "\n");
+    });
+  }
 
   server.get('/notify/confirm', NotifyController.confirmNotify);
 
@@ -57,7 +72,7 @@ app.prepare().then(() => {
 
     if (err) {
       mongoose.connection.close();
-      throw err;
+      throw Error(`Mongo error: ${err}`);
     }
     console.log(`> Ready on http://localhost:${port}`);
   });

@@ -1,15 +1,17 @@
 {
   "name": "Twitch-Bot",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "private": true,
   "scripts": {
     "dev": "nodemon dist/server.js",
     "start": "cross-env NODE_ENV=production node dist/server.js",
+    "lint:fix": "npm run lint -- --fix",
     "lint": "eslint .",
     "test": "jest"
   },
   "dependencies": {
     "@types/node": "^12.12.24",
+    "@sentry/node": "^5.10.2",
     "body-parser": "^1.19.0",
     "bottender": "latest",
     "cross-env": "^6.0.3",
