@@ -73,7 +73,7 @@ function userBinding(context, _a) {
                                 user.save(function (err) {
                                     if (err) {
                                         sendMessage_1.default(context, '❌ 綁定失敗');
-                                        return;
+                                        throw Error("\u5E33\u865F\u7D81\u5B9A\u5931\u6557: " + err);
                                     }
                                 });
                             }
