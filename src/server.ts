@@ -3,7 +3,6 @@ import express from 'express';
 import { NotifyController } from './controller/notifiesController';
 import { bottender } from 'bottender';
 import mongoose from 'mongoose';
-import * as Sentry from "@sentry/node";
 
 const {
   CLIENT_ID,
