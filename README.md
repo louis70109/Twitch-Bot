@@ -11,6 +11,7 @@
 <img height="200" border="0" alt="QRcode" src="https://i.imgur.com/kRcEhBN.png">
 
 掃描 QR code 或是點選我!!
+
 <a href="https://line.me/R/ti/p/%40eae1476b"><img height="50" border="0" alt="加入好友" src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png"></a>
 
 # 指令使用
@@ -45,6 +46,10 @@ git clone https://github.com/louis70109/Twitch-Bot.git
 ## 使用環境變數: `.env`
 
 把 `.env.sample` 改成 `.env` 並把對應的 key 放入。
+
+```
+cp .env.sample .env
+```
 
 ## LINE
 
