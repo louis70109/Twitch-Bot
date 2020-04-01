@@ -3,7 +3,6 @@ const Sentry = require('@sentry/node');
 const { NODE_ENV, SENTRY_DSN } = process.env;
 
 const ENABLE_SENTRY = Boolean(SENTRY_DSN);
-
 if (ENABLE_SENTRY) {
   Sentry.init({
     dsn: SENTRY_DSN,

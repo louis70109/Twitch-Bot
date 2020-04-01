@@ -11,11 +11,9 @@ const {
   LIFF_ID,
   MONGODB_URI,
   NODE_ENV,
-  PORT,
-  SENTRY_DSN
+  PORT
 } = process.env;
 
-Sentry.init({ dsn: SENTRY_DSN })
 
 const app = bottender({
   dev: NODE_ENV !== 'production',
@@ -33,17 +31,6 @@ app.prepare().then(() => {
       },
     })
   );
-  if (NODE_ENV === 'production') {
-    server.use(Sentry.Handlers.requestHandler());
-    server.use(Sentry.Handlers.errorHandler());
-    // Optional fallthrough error handler
-    server.use(function onError(err, req, res, next) {
-      // The error id is attached to `res.sentry` to be returned
-      // and optionally displayed to the user for support.
-      res.statusCode = 500;
-      res.end(res.sentry + "\n");
-    });
-  }
 
   server.get('/notify/confirm', NotifyController.confirmNotify);
 
