@@ -32,7 +32,7 @@ export default async function userBinding(
       user.save(err => {
         if (err) {
           sendMessage(context, '❌ 綁定失敗');
-          return;
+          throw Error(`帳號綁定失敗: ${err}`)
         }
       });
     } else {

@@ -35,7 +35,7 @@ class NotifyController {
           $notify.userId = userId;
           if (!isAlive) {
             $notify.save(err => {
-              if (err) throw err;
+              if (err) throw Error(`Notify 儲存失敗： ${err}`);
             });
           } else {
             const userObj = {
@@ -46,7 +46,7 @@ class NotifyController {
               { userId: userId },
               userObj,
               (err, _) => {
-                if (err) console.log(err);
+                if (err) throw Error(`Notify 更新失敗: ${err}`);
               }
             );
           }

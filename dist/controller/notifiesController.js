@@ -39,7 +39,7 @@ var NotifyController = /** @class */ (function () {
                 if (!isAlive) {
                     $notify.save(function (err) {
                         if (err)
-                            throw err;
+                            throw Error("Notify \u5132\u5B58\u5931\u6557\uFF1A " + err);
                     });
                 }
                 else {
@@ -49,7 +49,7 @@ var NotifyController = /** @class */ (function () {
                     };
                     notify_1.NotifyModel.findOneAndUpdate({ userId: userId }, userObj, function (err, _) {
                         if (err)
-                            console.log(err);
+                            throw Error("Notify \u66F4\u65B0\u5931\u6557: " + err);
                     });
                 }
             });

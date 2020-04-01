@@ -44,7 +44,7 @@ app.prepare().then(function () {
             .then(function () { return (mongoose_1.default.Promise = global.Promise); });
         if (err) {
             mongoose_1.default.connection.close();
-            throw err;
+            throw Error("Mongo error: " + err);
         }
         console.log("> Ready on http://localhost:" + port);
     });
