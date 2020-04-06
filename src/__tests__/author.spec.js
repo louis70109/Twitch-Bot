@@ -1,5 +1,4 @@
 const crypto = require('crypto');
-
 const nock = require('nock');
 const request = require('supertest');
 const { initializeServer } = require('bottender');

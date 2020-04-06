@@ -1,6 +1,6 @@
 {
   "include": ["src/**/*"],
-  "exclude": ["**/__tests__", "**/*.{spec,test}.ts"],
+  "exclude": ["**/__tests__", "**/*.{spec,test}.ts", "**/*.{spec,test}.js"],
   "compilerOptions": {
     "target": "es5",
     "lib": ["es2017", "esnext.asynciterable"],
@@ -10,7 +10,6 @@
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    // "strict": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
