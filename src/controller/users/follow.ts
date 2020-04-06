@@ -1,8 +1,33 @@
-import TwitchClient from 'twitch';
-import { UserModel } from '../../model/user';
+import TwitchClient, { UserFollow } from 'twitch';
 import { StreamNotifyModel } from '../../model/notify';
-import showChannels from '../common/Channels';
+import { UserModel } from '../../model/user';
 import sendMessage from '../../templates/common/sendMessage';
+import showChannels from '../common/Channels';
+
+
+async function _findStreamNotifyList(userId: string, streams: any): Promise<string[]> {
+  const $notify: any = await StreamNotifyModel.find({ userId: userId });
+  const userBindingStreams: Array<string> = [];
+  for (let idx = 0; idx < streams.length; idx++) {
+    for (let n_idx = 0; n_idx < $notify.length; n_idx++) {
+      if (streams[idx].channel.name === $notify[n_idx].name) {
+        userBindingStreams.push($notify[n_idx].name);
+        break;
+      }
+    }
+  }
+  return await userBindingStreams
+}
+
+async function _collectChannelIdList(follows: UserFollow[]): Promise<string[]> {
+  const channel: string[] = [];
+
+  for (let i = 0; i < follows.length; i++) {
+    const follow = follows[i]
+    channel.push(follow.channel.id)
+  }
+  return await channel
+}
 
 export default async function userFollow(context: any): Promise<void> {
   const platform: string = context._session?.platform;
@@ -18,27 +43,12 @@ export default async function userFollow(context: any): Promise<void> {
     sendMessage(context, '👾 請先綁定帳號哦！\n ex: 綁定 godjj');
     return;
   }
-  const follows = await twitchClient.kraken.users.getFollowedChannels(
+  const follows: UserFollow[] = await twitchClient.kraken.users.getFollowedChannels(
     $currentUser.twitchId
   );
-  const channel: Array<string> = [];
-
-  for (let i = 0; i < follows.length; i++) {
-    const follow = follows[i]
-    channel.push(follow.channel.id)
-  }
+  const channel: string[] = await _collectChannelIdList(follows);
   const streams: any = await twitchClient.kraken.streams.getStreams(channel);
 
-  const $notify: any = await StreamNotifyModel.find({ userId: userId });
-
-  const userBindingStreams: Array<string> = [];
-  for (let idx = 0; idx < streams.length; idx++) {
-    for (let n_idx = 0; n_idx < $notify.length; n_idx++) {
-      if (streams[idx].channel.name === $notify[n_idx].name) {
-        userBindingStreams.push($notify[n_idx].name);
-        break;
-      }
-    }
-  }
+  const userBindingStreams: string[] = await _findStreamNotifyList(userId, streams)
   showChannels(context, platform, streams, userBindingStreams);
 }
