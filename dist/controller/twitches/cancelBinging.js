@@ -35,12 +35,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var notify_1 = require("../../model/notify");
-var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"));
 function notifyCancelBinding(context, _a) {
     var match = _a.match;
     var _b, _c, _d;
@@ -61,10 +57,10 @@ function notifyCancelBinding(context, _a) {
                 case 1:
                     $stream = _e.sent();
                     if (!$stream) {
-                        sendMessage_1.default(context, '❌ 您未綁定此直播喔！');
+                        context.sendText('❌ 您未綁定此直播喔！');
                     }
                     else
-                        sendMessage_1.default(context, '✅ 解除成功');
+                        context.sendText('✅ 解除成功');
                     return [2 /*return*/];
             }
         });

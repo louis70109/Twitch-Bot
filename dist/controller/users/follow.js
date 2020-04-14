@@ -42,7 +42,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var twitch_1 = __importDefault(require("twitch"));
 var notify_1 = require("../../model/notify");
 var user_1 = require("../../model/user");
-var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"));
 var Channels_1 = __importDefault(require("../common/Channels"));
 function _findStreamNotifyList(userId, streams) {
     return __awaiter(this, void 0, void 0, function () {
@@ -100,7 +99,7 @@ function userFollow(context) {
                 case 2:
                     $currentUser = _d.sent();
                     if (!$currentUser) {
-                        sendMessage_1.default(context, '👾 請先綁定帳號哦！\n ex: 綁定 godjj');
+                        context.sendText('👾 請先綁定帳號哦！\n ex: 綁定 godjj');
                         return [2 /*return*/];
                     }
                     return [4 /*yield*/, twitchClient.kraken.users.getFollowedChannels($currentUser.twitchId)];

@@ -40,7 +40,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var streams_1 = __importDefault(require("../../templates/line/streams"));
-var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"));
 function showChannels(context, platform, streams, notification) {
     return __awaiter(this, void 0, void 0, function () {
         var _a, output_1;
@@ -55,7 +54,7 @@ function showChannels(context, platform, streams, notification) {
                 case 1:
                     streams.length !== 0
                         ? streams_1.default(context, streams, notification)
-                        : sendMessage_1.default(context, '🚀現在追隨的實況主都沒開哦！');
+                        : context.sendText('🚀現在追隨的實況主都沒開哦！');
                     return [3 /*break*/, 4];
                 case 2:
                     output_1 = '';

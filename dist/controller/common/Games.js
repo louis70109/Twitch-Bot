@@ -40,7 +40,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var games_1 = __importDefault(require("../../templates/line/games"));
-var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"));
 function showGames(context, platform, games) {
     return __awaiter(this, void 0, void 0, function () {
         var _a;
@@ -55,7 +54,7 @@ function showGames(context, platform, games) {
                 case 1:
                     games.length !== 0
                         ? games_1.default(context, games)
-                        : sendMessage_1.default(context, '🚀現在想看的遊戲都沒開哦！');
+                        : context.sendText('🚀現在想看的遊戲都沒開哦！');
                     return [3 /*break*/, 4];
                 case 2: return [4 /*yield*/, context.sendText(games)];
                 case 3:

@@ -35,12 +35,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var notify_1 = require("../../model/notify");
-var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"));
 function notifyBinding(context, _a) {
     var match = _a.match;
     var _b, _c, _d;
@@ -65,11 +61,11 @@ function notifyBinding(context, _a) {
                         $notify.save(function (err) {
                             if (err)
                                 replyMessage = '❌ 綁定失敗';
-                            sendMessage_1.default(context, replyMessage);
+                            context.sendText(replyMessage);
                         });
                     }
                     else
-                        sendMessage_1.default(context, '🔔 已經綁定過了喔！');
+                        context.sendText('🔔 已經綁定過了喔！');
                     return [2 /*return*/];
             }
         });

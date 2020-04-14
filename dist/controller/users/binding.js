@@ -41,7 +41,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var user_1 = require("../../model/user");
 var twitch_1 = __importDefault(require("twitch"));
-var sendMessage_1 = __importDefault(require("../../templates/common/sendMessage"));
 var _a = process.env, TWITCH_CLIENT_ID = _a.TWITCH_CLIENT_ID, TWITCH_ACCESS_TOKEN = _a.TWITCH_ACCESS_TOKEN;
 function userBinding(context, _a) {
     var match = _a.match;
@@ -60,7 +59,7 @@ function userBinding(context, _a) {
                 case 2:
                     twitchUser = _e.sent();
                     if (!twitchUser) {
-                        sendMessage_1.default(context, '👾 綁定帳號失敗，請檢查 Twitch 是否有效');
+                        context.sendText('👾 綁定帳號失敗，請檢查 Twitch 是否有效');
                         return [2 /*return*/];
                     }
                     user = new user_1.UserModel();
@@ -72,7 +71,7 @@ function userBinding(context, _a) {
                             if (!isAlive) {
                                 user.save(function (err) {
                                     if (err) {
-                                        sendMessage_1.default(context, '❌ 綁定失敗');
+                                        context.sendText('❌ 綁定失敗');
                                         throw Error("\u5E33\u865F\u7D81\u5B9A\u5931\u6557: " + err);
                                     }
                                 });
@@ -89,7 +88,7 @@ function userBinding(context, _a) {
                                         console.log('帳戶更新失敗', err);
                                 });
                             }
-                            sendMessage_1.default(context, "\u2705 \u7D81\u5B9A " + twitchUser.name + " \u6210\u529F\uFF01");
+                            context.sendText("\u2705 \u7D81\u5B9A " + twitchUser.name + " \u6210\u529F\uFF01");
                         })];
                 case 3:
                     _e.sent();
