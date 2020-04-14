@@ -1,5 +1,4 @@
 import { StreamNotifyModel } from '../../model/notify';
-import sendMessage from '../../templates/common/sendMessage';
 
 export default async function notifyBinding(
   context: any,
@@ -19,7 +18,7 @@ export default async function notifyBinding(
   if (!$stream) {
     $notify.save(err => {
       if (err) replyMessage = '❌ 綁定失敗';
-      sendMessage(context, replyMessage);
+      context.sendText(replyMessage);
     });
-  } else sendMessage(context, '🔔 已經綁定過了喔！');
+  } else context.sendText('🔔 已經綁定過了喔！');
 }

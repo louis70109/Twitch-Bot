@@ -1,6 +1,5 @@
 import { UserModel } from '../../model/user';
 import TwitchClient from 'twitch';
-import sendMessage from '../../templates/common/sendMessage';
 
 const { TWITCH_CLIENT_ID, TWITCH_ACCESS_TOKEN } = process.env;
 
@@ -18,7 +17,7 @@ export default async function userBinding(
 
   const twitchUser = await twitchClient.helix.users.getUserByName(userName);
   if (!twitchUser) {
-    sendMessage(context, '👾 綁定帳號失敗，請檢查 Twitch 是否有效');
+    context.sendText('👾 綁定帳號失敗，請檢查 Twitch 是否有效');
     return;
   }
 
@@ -31,7 +30,7 @@ export default async function userBinding(
     if (!isAlive) {
       user.save(err => {
         if (err) {
-          sendMessage(context, '❌ 綁定失敗');
+          context.sendText('❌ 綁定失敗');
           throw Error(`帳號綁定失敗: ${err}`)
         }
       });
@@ -46,6 +45,6 @@ export default async function userBinding(
         if (err) console.log('帳戶更新失敗', err);
       });
     }
-    sendMessage(context, `✅ 綁定 ${twitchUser.name} 成功！`);
+    context.sendText(`✅ 綁定 ${twitchUser.name} 成功！`);
   });
 }
