@@ -23,7 +23,6 @@
     "mongoose": "^5.8.3",
     "nock": "^11.7.2",
     "supertest": "^4.0.2",
-    "ts-node": "^8.4.1",
     "twitch": "^3.5.6"
   },
   "devDependencies": {
