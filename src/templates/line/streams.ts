@@ -1,17 +1,18 @@
+import { LineContext, LineTypes } from 'bottender';
 import { Stream } from 'twitch';
 
 const LINE_FLEX_LIMIT = 10;
 export default async function showChannelsFlex(
-  context: any,
+  context: LineContext,
   streams: Stream[],
   notification: Array<string>
 ): Promise<void> {
-  const channelBubble: any[] = [];
+  const channelBubble: LineTypes.FlexBubble[] = [];
 
   streams.forEach((element, index) => {
     if (index < LINE_FLEX_LIMIT) {
       const ch = element.channel;
-      const content: any = {
+      const content: LineTypes.FlexBubble = {
         type: 'bubble',
         hero: {
           type: 'image',
@@ -126,30 +127,29 @@ export default async function showChannelsFlex(
                 uri: ch.url,
               },
             },
+            notification.includes(String(ch.name))
+              ? {
+                  type: 'button',
+                  style: 'secondary',
+                  action: {
+                    type: 'message',
+                    label: '取消綁定',
+                    text: `解除 ${ch.name}`,
+                  },
+                }
+              : {
+                  type: 'button',
+                  style: 'primary',
+                  action: {
+                    type: 'message',
+                    label: '綁定通知',
+                    text: `綁定推播 ${ch.name}`,
+                  },
+                },
           ],
         },
       };
-      if (notification.includes(String(ch.name))) {
-        content.footer.contents.push({
-          type: 'button',
-          style: 'secondary',
-          action: {
-            type: 'message',
-            label: '取消綁定',
-            text: `解除 ${ch.name}`,
-          },
-        });
-      } else {
-        content.footer.contents.push({
-          type: 'button',
-          style: 'primary',
-          action: {
-            type: 'message',
-            label: '綁定通知',
-            text: `綁定推播 ${ch.name}`,
-          },
-        });
-      }
+
       channelBubble.push(content);
     }
   });

@@ -1,10 +1,11 @@
 import { UserModel } from '../../model/user';
 import TwitchClient from 'twitch';
+import { LineContext } from 'bottender';
 
 const { TWITCH_CLIENT_ID, TWITCH_ACCESS_TOKEN } = process.env;
 
 export default async function userBinding(
-  context: any,
+  context: LineContext,
   { match }
 ): Promise<void> {
   const userName: string = match.groups?.name;
@@ -31,7 +32,7 @@ export default async function userBinding(
       user.save(err => {
         if (err) {
           context.sendText('❌ 綁定失敗');
-          throw Error(`帳號綁定失敗: ${err}`)
+          throw Error(`帳號綁定失敗: ${err}`);
         }
       });
     } else {

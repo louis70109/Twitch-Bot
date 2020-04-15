@@ -11,7 +11,7 @@ module.exports = {
     jest: true,
     jasmine: true,
   },
-  plugins: ['@typescript-eslint'],
+  plugins: ['prettier', '@typescript-eslint'],
   rules: {
     'class-methods-use-this': 'off',
     'consistent-return': 'off',
@@ -21,6 +21,13 @@ module.exports = {
     'prefer-destructuring': 'off',
     '@typescript-eslint/camelcase': 'off',
     '@typescript-eslint/class-name-casing': 'off',
+    'prettier/prettier': [
+      'error',
+      {
+        trailingComma: 'es5',
+        singleQuote: true,
+      },
+    ],
   },
   overrides: [
     {

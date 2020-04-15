@@ -1,15 +1,17 @@
+import { LineContext, LineTypes } from 'bottender';
+
 import { Game } from '../../model/game';
 
 const LINE_FLEX_LIMIT = 10;
 export default async function showGamesFlex(
-  context: any,
+  context: LineContext,
   games: Game[]
 ): Promise<void> {
-  const channelBubble: any[] = [];
+  const channelBubble: LineTypes.FlexBubble[] = [];
 
   games.forEach((element, index) => {
     if (index < LINE_FLEX_LIMIT) {
-      const content = {
+      const content: LineTypes.FlexBubble = {
         type: 'bubble',
         body: {
           type: 'box',

@@ -3,8 +3,10 @@ import { StreamNotifyModel } from '../../model/notify';
 import { UserModel } from '../../model/user';
 import showChannels from '../common/Channels';
 
-
-async function _findStreamNotifyList(userId: string, streams: any): Promise<string[]> {
+async function _findStreamNotifyList(
+  userId: string,
+  streams: any
+): Promise<string[]> {
   const $notify: any = await StreamNotifyModel.find({ userId: userId });
   const userBindingStreams: Array<string> = [];
   for (let idx = 0; idx < streams.length; idx++) {
@@ -15,17 +17,17 @@ async function _findStreamNotifyList(userId: string, streams: any): Promise<stri
       }
     }
   }
-  return await userBindingStreams
+  return await userBindingStreams;
 }
 
 async function _collectChannelIdList(follows: UserFollow[]): Promise<string[]> {
   const channel: string[] = [];
 
   for (let i = 0; i < follows.length; i++) {
-    const follow = follows[i]
-    channel.push(follow.channel.id)
+    const follow = follows[i];
+    channel.push(follow.channel.id);
   }
-  return await channel
+  return await channel;
 }
 
 export default async function userFollow(context: any): Promise<void> {
@@ -48,6 +50,9 @@ export default async function userFollow(context: any): Promise<void> {
   const channel: string[] = await _collectChannelIdList(follows);
   const streams: any = await twitchClient.kraken.streams.getStreams(channel);
 
-  const userBindingStreams: string[] = await _findStreamNotifyList(userId, streams)
+  const userBindingStreams: string[] = await _findStreamNotifyList(
+    userId,
+    streams
+  );
   showChannels(context, platform, streams, userBindingStreams);
 }

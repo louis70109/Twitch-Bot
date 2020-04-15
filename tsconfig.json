@@ -1,5 +1,8 @@
 {
-  "include": ["src/**/*"],
+  "include": [
+    "src/**/*",
+    "typings/*"
+  ],
   "exclude": ["**/__tests__", "**/*.{spec,test}.ts", "**/*.{spec,test}.js"],
   "compilerOptions": {
     "target": "es5",

@@ -1,3 +1,4 @@
+import { Action, LineContext } from 'bottender';
 import { platform, router, text } from 'bottender/router';
 import userBinding from './controller/users/binding';
 import userFollow from './controller/users/follow';
@@ -11,8 +12,8 @@ import author from './templates/common/author';
 async function connectLineNotify(context): Promise<void> {
   await context.sendText(`https://liff.line.me/${process.env.LIFF_ID}`);
 }
-async function LineAction(): Promise<void> {
-  return await router([
+async function LineAction(): Promise<Action<LineContext>> {
+  return router<LineContext>([
     text('連結 LINE Notify', connectLineNotify),
     text(/^綁定推播\s*(?<name>[\s\S]+)/, notifyBinding),
     text(/^解除\s*(?<name>[\s\S]+)/, notifyCancelBinding),
@@ -25,8 +26,8 @@ async function LineAction(): Promise<void> {
   ]);
 }
 
-export default async function App(): Promise<void> {
-  return await router([
+export default async function App(): Promise<Action<LineContext>> {
+  return router<LineContext>([
     platform('line', LineAction),
     text('連結 LINE Notify', connectLineNotify),
     text(/^綁定推播\s*(?<name>[\s\S]+)/, notifyBinding),
