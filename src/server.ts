@@ -10,9 +10,8 @@ const {
   LIFF_ID,
   MONGODB_URI,
   NODE_ENV,
-  PORT
+  PORT,
 } = process.env;
-
 
 const app = bottender({
   dev: NODE_ENV !== 'production',

@@ -17,4 +17,4 @@ mongoose.connect(URI).then(() => (mongoose.Promise = global.Promise));
   if ((hour === 8 || hour === 20) && min >= 0)
     await StreamNotifyModel.updateMany({}, { $set: { isPublish: false } });
   await mongoose.connection.close();
-})()
+})();
