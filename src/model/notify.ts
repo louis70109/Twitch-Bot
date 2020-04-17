@@ -20,3 +20,10 @@ const NotifyModel = mongoose.model('notify', NotifySchema);
 const StreamNotifyModel = mongoose.model('stream_notify', StreamNotifySchema);
 
 export { NotifyModel, StreamNotifyModel };
+
+export type Notify = {
+  name: string;
+  isPublish: boolean;
+  createAt: DateConstructor;
+  userId: string;
+};
