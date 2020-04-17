@@ -5,6 +5,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "nodemon dist/server.js",
+    "watch": "tsc -w",
     "start": "cross-env NODE_ENV=production node dist/server.js",
     "lint:fix": "npm run lint -- --fix",
     "lint": "eslint . --ext=js,ts",
