@@ -5,7 +5,7 @@ import { LineContext } from 'bottender';
 const { TWITCH_CLIENT_ID, TWITCH_ACCESS_TOKEN } = process.env;
 
 export default async function userBinding(
-  context: LineContext,
+  context: LineContext | any,
   { match }
 ): Promise<void> {
   const userName: string = match.groups?.name;
