@@ -1,33 +1,20 @@
-import TwitchClient, { UserFollow } from 'twitch';
-import { StreamNotifyModel } from '../../model/notify';
-import { UserModel } from '../../model/user';
+import TwitchClient, { UserFollow, Stream } from 'twitch';
+import { Notify, StreamNotifyModel } from '../../model/notify';
+import { UserModel, User } from '../../model/user';
 import showChannels from '../common/Channels';
 
 async function _findStreamNotifyList(
   userId: string,
-  streams: any
+  streams: Stream[]
 ): Promise<string[]> {
-  const $notify: any = await StreamNotifyModel.find({ userId: userId });
-  const userBindingStreams: Array<string> = [];
-  for (let idx = 0; idx < streams.length; idx++) {
-    for (let n_idx = 0; n_idx < $notify.length; n_idx++) {
-      if (streams[idx].channel.name === $notify[n_idx].name) {
-        userBindingStreams.push($notify[n_idx].name);
-        break;
-      }
-    }
-  }
-  return await userBindingStreams;
+  const $notify: Notify[] = await StreamNotifyModel.find({ userId: userId });
+  const streamNameList: string[] = streams.map(el => el.channel.name);
+  const notifyList: string[] = $notify.map(el => el.name);
+  return await notifyList.filter(el => streamNameList.indexOf(el));
 }
 
 async function _collectChannelIdList(follows: UserFollow[]): Promise<string[]> {
-  const channel: string[] = [];
-
-  for (let i = 0; i < follows.length; i++) {
-    const follow = follows[i];
-    channel.push(follow.channel.id);
-  }
-  return await channel;
+  return follows.map(element => element.channel.id);
 }
 
 export default async function userFollow(context: any): Promise<void> {
@@ -39,7 +26,7 @@ export default async function userFollow(context: any): Promise<void> {
     process.env.TWITCH_ACCESS_TOKEN
   );
 
-  const $currentUser: any = await UserModel.findOne({ userId: userId });
+  const $currentUser: User = await UserModel.findOne({ userId: userId });
   if (!$currentUser) {
     context.sendText('👾 請先綁定帳號哦！\n ex: 綁定 godjj');
     return;
@@ -48,7 +35,9 @@ export default async function userFollow(context: any): Promise<void> {
     $currentUser.twitchId
   );
   const channel: string[] = await _collectChannelIdList(follows);
-  const streams: any = await twitchClient.kraken.streams.getStreams(channel);
+  const streams: Stream[] = await twitchClient.kraken.streams.getStreams(
+    channel
+  );
 
   const userBindingStreams: string[] = await _findStreamNotifyList(
     userId,
