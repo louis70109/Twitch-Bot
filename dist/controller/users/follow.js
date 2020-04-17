@@ -45,22 +45,15 @@ var user_1 = require("../../model/user");
 var Channels_1 = __importDefault(require("../common/Channels"));
 function _findStreamNotifyList(userId, streams) {
     return __awaiter(this, void 0, void 0, function () {
-        var $notify, userBindingStreams, idx, n_idx;
+        var $notify, streamNameList, notifyList;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, notify_1.StreamNotifyModel.find({ userId: userId })];
                 case 1:
                     $notify = _a.sent();
-                    userBindingStreams = [];
-                    for (idx = 0; idx < streams.length; idx++) {
-                        for (n_idx = 0; n_idx < $notify.length; n_idx++) {
-                            if (streams[idx].channel.name === $notify[n_idx].name) {
-                                userBindingStreams.push($notify[n_idx].name);
-                                break;
-                            }
-                        }
-                    }
-                    return [4 /*yield*/, userBindingStreams];
+                    streamNameList = streams.map(function (el) { return el.channel.name; });
+                    notifyList = $notify.map(function (el) { return el.name; });
+                    return [4 /*yield*/, notifyList.filter(function (el) { return streamNameList.indexOf(el); })];
                 case 2: return [2 /*return*/, _a.sent()];
             }
         });
@@ -68,18 +61,8 @@ function _findStreamNotifyList(userId, streams) {
 }
 function _collectChannelIdList(follows) {
     return __awaiter(this, void 0, void 0, function () {
-        var channel, i, follow;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    channel = [];
-                    for (i = 0; i < follows.length; i++) {
-                        follow = follows[i];
-                        channel.push(follow.channel.id);
-                    }
-                    return [4 /*yield*/, channel];
-                case 1: return [2 /*return*/, _a.sent()];
-            }
+            return [2 /*return*/, follows.map(function (element) { return element.channel.id; })];
         });
     });
 }
