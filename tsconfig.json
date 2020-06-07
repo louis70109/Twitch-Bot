@@ -1,8 +1,6 @@
 {
-  "include": [
-    "src/**/*",
-    "typings/*"
-  ],
+  "include": ["src/**/*", "typings/*"],
+  "files": ["typings/express.d.ts"],
   "exclude": ["**/__tests__", "**/*.{spec,test}.ts", "**/*.{spec,test}.js"],
   "compilerOptions": {
     "target": "es5",
