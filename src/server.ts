@@ -4,6 +4,12 @@ import { NotifyController } from './controller/notifiesController';
 import { bottender } from 'bottender';
 import mongoose from 'mongoose';
 
+declare module 'http' {
+  // ignore rawBody complier error
+  interface IncomingMessage {
+    rawBody: any;
+  }
+}
 const {
   CLIENT_ID,
   REDIRECT_URI,
@@ -46,6 +52,7 @@ app.prepare().then(() => {
 
   const port = Number(PORT) || 5000;
   server.listen(port, err => {
+    console.log(process.env.LINE_ACCESS_TOKEN);
     mongoose
       .connect(MONGODB_URI, {
         useUnifiedTopology: true,

@@ -34,6 +34,7 @@ app.prepare().then(function () {
     });
     var port = Number(PORT) || 5000;
     server.listen(port, function (err) {
+        console.log(process.env.LINE_ACCESS_TOKEN);
         mongoose_1.default
             .connect(MONGODB_URI, {
             useUnifiedTopology: true,
