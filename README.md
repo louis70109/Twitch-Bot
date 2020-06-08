@@ -27,7 +27,7 @@
 
 # Developer setup
 
-## 主力套件
+## 主要工具
 
 - [Bottender](https://github.com/Yoctol/bottender)
 - [Mongo](https://www.mongodb.com/)
@@ -67,8 +67,15 @@ cp .env.sample .env
 
 ### Twitch
 
-TWITCH_CLIENT_ID: 在 Twitch [後台申請](https://dev.twitch.tv/console/apps/create)
-TWITCH_ACCESS_TOKEN: Oauth key 在[這邊申請](https://twitchapps.com/tmi/)
+TWITCH_ACCESS_TOKEN: OAuth key 在[這邊申請](https://twitchapps.com/tmi/)
+
+申請完後將 `oauth:` 後的 key 透過官方文件的 [Validating requests](https://dev.twitch.tv/docs/authentication/#validating-requests) 指令放入 access token 中取得 Client_id，如下:
+
+```
+curl -H "Authorization: OAuth <access token>" https://id.twitch.tv/oauth2/validate
+```
+
+本專案的 `TWITCH_CLIENT_ID` 的環境變數就是這個回傳值中的 `client_id`。
 
 ## 啟動
 
