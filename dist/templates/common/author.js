@@ -36,14 +36,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var IconSwitch_1 = require("../../utils/IconSwitch");
 function author(context) {
     return __awaiter(this, void 0, void 0, function () {
-        var message;
+        var message, sender;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     message = '🦈【NiJia Lin】🦈\n✏️ 部落格:\nhttps://nijialin.com/\n\n🐙 Github:\nhttps://github.com/louis70109';
-                    return [4 /*yield*/, context.sendText(message)];
+                    sender = IconSwitch_1.randomSticker();
+                    return [4 /*yield*/, context.sendText(message, { sender: sender })];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];

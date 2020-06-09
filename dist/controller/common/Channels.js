@@ -40,7 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var streams_1 = __importDefault(require("../../templates/line/streams"));
-var IconSwitch_1 = require("../common/IconSwitch");
+var IconSwitch_1 = require("../../utils/IconSwitch");
 function showChannels(context, platform, streams, notification) {
     return __awaiter(this, void 0, void 0, function () {
         var _a, sender, output_1;
