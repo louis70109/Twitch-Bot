@@ -1,6 +1,6 @@
 import { Stream } from 'twitch';
 import showChannelsFlex from '../../templates/line/streams';
-import { randomSticker } from '../common/IconSwitch';
+import { randomSticker } from '../../utils/IconSwitch';
 export default async function showChannels(
   context,
   platform: string,
