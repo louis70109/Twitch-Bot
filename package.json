@@ -24,6 +24,7 @@
     "mongodb": "^3.4.1",
     "mongoose": "^5.8.3",
     "nock": "^11.7.2",
+    "random-item": "^3.0.0",
     "supertest": "^4.0.2",
     "twitch": "^3.5.6"
   },
