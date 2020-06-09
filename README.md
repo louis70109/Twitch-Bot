@@ -14,6 +14,11 @@
 
 <a href="https://line.me/R/ti/p/%40eae1476b"><img height="50" border="0" alt="加入好友" src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png"></a>
 
+# 截圖
+
+![](https://i.imgur.com/9KJojv4l.png)
+![](https://i.imgur.com/9QKncuJl.png)
+
 # 指令使用
 
 - 綁定帳號: `綁定 TWITCH_ACCOUNT`
