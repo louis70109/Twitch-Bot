@@ -1,0 +1,323 @@
+const random = require('random-item');
+// https://devdocs.line.me/files/sticker_list.pdf
+// https://developers.line.biz/media/messaging-api/sticker_list.pdf
+const dynamicBrown = [
+  52002734,
+  52002737,
+  52002739,
+  52002743,
+  52002744,
+  52002746,
+  52002749,
+  52002751,
+  52002753,
+  52002754,
+  52002759,
+  52002762,
+  52002764,
+  52002767,
+  52002769,
+  52002770,
+];
+const staticBrown = [
+  18,
+  19,
+  38,
+  140,
+  141,
+  142,
+  143,
+  144,
+  145,
+  146,
+  147,
+  148,
+  149,
+  150,
+  151,
+  152,
+  153,
+  154,
+  155,
+  156,
+  157,
+  158,
+  159,
+  501,
+  502,
+  503,
+  504,
+  505,
+  506,
+  507,
+  508,
+  509,
+  510,
+  511,
+  512,
+  513,
+  514,
+  516,
+  517,
+  518,
+  519,
+  520,
+];
+
+const dynamicSally = [
+  52002736,
+  52002741,
+  52002750,
+  52002756,
+  52002760,
+  52002771,
+  52002772,
+  52002766,
+];
+const dynamicCony = [
+  52002735,
+  52002737,
+  52002738,
+  52002740,
+  52002742,
+  52002745,
+  52002747,
+  52002748,
+  52002752,
+  52002755,
+  52002757,
+  52002758,
+  52002761,
+  52002763,
+  52002765,
+  52002768,
+  52002773,
+];
+const staticCony = [
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  29,
+  30,
+  31,
+  32,
+  33,
+  34,
+  36,
+  37,
+  39,
+  157,
+  158,
+  159,
+  160,
+  161,
+  162,
+  163,
+  164,
+  165,
+  166,
+  167,
+  168,
+  169,
+  170,
+  171,
+  172,
+  173,
+  174,
+  175,
+  176,
+  177,
+  178,
+  179,
+  515,
+  516,
+  517,
+  518,
+  519,
+  520,
+  521,
+  522,
+  523,
+  524,
+  525,
+  526,
+  527,
+];
+
+const dynamicMoon = [
+  51626494,
+  51626499,
+  51626501,
+  51626504,
+  51626507,
+  51626510,
+  51626512,
+  51626515,
+  51626522,
+  51626530,
+  51626532,
+];
+
+const staticMoon = [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  21,
+  100,
+  101,
+  102,
+  103,
+  104,
+  105,
+  106,
+  107,
+  108,
+  109,
+  110,
+  111,
+  112,
+  113,
+  114,
+  115,
+  116,
+  117,
+  118,
+  401,
+  402,
+  403,
+  404,
+  405,
+  406,
+];
+const dynamicJames = [
+  51626496,
+  51626502,
+  51626505,
+  51626508,
+  51626514,
+  51626520,
+  51626523,
+  51626529,
+  51626531,
+];
+const staticJames = [
+  119,
+  120,
+  121,
+  122,
+  123,
+  124,
+  125,
+  126,
+  127,
+  128,
+  129,
+  130,
+  131,
+  132,
+  133,
+  134,
+  135,
+  136,
+  137,
+  138,
+  139,
+  407,
+  408,
+  409,
+  410,
+  411,
+  412,
+  413,
+  414,
+  415,
+  416,
+  417,
+  418,
+  419,
+  420,
+  421,
+  422,
+  423,
+  424,
+  425,
+  426,
+  427,
+  428,
+  429,
+  430,
+];
+
+const Brown = [...dynamicBrown, ...staticBrown];
+const Cony = [...dynamicCony, ...staticCony];
+const James = [...dynamicJames, staticJames];
+const Moon = [...dynamicMoon, staticMoon];
+const Sally = [...dynamicSally];
+
+const dynamicTotal = [
+  ...dynamicBrown,
+  ...dynamicSally,
+  ...dynamicMoon,
+  ...dynamicJames,
+  ...dynamicCony,
+];
+const staticTotal = [
+  ...staticBrown,
+  ...staticMoon,
+  ...staticJames,
+  ...staticCony,
+];
+const total = [...dynamicTotal, ...staticTotal];
+const lineFriendMap = {
+  James: '👨‍🔧詹姆士',
+  Moon: '🔘饅頭人',
+  Cony: '🐰兔兔',
+  Sally: '🐤莎莉',
+  Brown: '🐻熊大',
+};
+
+export function specificSticker(name) {
+  const totalMap = { Brown, Moon, James, Cony, Sally };
+  if (!totalMap[name]) {
+    throw Error('LINE friends not found...');
+  }
+  return {
+    name: `${lineFriendMap[name]}管理員`,
+    iconUrl: `https://stickershop.line-scdn.net/stickershop/v1/sticker/${random(
+      totalMap[name]
+    )}/iPhone/sticker_key@2x.png`,
+  };
+}
+
+export function randomSticker() {
+  const totalMap = { Brown, Moon, James, Cony, Sally };
+
+  const Friends = ['Brown', 'Moon', 'James', 'Cony', 'Sally'];
+  const friend = random(Friends);
+  if (!lineFriendMap[friend]) {
+    throw Error('LINE friends not found...');
+  }
+  return {
+    name: `${lineFriendMap[friend]}管理員`,
+    iconUrl: `https://stickershop.line-scdn.net/stickershop/v1/sticker/${random(
+      totalMap[friend]
+    )}/iPhone/sticker_key@2x.png`,
+  };
+}
