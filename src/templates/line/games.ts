@@ -1,6 +1,6 @@
 import { LineContext, LineTypes } from 'bottender';
-
 import { Game } from '../../model/game';
+import { randomSticker } from '../../utils/IconSwitch';
 
 const LINE_FLEX_LIMIT = 10;
 export default async function showGamesFlex(
@@ -107,9 +107,14 @@ export default async function showGamesFlex(
       channelBubble.push(content);
     }
   });
+  const sender = randomSticker();
 
-  await context.sendFlex('來看直播囉！', {
-    type: 'carousel',
-    contents: channelBubble,
-  });
+  await context.sendFlex(
+    '來看直播囉！',
+    {
+      type: 'carousel',
+      contents: channelBubble,
+    },
+    { sender }
+  );
 }

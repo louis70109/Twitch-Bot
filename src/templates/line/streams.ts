@@ -1,5 +1,6 @@
 import { LineContext, LineTypes } from 'bottender';
 import { Stream } from 'twitch';
+import { randomSticker } from '../../utils/IconSwitch';
 
 const LINE_FLEX_LIMIT = 10;
 export default async function showChannelsFlex(
@@ -153,9 +154,16 @@ export default async function showChannelsFlex(
       channelBubble.push(content);
     }
   });
+  const sender = randomSticker();
 
-  await context.sendFlex('來看直播囉！', {
-    type: 'carousel',
-    contents: channelBubble,
-  });
+  await context.sendFlex(
+    '來看直播囉！',
+    {
+      type: 'carousel',
+      contents: channelBubble,
+    },
+    {
+      sender,
+    }
+  );
 }

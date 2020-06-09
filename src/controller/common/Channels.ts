@@ -1,5 +1,6 @@
 import { Stream } from 'twitch';
 import showChannelsFlex from '../../templates/line/streams';
+import { randomSticker } from '../common/IconSwitch';
 export default async function showChannels(
   context,
   platform: string,
@@ -8,9 +9,10 @@ export default async function showChannels(
 ): Promise<void> {
   switch (platform) {
     case 'line':
+      const sender = randomSticker();
       streams.length !== 0
         ? showChannelsFlex(context, streams, notification)
-        : context.sendText('🚀現在追隨的實況主都沒開哦！');
+        : context.sendText('🚀現在追隨的實況主都沒開哦！', { sender });
       break;
     default:
       let output = '';
