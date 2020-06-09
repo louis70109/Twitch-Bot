@@ -41,6 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var user_1 = require("../../model/user");
 var twitch_1 = __importDefault(require("twitch"));
+var IconSwitch_1 = require("../../utils/IconSwitch");
 var _a = process.env, TWITCH_CLIENT_ID = _a.TWITCH_CLIENT_ID, TWITCH_ACCESS_TOKEN = _a.TWITCH_ACCESS_TOKEN;
 function userBinding(context, _a) {
     var match = _a.match;
@@ -88,7 +89,8 @@ function userBinding(context, _a) {
                                         console.log('帳戶更新失敗', err);
                                 });
                             }
-                            context.sendText("\u2705 \u7D81\u5B9A " + twitchUser.name + " \u6210\u529F\uFF01");
+                            var sender = IconSwitch_1.specificSticker('Cony');
+                            context.sendText("\u2705 \u7D81\u5B9A " + twitchUser.name + " \u6210\u529F\uFF01", { sender: sender });
                         })];
                 case 3:
                     _e.sent();

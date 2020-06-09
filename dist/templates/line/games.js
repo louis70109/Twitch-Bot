@@ -36,10 +36,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var IconSwitch_1 = require("../../utils/IconSwitch");
 var LINE_FLEX_LIMIT = 10;
 function showGamesFlex(context, games) {
     return __awaiter(this, void 0, void 0, function () {
-        var channelBubble;
+        var channelBubble, sender;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -142,10 +143,11 @@ function showGamesFlex(context, games) {
                             channelBubble.push(content);
                         }
                     });
+                    sender = IconSwitch_1.randomSticker();
                     return [4 /*yield*/, context.sendFlex('來看直播囉！', {
                             type: 'carousel',
                             contents: channelBubble,
-                        })];
+                        }, { sender: sender })];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];

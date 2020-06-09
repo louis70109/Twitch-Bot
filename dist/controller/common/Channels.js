@@ -40,9 +40,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var streams_1 = __importDefault(require("../../templates/line/streams"));
+var IconSwitch_1 = require("../common/IconSwitch");
 function showChannels(context, platform, streams, notification) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, output_1;
+        var _a, sender, output_1;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
@@ -52,9 +53,10 @@ function showChannels(context, platform, streams, notification) {
                     }
                     return [3 /*break*/, 2];
                 case 1:
+                    sender = IconSwitch_1.randomSticker();
                     streams.length !== 0
                         ? streams_1.default(context, streams, notification)
-                        : context.sendText('🚀現在追隨的實況主都沒開哦！');
+                        : context.sendText('🚀現在追隨的實況主都沒開哦！', { sender: sender });
                     return [3 /*break*/, 4];
                 case 2:
                     output_1 = '';
