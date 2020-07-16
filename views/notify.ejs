@@ -7,31 +7,31 @@
   </head>
 
   <body>
-    <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   </body>
 
   <script>
     liff
       .init({
-        liffId: '<%= liffId %>',
+        liffId: "<%= liffId %>",
       })
       .then(() => {
         if (!liff.isLoggedIn()) liff.login();
 
-        liff.getProfile().then(profile => {
+        liff.getProfile().then((profile) => {
           const userId = profile.userId;
-          var URL = 'https://notify-bot.line.me/oauth/authorize?';
-          URL += 'response_type=code';
-          URL += '&client_id=<%= clientId %>';
-          URL += '&redirect_uri=<%= redirectUri %>';
-          URL += '&scope=notify';
+          var URL = "https://notify-bot.line.me/oauth/authorize?";
+          URL += "response_type=code";
+          URL += "&client_id=<%= clientId %>";
+          URL += "&redirect_uri=<%= redirectUri %>";
+          URL += "&scope=notify";
           URL += `&state=${userId}`;
           window.location.href = URL;
         });
       })
-      .catch(err => {
+      .catch((err) => {
         alert(err.code, err.message);
-        alert('綁定異常，請聯絡作者');
+        alert("綁定異常，請聯絡作者");
       });
   </script>
 </html>
