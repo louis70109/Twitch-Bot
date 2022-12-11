@@ -19,7 +19,7 @@
     "cross-env": "^6.0.3",
     "crypto": "^1.0.1",
     "ejs": "^3.0.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "moment": "^2.24.0",
     "mongodb": "^3.4.1",
     "mongoose": "^5.8.3",
